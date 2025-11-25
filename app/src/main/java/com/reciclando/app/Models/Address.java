@@ -14,6 +14,7 @@ public class Address {
     private String postalCode;
     private String city;
     private String state;
+    private String neighborhood;
 
     public Long getId() {
         return id;
@@ -46,9 +47,17 @@ public class Address {
     public void setState(String state) {
         this.state = state;
     }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
     
     @Override
     public String toString() {
-        return "Address [id=" + id + ", postalCode=" + postalCode + ", city=" + city + ", state=" + state + "]";
+        return "Address [id=" + id + ", postalCode=" + postalCode + ", city=" + city + ", state=" + state + ", neighborhood=" + neighborhood + "]";
     }
 }

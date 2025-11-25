@@ -3,7 +3,7 @@ package com.reciclando.app.Models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,12 +13,13 @@ public class Post {
     @GeneratedValue
     private Long id;
     private String title;
-    private String description;
-    private String photoPath;
-    private String phoneNumber;
-    @OneToOne
+    private String body;
+    private String photoUrl;
+    @ManyToOne
+    private User user;
+    @ManyToOne
     private Address address;
-    private String materialCategory;
+    
 
     public Long getId() {
         return id;
@@ -36,29 +37,23 @@ public class Post {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBody() {
+        return body;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBody(String body) {
+        this.body = body;
     }
 
-    public String getPhotoPath() {
-        return photoPath;
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 
-    public void setPhotoPath(String photoPath) {
-        this.photoPath = photoPath;
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public Address getAddress() {
         return address;
@@ -68,18 +63,12 @@ public class Post {
         this.address = address;
     }
 
-    public String getMaterialCategory() {
-        return materialCategory;
-    }
 
-    public void setMaterialCategory(String materialCategory) {
-        this.materialCategory = materialCategory;
-    }
 
     @Override
     public String toString() {
-        return "Post [id=" + id + ", title=" + title + ", description=" + description + ", photoPath=" + photoPath
-                + ", phoneNumber=" + phoneNumber + ", address=" + address + ", materialCategory=" + materialCategory
+        return "Post [id=" + id + ", title=" + title + ", body=" + body + ", photoUrl=" + photoUrl
+                + ", address=" + address 
                 + "]";
     }
 }
