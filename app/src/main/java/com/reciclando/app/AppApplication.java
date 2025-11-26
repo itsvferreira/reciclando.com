@@ -14,6 +14,7 @@ import com.reciclando.app.models.Recycler;
 import com.reciclando.app.models.User;
 import com.reciclando.app.models.enums.AccountType;
 import com.reciclando.app.models.enums.Material;
+import com.reciclando.app.repositories.AddressRepository;
 import com.reciclando.app.repositories.DonorRepository;
 import com.reciclando.app.repositories.PostRepository;
 import com.reciclando.app.repositories.RecyclerRepository;
@@ -31,12 +32,15 @@ public class AppApplication {
 			UserRepository userRepo,
 			PostRepository postRepo,
 			DonorRepository donorRepo,
-			RecyclerRepository recyclerRepo) {
+			RecyclerRepository recyclerRepo,
+			AddressRepository addressRepo) {
 		return args -> {
 
 			// ADDRESS
 			Address donorAddress = new Address("12345-678", "Sample City", "SC");
+			addressRepo.save(donorAddress);
 			Address recyclerAddress = new Address("98765-432", "Example Town", "ET");
+			addressRepo.save(recyclerAddress);
 
 			// USER - DONOR
 			User donorUser = new User("John", "Doe", "1234567890", AccountType.DONOR);
