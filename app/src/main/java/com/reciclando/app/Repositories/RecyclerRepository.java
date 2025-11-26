@@ -1,8 +1,13 @@
 package com.reciclando.app.Repositories;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.reciclando.app.Models.Recycler;
 
-public interface RecyclerRepository extends CrudRepository<Recycler, Long> {
+@Repository
+public interface RecyclerRepository extends JpaRepository<Recycler, Long> {
+    List<Recycler> findByAcceptedMaterialsContaining(String material);
 }
