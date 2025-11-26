@@ -1,7 +1,8 @@
-package com.reciclando.app.Models;
+package com.reciclando.app.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -9,19 +10,23 @@ import jakarta.persistence.Table;
 @Table(name="addresses")
 public class Address {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String postalCode;
     private String city;
     private String state;
-    private String neighborhood;
+
+    protected Address() {}
+
+    public Address(String postalCode, String city, String state) {
+        this.postalCode = postalCode;
+        this.city = city;
+        this.state = state;
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getPostalCode() {
@@ -47,17 +52,9 @@ public class Address {
     public void setState(String state) {
         this.state = state;
     }
-
-    public String getNeighborhood() {
-        return neighborhood;
-    }
-
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
-    }
     
     @Override
     public String toString() {
-        return "Address [id=" + id + ", postalCode=" + postalCode + ", city=" + city + ", state=" + state + ", neighborhood=" + neighborhood + "]";
+        return "Address [id=" + id + ", postalCode=" + postalCode + ", city=" + city + ", state=" + state + "]";
     }
 }
