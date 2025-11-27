@@ -60,24 +60,7 @@ public class RecyclerService {
         recyclerRepository.deleteById(userID);
     }
 
-    public List<Recycler> findByAcceptedMaterials(Material material){
-        return recyclerRepository.findByAcceptedMaterialsContaining(material.name());
-    }
-
     public List<Recycler> findByAcceptedMaterial(Material material) {
         return recyclerRepository.findByAcceptedMaterialsContaining(material.name());
-    }
-
-    @Transactional
-    public Recycler registerRecycler(Long userId, List<Material> acceptedMaterials) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
-
-        if (recyclerRepository.existsById(userId)) {
-            throw new IllegalArgumentException("Recycler already exists for user id: " + userId);
-        }
-
-        Recycler recycler = new Recycler(user, acceptedMaterials);
-        return recyclerRepository.save(recycler);
     }
 }

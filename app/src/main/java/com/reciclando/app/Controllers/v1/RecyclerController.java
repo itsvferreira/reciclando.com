@@ -22,7 +22,7 @@ public class RecyclerController {
 
     @PostMapping
     public ResponseEntity<Recycler> createRecycler(@RequestBody CreateRecyclerDTO dto) {
-        Recycler recycler = recyclerService.registerRecycler(dto.userId(), dto.acceptedMaterials());
+        Recycler recycler = recyclerService.createRecycler(dto.userId(), dto.acceptedMaterials());
         return ResponseEntity.ok(recycler);
     }
 
@@ -45,9 +45,7 @@ public class RecyclerController {
             @PathVariable Long userId,
             @RequestBody UpdateMaterialsDTO dto) {
 
-        recyclerService.updateMaterials(userId, dto.acceptedMaterials());
-        Recycler updated = recyclerService.getByUserID(userId);
-
+        Recycler updated = recyclerService.updateMaterials(userId, dto.acceptedMaterials());
         return ResponseEntity.ok(updated);
     }
 
