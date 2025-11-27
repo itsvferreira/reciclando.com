@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.ElementCollection;
 
 @Entity
 @Table(name = "recyclers")
@@ -24,6 +25,8 @@ public class Recycler {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ElementCollection
+    @Enumerated(EnumType.STRING)
     private List<Material> acceptedMaterials;
 
     protected Recycler() {
