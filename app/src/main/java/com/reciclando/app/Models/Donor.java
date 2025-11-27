@@ -32,4 +32,16 @@ public class Donor {
     public User getUser() {
         return user;
     }
+
+    public String getFullName() {
+        return user.getFirstName() + " " + user.getLastName();
+    }
+
+    public String getContact() {
+        return user.getPhone();
+    }
+
+    public Address getAddress() {
+        return user.getAddress();
+    }
 }
