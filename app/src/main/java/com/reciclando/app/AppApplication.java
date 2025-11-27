@@ -9,14 +9,14 @@ import org.springframework.context.annotation.Bean;
 
 import com.reciclando.app.Models.Address;
 import com.reciclando.app.Models.Donor;
-import com.reciclando.app.Models.Post;
+import com.reciclando.app.Models.Ad;
 import com.reciclando.app.Models.Recycler;
 import com.reciclando.app.Models.User;
 import com.reciclando.app.Models.enums.AccountType;
 import com.reciclando.app.Models.enums.Material;
 import com.reciclando.app.Repositories.AddressRepository;
 import com.reciclando.app.Repositories.DonorRepository;
-import com.reciclando.app.Repositories.PostRepository;
+import com.reciclando.app.Repositories.AdRepository;
 import com.reciclando.app.Repositories.RecyclerRepository;
 
 @SpringBootApplication
@@ -28,16 +28,16 @@ public class AppApplication {
 
 	@Bean
 	CommandLineRunner seedData(
-			PostRepository postRepo,
+			AdRepository postRepo,
 			DonorRepository donorRepo,
 			RecyclerRepository recyclerRepo,
 			AddressRepository addressRepo) {
 		return args -> {
 
 			// ADDRESS
-			Address donorAddress = new Address("12345-678", "Sample City", "SC");
+			Address donorAddress = new Address("12345-678", "Sample City", "SC", "Central District");
 			addressRepo.save(donorAddress);
-			Address recyclerAddress = new Address("98765-432", "Example Town", "ET");
+			Address recyclerAddress = new Address("98765-432", "Example Town", "ET", "Green Neighborhood");
 			addressRepo.save(recyclerAddress);
 
 			// DONOR
@@ -51,18 +51,32 @@ public class AppApplication {
 			List<Material> materials = List.of(Material.PAPER, Material.PLASTIC);
 			Recycler recycler = new Recycler(recyclerUser, materials);
 
-			// POSTS
-			Post post = new Post(
+			// ADS
+			Ad ad1 = new Ad(
 					"Old Newspaper",
 					"Bundle of old newspapers available for recycling.",
 					donor,
 					Material.PAPER);
-			post.setLocation(donorAddress);
+			ad1.setLocation(donorAddress);
+
+			Ad ad2 = new Ad(
+					"Plastic Bottles",
+					"Collection of used plastic bottles.",
+					donor,
+					Material.PLASTIC);
+			ad2.setLocation(donorAddress);
+
+			Ad ad3 = new Ad(
+					"Glass Jars",
+					"Several glass jars ready for recycling.",
+					donor,
+					Material.GLASS);
+			ad3.setLocation(donorAddress);
 
 			// Save to repositories
 			donorRepo.save(donor);
 			recyclerRepo.save(recycler);
-			postRepo.save(post);
+			postRepo.saveAll(List.of(ad1, ad2, ad3));
 		};
 	}
 
