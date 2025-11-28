@@ -70,6 +70,16 @@ public class AdControllerTests {
         }
 
         @Test
+        public void testGetAdByFilter_Success() throws Exception {
+                String filter = "Material1";
+                when(adService.getAdsOrderByCreatedAt(filter)).thenReturn(List.of(ads.get(0)));
+                mockMvc.perform(get("/api/v1/ads?filter={filter}", "Material1"))
+                                .andExpect(status().isOk())
+                                .andExpect(jsonPath("$.length()").value(1))
+                                .andExpect(jsonPath("$[0].title").value("Title1"));
+        }
+
+        @Test
         public void testCreateAd() throws Exception {
                 AdRequestDto newAdRequest = new AdRequestDto("New Title", "New Description", 1L, "Material1");
                 AdResponseDto newAdResponse = new AdResponseDto("New Title", "New Description", "Donor1", "Contact1",
