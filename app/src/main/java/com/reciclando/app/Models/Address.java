@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="addresses")
+@Table(name = "addresses")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +16,15 @@ public class Address {
     private String postalCode;
     private String city;
     private String state;
+    private String neighborhood;
 
-    protected Address() {}
+    protected Address() {
+    }
 
-    public Address(String postalCode, String city, String state) {
-        this.postalCode = postalCode;
+    public Address(String postalCode, String city, String state, String neighborhood) {
         this.city = city;
         this.state = state;
+        this.neighborhood = neighborhood;
     }
 
     public Long getId() {
@@ -52,9 +54,18 @@ public class Address {
     public void setState(String state) {
         this.state = state;
     }
-    
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
     @Override
     public String toString() {
-        return "Address [id=" + id + ", postalCode=" + postalCode + ", city=" + city + ", state=" + state + "]";
+        return "Address [id=" + id + ", postalCode=" + postalCode + ", city=" + city + ", state=" + state
+                + ", neighborhood=" + neighborhood + "]";
     }
 }
