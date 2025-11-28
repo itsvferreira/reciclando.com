@@ -1,4 +1,4 @@
-package com.reciclando.app.dto;
+package com.reciclando.app.dtos;
 
 import java.util.List;
 import com.reciclando.app.Models.enums.Material;

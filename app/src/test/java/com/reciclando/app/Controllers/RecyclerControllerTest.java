@@ -1,4 +1,4 @@
-package com.reciclando.app.Controllers.v1;
+package com.reciclando.app.Controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reciclando.app.Models.enums.Material;
@@ -8,8 +8,8 @@ import com.reciclando.app.Models.Address;
 import com.reciclando.app.Repositories.UserRepository;
 import com.reciclando.app.Repositories.AddressRepository;
 import com.reciclando.app.Repositories.RecyclerRepository;
-import com.reciclando.app.dto.CreateRecyclerDTO;
-import com.reciclando.app.dto.UpdateMaterialsDTO;
+import com.reciclando.app.dtos.CreateRecyclerDTO;
+import com.reciclando.app.dtos.UpdateMaterialsDTO;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
