@@ -39,6 +39,8 @@ public class AppApplication {
 			addressRepo.save(donorAddress);
 			Address recyclerAddress = new Address("98765-432", "Example Town", "ET");
 			addressRepo.save(recyclerAddress);
+			Address poaAddress = new Address("90000-000", "Porto Alegre", "RS");
+            addressRepo.save(poaAddress);
 
 			// DONOR
 			User donorUser = new User("John", "Doe", "1234567890", AccountType.DONOR);
@@ -50,6 +52,13 @@ public class AppApplication {
 			recyclerUser.setAddress(recyclerAddress);
 			List<Material> materials = List.of(Material.PAPER, Material.PLASTIC);
 			Recycler recycler = new Recycler(recyclerUser, materials);
+
+			User poaUser = new User("Carlos", "Silva", "51999999999", AccountType.RECYCLER);
+            poaUser.setAddress(poaAddress);
+          
+			 List<Material> sameMaterials = List.of(Material.PAPER);
+            Recycler recyclerPoa = new Recycler(poaUser, sameMaterials);
+            recyclerRepo.save(recyclerPoa);
 
 			// POSTS
 			Post post = new Post(
