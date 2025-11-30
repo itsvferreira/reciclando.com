@@ -1,6 +1,6 @@
 package com.reciclando.app.Models;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 import com.reciclando.app.Models.enums.Material;
 
@@ -17,8 +17,8 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "ads")
+public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,29 +32,29 @@ public class Post {
     private Address location;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "donor_id")
     private Donor donor;
 
     @Enumerated(EnumType.STRING)
     private Material materialCategory;
 
-    private OffsetDateTime createdAt;
-    private OffsetDateTime updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     @PrePersist
     private void onCreate() {
-        createdAt = updatedAt = OffsetDateTime.now();
+        createdAt = updatedAt = LocalDateTime.now();
     }
 
     @PreUpdate
     private void onUpdate() {
-        updatedAt = OffsetDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 
-    protected Post() {
+    protected Ad() {
     }
 
-    public Post(String title, String description, Donor donor, Material materialCategory) {
+    public Ad(String title, String description, Donor donor, Material materialCategory) {
         this.title = title;
         this.description = description;
         this.donor = donor;
@@ -111,6 +111,32 @@ public class Post {
 
     public void setMaterialCategory(Material materialCategory) {
         this.materialCategory = materialCategory;
+    }
+
+    public String getFormatedCreationDate() {
+        String fullDate = createdAt.toString();
+        return fullDate.substring(0, 10) + ", " + fullDate.substring(11, 16);
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public String getLocationString() {
+        return buildLocationString();
+    }
+
+    private String buildLocationString() {
+        if (donor.getAddress() != null) {
+            String city = donor.getAddress().getCity();
+            String state = donor.getAddress().getState();
+            return city + " - " + state;
+        }
+        return "No address provided";
     }
 
     @Override
