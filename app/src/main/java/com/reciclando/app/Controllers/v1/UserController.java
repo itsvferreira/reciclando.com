@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import com.reciclando.app.Models.User;
-import com.reciclando.app.Models.Post;
+import com.reciclando.app.Models.Ad;
 import com.reciclando.app.Services.UserService;
 
 @RestController 
@@ -70,7 +70,7 @@ public class UserController {
     // GET /api/v1/users/{id}/meus-anuncios
     
     @GetMapping("/{id}/meus-anuncios")
-    public List<Post> getMeusAnuncios(
+    public List<Ad> getMeusAnuncios(
         @PathVariable Long id,
         @RequestParam(required = false) String status
     ) {
@@ -79,14 +79,14 @@ public class UserController {
 
     // GET /api/v1/users/{id}/historico-doacoes
     @GetMapping("/{id}/historico-doacoes")
-    public List<Post> getHistoricoDoacoes(@PathVariable Long id){
+    public List<Ad> getHistoricoDoacoes(@PathVariable Long id){
         return userService.getHistoricoDoacoes(id);
     }
 
     // ROTAS RECICLADOR
     // GET /api/v1/users/{id}/minhas-coletas
     @GetMapping("/{id}/minhas-coletas")
-    public List<Post> getMinhasColetas(
+    public List<Ad> getMinhasColetas(
         @PathVariable Long id,
         @RequestParam(required = false) String status
     ) {
@@ -95,7 +95,7 @@ public class UserController {
 
     // GET /api/v1/users/{id}/historico-coletas
     @GetMapping("/{id}/historico-coletas")
-    public List<Post> getHistoricoColetas(@PathVariable Long id){
+    public List<Ad> getHistoricoColetas(@PathVariable Long id){
         return userService.getHistoricoColetas(id);
     }
 

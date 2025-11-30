@@ -1,7 +1,7 @@
 package com.reciclando.app.Services;
 
+import com.reciclando.app.Models.Ad;
 import com.reciclando.app.Models.User;
-import com.reciclando.app.Models.Post;
 import com.reciclando.app.Repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -62,19 +62,19 @@ public class UserService {
         return List.of(); 
     }
 
-    public List<Post> getAnuncioDoUsuario(Long userId, String status) {
+    public List<Ad> getAnuncioDoUsuario(Long userId, String status) {
         return List.of(); 
     }
 
-    public List<Post> getHistoricoDoacoes(Long userId) {
+    public List<Ad> getHistoricoDoacoes(Long userId) {
         return List.of(); 
     }
 
-    public List<Post> getColetasDoReciclador(Long userId, String status) {
+    public List<Ad> getColetasDoReciclador(Long userId, String status) {
         return List.of(); 
     }
 
-    public List<Post> getHistoricoColetas(Long userId) {
+    public List<Ad> getHistoricoColetas(Long userId) {
         return List.of(); 
     }
 
