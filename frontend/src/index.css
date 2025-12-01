@@ -1,0 +1,12 @@
+:root {
+  --green: #16a34a;
+  --light-green: #dcfce7;
+  --light-font: #78716c;
+  --black: #1c1917;
+  --border: #0000001a;
+  --green-font: #166534;
+  --bg-color: #fafaf9;
+  --btn-hover: #0ab348;
+  --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
