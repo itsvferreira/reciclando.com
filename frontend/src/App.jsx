@@ -1,7 +1,10 @@
 function App() {
   return (
     <>
-      <main></main>
+      <main>
+        <div className='container'>
+        </div>
+      </main>
     </>
   );
 }
