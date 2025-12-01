@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // WebMvcTest Sobe só o controller para teste (sem subir o sistema inteiro).
 
 @WebMvcTest(UserController.class)
-public class UserControllerTest {
+public class UserControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
