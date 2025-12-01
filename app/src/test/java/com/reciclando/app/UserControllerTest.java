@@ -1,11 +1,12 @@
 package com.reciclando.app;
 
-
+// Traz as classes necessárias para montar o teste.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reciclando.app.Models.User;
 import com.reciclando.app.Models.enums.AccountType;
 import com.reciclando.app.Services.UserService;
 import com.reciclando.app.Controllers.v1.UserController;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+// WebMvcTest Sobe só o controller para teste (sem subir o sistema inteiro).
 
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
@@ -106,7 +109,10 @@ public class UserControllerTest {
     void shouldReturnRecyclers() throws Exception {
     User recycler = createTestUser(1L, "Paulo", "Lima", AccountType.RECYCLER);
     
-    // 👇 USE "RECICLADOR" (igual ao Controller)
+// Testa o endpoint GET /api/v1/users/recicladores.
+// Garante que o controller retorna corretamente a lista de usuários
+// do tipo RECICLADOR, validando status HTTP, tamanho da lista
+// e os campos do JSON de resposta.
     Mockito.when(userService.getUserByAccountType("RECICLADOR")).thenReturn(List.of(recycler));
 
     mockMvc.perform(get("/api/v1/users/recicladores"))
