@@ -1,12 +1,17 @@
 package com.reciclando.app.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.reciclando.app.models.enums.Material;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,8 +40,11 @@ public class Ad {
     @JoinColumn(name = "donor_id")
     private Donor donor;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "ad_categories", joinColumns = @JoinColumn(name = "ad_id"))
+    @Column(name = "category")
     @Enumerated(EnumType.STRING)
-    private Material materialCategory;
+    private List<Material> category;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -54,11 +62,11 @@ public class Ad {
     protected Ad() {
     }
 
-    public Ad(String title, String description, Donor donor, Material materialCategory) {
+    public Ad(String title, String description, Donor donor, List<Material> category) {
         this.title = title;
         this.description = description;
         this.donor = donor;
-        this.materialCategory = materialCategory;
+        this.category = category;
     }
 
     public Long getId() {
@@ -105,12 +113,12 @@ public class Ad {
         this.donor = donor;
     }
 
-    public Material getMaterialCategory() {
-        return materialCategory;
+    public List<Material> getCategory() {
+        return category;
     }
 
-    public void setMaterialCategory(Material materialCategory) {
-        this.materialCategory = materialCategory;
+    public void setCategory(List<Material> category) {
+        this.category = category;
     }
 
     public String getFormatedCreationDate() {
@@ -142,7 +150,7 @@ public class Ad {
     @Override
     public String toString() {
         return "Post [id=" + id + ", title=" + title + ", description=" + description + ", photoPath=" + photoPath
-                + ", location=" + location + ", donor=" + donor + ", materialCategory=" + materialCategory
+                + ", location=" + location + ", donor=" + donor + ", category=" + category
                 + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
     }
 }

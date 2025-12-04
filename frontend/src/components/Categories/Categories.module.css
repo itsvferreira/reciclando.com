@@ -1,0 +1,32 @@
+.category-item label {
+  border: 1.75px solid #eee;
+  padding: 3px 5px;
+  border-radius: 10px;
+  font-weight: 400;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.category-item label:hover {
+  background: #dbfcddab;
+  color: rgb(56, 72, 29);
+  border-color: #a0bca2ab;
+}
+
+.category-item input {
+  display: none;
+}
+
+.category-item input:checked + label {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+
+.category-item input:checked + label:hover {
+  background: var(--btn-hover);
+  color: #fff;
+  border-color: var(--btn-hover);
+}

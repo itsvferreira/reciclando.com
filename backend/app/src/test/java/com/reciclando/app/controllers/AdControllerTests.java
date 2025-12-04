@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.reciclando.app.controllers.v1.AdController;
 import com.reciclando.app.dtos.ad.AdRequestDto;
 import com.reciclando.app.dtos.ad.AdResponseDto;
+import com.reciclando.app.models.enums.Material;
 import com.reciclando.app.services.AdService;
 
 import static org.mockito.Mockito.*;
@@ -34,17 +35,17 @@ public class AdControllerTests {
         @BeforeEach
         public void init() {
                 ads = new ArrayList<>();
-                ads.add(new AdResponseDto("Title1", "Description1", "Donor1", "Contact1", "Location1",
-                                "Material1",
+                ads.add(new AdResponseDto(1L, "Title1", "Description1", "Donor1", "Contact1", "Location1",
+                                List.of(Material.PAPER),
                                 "2024-06-01, 10:00"));
-                ads.add(new AdResponseDto("Title2", "Description2", "Donor2", "Contact2", "Location2",
-                                "Material2",
+                ads.add(new AdResponseDto(2L, "Title2", "Description2", "Donor2", "Contact2", "Location2",
+                                List.of(Material.PLASTIC),
                                 "2024-06-02, 11:00"));
         }
 
         @Test
         public void testGetAds() throws Exception {
-                when(adService.getAdsOrderByCreatedAt(null)).thenReturn(ads);
+                when(adService.getAdsOrderByCreatedAt(null, null)).thenReturn(ads);
                 mockMvc.perform(get("/api/v1/ads"))
                                 .andExpect(status().isOk())
                                 .andExpect(jsonPath("$.length()").value(2))
@@ -71,9 +72,9 @@ public class AdControllerTests {
 
         @Test
         public void testGetAdByFilter_Success() throws Exception {
-                String filter = "Material1";
-                when(adService.getAdsOrderByCreatedAt(filter)).thenReturn(List.of(ads.get(0)));
-                mockMvc.perform(get("/api/v1/ads?filter={filter}", "Material1"))
+                String category = "Material1";
+                when(adService.getAdsOrderByCreatedAt(category, null)).thenReturn(List.of(ads.get(0)));
+                mockMvc.perform(get("/api/v1/ads?category={category}", "Material1"))
                                 .andExpect(status().isOk())
                                 .andExpect(jsonPath("$.length()").value(1))
                                 .andExpect(jsonPath("$[0].title").value("Title1"));
@@ -81,15 +82,19 @@ public class AdControllerTests {
 
         @Test
         public void testCreateAd() throws Exception {
-                AdRequestDto newAdRequest = new AdRequestDto("New Title", "New Description", 1L, "Material1");
-                AdResponseDto newAdResponse = new AdResponseDto("New Title", "New Description", "Donor1", "Contact1",
-                                "Location1", "Material3", "2024-06-03, 12:00");
+                AdRequestDto newAdRequest = new AdRequestDto("New Title", "New Description",
+                                1L, List.of(Material.PLASTIC));
+                AdResponseDto newAdResponse = new AdResponseDto(3L, "New Title", "New Description", "Donor3",
+                                "Contact3",
+                                "Location3",
+                                List.of(Material.METAL, Material.GLASS),
+                                "2024-06-03, 12:00");
                 String requestBody = """
                                 {
-                                    "title": "New Title",
-                                    "description": "New Description",
-                                    "donorId": 1,
-                                    "materialCategory": "Material1"
+                                "title": "New Title",
+                                "description": "New Description",
+                                "donorId": 1,
+                                "materialCategory": "Material1"
                                 }
                                 """;
                 when(adService.createPost(newAdRequest)).thenReturn(newAdResponse);

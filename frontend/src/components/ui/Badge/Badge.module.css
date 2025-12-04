@@ -1,0 +1,11 @@
+.badge {
+  color: var(--green-font);
+  font-size: 11px;
+  padding: 7px 12px;
+  font-weight: 500;
+  border-radius: 15px;
+}
+
+.bg-badge {
+  background: var(--light-green);
+}
