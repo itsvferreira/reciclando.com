@@ -39,13 +39,9 @@ export function LoginForm() {
     const userReciclador = mockUsers.reciclador;
 
     if (formData.email === userComum.email && formData.password === userComum.password) {
-      console.log("Login realizado como Usuário Comum!");
-      alert("Login realizado com sucesso!\nTipo: Usuário Comum");
       localStorage.setItem("user", JSON.stringify(userComum));
       navigate("/how-to-recycle"); //temporário
     } else if (formData.email === userReciclador.email && formData.password === userReciclador.password) {
-      console.log("Login realizado como Reciclador!");
-      alert("Login realizado com sucesso!\nTipo: Reciclador");
       localStorage.setItem("user", JSON.stringify(userReciclador));
       navigate("/how-to-recycle"); //temporário
     } else {

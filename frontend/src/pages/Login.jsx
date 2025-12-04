@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import { LoginForm } from "../components/loginForm/LoginForm";
 import { RegistrationForm } from "../components/registrationForm/RegistrationForm";
-import styles from "./Login.module.css";
+import "../index.css";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>Bem-vindo ao Recicla.com</h1>
-          <p className={styles.subtitle}>Cadastre-se ou faça login</p>
+    <div className="container">
+      <div className="card">
+        <div className="header">
+          <h1 className="title">Bem-vindo ao Recicla.com</h1>
+          <p className="subtitle">Cadastre-se ou faça login</p>
         </div>
 
-        <div className={styles.tabs}>
+        <div className="tabs">
           <button
-            className={`${styles.tab} ${isLogin ? styles.tabActive : ""}`}
+            className={`tab ${isLogin ? "tabActive" : ""}`}
             onClick={() => setIsLogin(true)}
           >
             Entrar
           </button>
           <button
-            className={`${styles.tab} ${!isLogin ? styles.tabActive : ""}`}
+            className={`tab ${!isLogin ? "tabActive" : ""}`}
             onClick={() => setIsLogin(false)}
           >
             Cadastrar

@@ -2,7 +2,7 @@ import React from "react";
 import { Wine, FileText, Laptop, BottleWine, Wrench, Leaf } from "lucide-react";
 import { CardMaterials } from "../components/cardMaterials/CardMaterials";
 import { CardTips } from "../components/cardTips/CardTips";
-import styles from "./HowToRecycle.module.css";
+import "../index.css";
 
 
 export default function HowToRecycle() {
@@ -122,14 +122,14 @@ export default function HowToRecycle() {
   };
 
   return (
-    <div className={styles.comoContainer}>
-      <h1 className={styles.comoTitulo}>Como funciona a Reciclagem</h1>
+    <div className="comoContainer">
+      <h1 className="comoTitulo">Como funciona a Reciclagem</h1>
 
-      <p className={styles.comoSubtitulo}>
+      <p className="comoSubtitulo">
         Aprenda a separar corretamente cada tipo de material reciclável e contribua para um planeta mais sustentável
       </p>
 
-      <div className={styles.gridMateriais}>
+      <div className="gridMateriais">
         <CardMaterials
           icon={Wine}
           color="#00c951"
