@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./CardMaterials.module.css";
-import { MaterialModal } from "../Modalnformações/ModalInformações";
+import { ModalInformations } from "../modalInformations/ModalInformations";
 
-export function CardMateriais({ icon: Icon, color, title, description, materialData }) {
+export function CardMaterials({ icon: Icon, color, title, description, materialData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -25,7 +25,7 @@ export function CardMateriais({ icon: Icon, color, title, description, materialD
         </button>
       </div>
 
-      <MaterialModal 
+      <ModalInformations
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         material={materialData}

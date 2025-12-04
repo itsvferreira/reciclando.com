@@ -1,6 +1,6 @@
 import React from "react";
 import { CircleCheckBig } from "lucide-react";
-import styles from "./CardDicas.module.css";
+import styles from "./CardTips.module.css";
 
 export function CardTips() {
   const tips = [
@@ -12,12 +12,12 @@ export function CardTips() {
 
   return (
     <div className={styles.dicasSection}>
-      <h2 className={styles.dicasTitulo}>Dicas Gerais de Reciclagem</h2>
-
+      <h2 className={styles.dicasTitulo}>Dicas Importantes</h2>
+      
       <div className={styles.dicasGrid}>
         {tips.map((tip, index) => (
           <div key={index} className={styles.dicaCard}>
-            <CircleCheckBig size={28} strokeWidth={2} className={styles.dicaIcon} />
+            <CircleCheckBig size={24} className={styles.dicaIcon} />
             <p>{tip}</p>
           </div>
         ))}

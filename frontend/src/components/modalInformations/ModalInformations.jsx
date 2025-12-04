@@ -1,8 +1,8 @@
 import React from "react";
 import { X, CircleCheckBig, CircleAlert } from "lucide-react";
-import styles from "./ModalInformações.module.css";
+import styles from "./modalInformations.module.css";
 
-export function MaterialModal({ isOpen, onClose, material }) {
+export function ModalInformations({ isOpen, onClose, material }) {
   if (!isOpen || !material) return null;
 
   return (
