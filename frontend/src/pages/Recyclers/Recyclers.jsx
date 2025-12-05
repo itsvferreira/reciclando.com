@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { recyclersService } from '../services/api';
-import RecyclerCard from '../components/RecyclerCard/RecyclerCard';
-import SearchBar from '../components/SearchBar/SearchBar';
-import LocationSelect from '../components/LocationSelect/LocationSelect';
-import Categories from '../components/Categories/Categories';
-import { buildQuery } from '../utils/buildQuery';
+import { recyclersService } from '../../services/api';
+import RecyclerCard from '../../components/RecyclerCard/RecyclerCard';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import LocationSelect from '../../components/LocationSelect/LocationSelect';
+import Categories from '../../components/Categories/Categories';
+import { buildQuery } from '../../utils/buildQuery';
 
 const Recyclers = () => {
   const [recyclers, setRecyclers] = useState([]);
@@ -18,6 +18,8 @@ const Recyclers = () => {
 
       try {
         const query = buildQuery(city, categories, searchText);
+
+        console.log(query);
 
         if (query.length > 0) {
           response = await recyclersService.search(query);

@@ -1,8 +1,8 @@
-import Recyclers from './pages/Recyclers';
+import Recyclers from './pages/Recyclers/Recyclers';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HowToRecycle from './pages/HowToRecycle/HowToRecycle';
 import Login from './pages/Login/Login';
-import Ads from './pages/Ads';
+import Ads from './pages/Ads/Ads';
 
 function App() {
   return (
