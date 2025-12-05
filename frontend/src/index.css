@@ -7,11 +7,40 @@
   --green-font: #166534;
   --bg-color: #fafaf9;
   --btn-hover: #0ab348;
+  --title-size: 36px;
   --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-/*How To Recycle */
+/* Global Styles */
+html,
+body {
+  background: var(--bg-color);
+  font-family: var(--font-sans);
+}
+
+h1 {
+  color: var(--black);
+  font-size: var(--title-size);
+}
+
+p {
+  color: var(--light-font);
+}
+
+.btn-success {
+  background-color: var(--green);
+  color: #fff;
+  font-weight: 500;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: var(--btn-hover);
+  color: #fff;
+}
+
+/* How To Recycle */
 .comoContainer {
   width: 90%;
   max-width: 1200px;
