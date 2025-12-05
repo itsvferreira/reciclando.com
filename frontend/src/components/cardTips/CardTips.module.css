@@ -1,0 +1,55 @@
+.dicasSection {
+  margin-top: 60px;
+  padding: 40px 0;
+}
+
+.dicasTitulo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1c1917;
+  margin-bottom: 30px;
+  text-align: left;
+  padding: 0 20px;
+}
+
+.dicasGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px 60px;
+  padding: 40px;
+  background-color: rgba(22, 163, 74, 0.1);
+  border-radius: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dicaCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.dicaIcon {
+  color: #16a34a;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.dicaCard p {
+  color: #1c1917;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .dicasGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 30px 20px;
+  }
+  
+  .dicasTitulo {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,101 @@
+.form {
+  width: 100%;
+}
+
+.inputGroup {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1c1917;
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 100%;
+  padding: 16px 18px;
+  font-size: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  outline: none;
+  font-family: inherit;
+  background: #fafafa;
+}
+
+.input:focus {
+  border-color: #d1d5db;
+  background: white;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  margin-top: 8px;
+}
+
+.submitButton:hover {
+  background: #15803d;
+}
+
+.submitButton:active {
+  transform: scale(0.98);
+}
+
+
+
+.forgotPassword:hover {
+  color: #15803d;
+}
+
+.link {
+  color: #16a34a;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #0ab348;
+  text-decoration: underline;
+}
+
+.switchText {
+  text-align: center;
+  margin-top: 24px;
+  color: #78716c;
+  font-size: 0.95rem;
+}
+
+.switchButton {
+  background: none;
+  border: none;
+  color: #16a34a;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.switchButton:hover {
+  color: #0ab348;
+  text-decoration: underline;
+}
