@@ -117,7 +117,8 @@ public class RecyclerControllerTest {
     public void testGetRecyclerById_NotFound() throws Exception {
         long recyclerId = 999L;
         when(recyclerService.getByUserID(recyclerId))
-                .thenThrow(new EntityNotFoundException("Recycler not found with user id: " + recyclerId));
+                .thenThrow(new EntityNotFoundException(
+                        "Recycler not found with user id: " + recyclerId));
 
         mockMvc.perform(get("/api/v1/recyclers/{id}", recyclerId))
                 .andExpect(status().isNotFound());
@@ -128,7 +129,7 @@ public class RecyclerControllerTest {
         when(recyclerService.search(null, Material.PAPER.toString(), null)).thenReturn(recyclers);
 
         mockMvc.perform(get("/api/v1/recyclers")
-                .param("material", "PAPER"))
+                .param("category", "PAPER"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2));
     }
@@ -148,15 +149,14 @@ public class RecyclerControllerTest {
 
     @Test
     public void testGetRecyclers_ByCityAndMaterial() throws Exception {
-        when(recyclerService.search("Example Town", Material.PLASTIC.toString(), null))
+        when(recyclerService.search("Example Town", Material.PAPER.toString(), null))
                 .thenReturn(List.of(janeRecycler));
 
-        mockMvc.perform(get("/api/v1/recyclers")
-                .param("city", "Example Town")
-                .param("material", "PLASTIC"))
+        mockMvc.perform(get("/api/v1/recyclers?city={city}&category={category}", "Example Town", "PAPER"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
-                .andExpect(jsonPath("$[0].firstName").value("Jane"));
+                .andExpect(jsonPath("$[0].firstName").value("Jane"))
+                .andExpect(jsonPath("$[0].city").value("Example Town"));
     }
 
     @Test
