@@ -62,6 +62,25 @@ public class AdService {
     }
 
     @Transactional(readOnly = true)
+    public List<AdResponseDto> getAdsByDonorId(Long donorId) {
+        Donor donor = donorService.findById(donorId)
+                .orElseThrow(() -> new EntityNotFoundException("Donor not found"));
+        List<Ad> ads = postRepository.findByDonorOrderByCreatedAtDesc(donor);
+        return ads.stream()
+                .map(ad -> new AdResponseDto(
+                        ad.getId(),
+                        ad.getTitle(),
+                        ad.getDescription(),
+                        ad.getDonor().getFullName(),
+                        ad.getDonor().getContact(),
+                        ad.getLocationString(),
+                        ad.getCategory(),
+                        ad.getFormatedCreationDate(),
+                        ad.getStatus()))
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
     public AdResponseDto getPostById(long id) {
         Ad ad = postRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
@@ -91,5 +110,40 @@ public class AdService {
                 newPost.getLocationString(),
                 newPost.getCategory(),
                 newPost.getFormatedCreationDate());
+    }
+
+    @Transactional
+    public void deleteAd(Long id) {
+        Ad ad = postRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
+        postRepository.delete(ad);
+    }
+
+    @Transactional
+    public AdResponseDto concludeAd(Long id, String recyclerCode) {
+        Ad ad = postRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
+        
+        if (!"active".equals(ad.getStatus())) {
+            throw new IllegalArgumentException("Only active ads can be concluded");
+        }
+        
+        if (recyclerCode == null || recyclerCode.trim().isEmpty()) {
+            throw new IllegalArgumentException("Recycler code is required");
+        }
+        
+        ad.setStatus("concluded");
+        postRepository.save(ad);
+        
+        return new AdResponseDto(
+                ad.getId(),
+                ad.getTitle(),
+                ad.getDescription(),
+                ad.getDonor().getFullName(),
+                ad.getDonor().getContact(),
+                ad.getLocationString(),
+                ad.getCategory(),
+                ad.getFormatedCreationDate(),
+                ad.getStatus());
     }
 }

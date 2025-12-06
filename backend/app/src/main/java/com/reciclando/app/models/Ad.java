@@ -46,6 +46,8 @@ public class Ad {
     @Enumerated(EnumType.STRING)
     private List<Material> category;
 
+    private String status; 
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -119,6 +121,14 @@ public class Ad {
 
     public void setCategory(List<Material> category) {
         this.category = category;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getFormatedCreationDate() {

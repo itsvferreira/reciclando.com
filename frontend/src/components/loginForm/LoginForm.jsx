@@ -23,9 +23,12 @@ export function LoginForm() {
     // Usuários mockados
     const mockUsers = {
       comum: {
-        email: "usuario@teste.com",
+        id: 4, 
+        email: "luiza@exemplo.com",
         password: "123456",
-        tipo: "comum"
+        tipo: "comum",
+        firstName: "Luiza",
+        lastName: "Almeida"
       },
       reciclador: {
         email: "reciclador@teste.com",
@@ -40,7 +43,7 @@ export function LoginForm() {
 
     if (formData.email === userComum.email && formData.password === userComum.password) {
       localStorage.setItem("user", JSON.stringify(userComum));
-      navigate("/how-to-recycle"); //temporário
+      navigate("/user-profile");
     } else if (formData.email === userReciclador.email && formData.password === userReciclador.password) {
       localStorage.setItem("user", JSON.stringify(userReciclador));
       navigate("/how-to-recycle"); //temporário
