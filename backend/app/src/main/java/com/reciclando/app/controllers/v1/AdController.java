@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.reciclando.app.dtos.ad.AdRequestDto;
-import com.reciclando.app.dtos.ad.AdResponseDto;
+import com.reciclando.app.dtos.ad.AdRequestDTO;
+import com.reciclando.app.dtos.ad.AdResponseDTO;
 import com.reciclando.app.services.AdService;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -29,17 +29,17 @@ public class AdController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AdResponseDto>> getPosts(
+    public ResponseEntity<List<AdResponseDTO>> listAds(
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String city) {
-        List<AdResponseDto> posts = postService.getAdsOrderByCreatedAt(category, city);
+        List<AdResponseDTO> posts = postService.getAdsOrderByCreatedAt(category, city);
         return ResponseEntity.status(HttpStatus.OK).body(posts);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AdResponseDto> getPostById(@PathVariable long id) {
+    public ResponseEntity<AdResponseDTO> getAdById(@PathVariable long id) {
         try {
-            AdResponseDto post = postService.getPostById(id);
+            AdResponseDTO post = postService.getAdById(id);
             return ResponseEntity.status(HttpStatus.OK).body(post);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -47,9 +47,9 @@ public class AdController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<AdResponseDto> createPost(@RequestBody AdRequestDto postRequest) {
+    public ResponseEntity<AdResponseDTO> createAd(@RequestBody AdRequestDTO postRequest) {
         try {
-            AdResponseDto createdPost = postService.createPost(postRequest);
+            AdResponseDTO createdPost = postService.createAd(postRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);

@@ -22,6 +22,7 @@ public class Address {
     }
 
     public Address(String postalCode, String city, String state, String neighborhood) {
+        this.postalCode = postalCode;
         this.city = city;
         this.state = state;
         this.neighborhood = neighborhood;

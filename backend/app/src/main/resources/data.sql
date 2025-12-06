@@ -1,7 +1,7 @@
-INSERT INTO addresses (id, postal_code, city, state, neighborhood) VALUES
-  (1, '12345-678', 'Sample City', 'SC', 'Central District'),
-  (2, '98765-432', 'Example Town', 'ET', 'Green Neighborhood'),
-  (3, '90000-000', 'Porto Alegre', 'RS', 'Centro');
+INSERT INTO addresses (postal_code, city, state, neighborhood) VALUES
+  ('12345-678', 'Sample City', 'SC', 'Central District'),
+  ('98765-432', 'Example Town', 'ET', 'Green Neighborhood'),
+  ('90000-000', 'Porto Alegre', 'RS', 'Centro');
 
 INSERT INTO users (first_name, last_name, phone, account_type, address_id) VALUES
   ('John', 'Doe', '1234567890', 'DONOR', 1),
