@@ -1,0 +1,60 @@
+.cardMaterial {
+  padding: 24px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background-color: white;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardMaterial:hover {
+  border-color: #16a34a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.iconBox {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.textBox {
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.textBox h3 {
+  color: #1c1917;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.textBox p {
+  color: #78716c;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.buttonSaibaMais {
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: auto;
+}
+
+.buttonSaibaMais:hover {
+  background: #0ab348;
+}

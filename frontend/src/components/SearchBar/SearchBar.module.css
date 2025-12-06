@@ -1,0 +1,33 @@
+.search-container {
+  position: relative;
+}
+
+.search-container svg {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: var(--light-font);
+}
+
+.form-control {
+  height: 50px;
+  border-radius: 10px;
+  padding-left: 45px;
+  border: 1px solid var(--border);
+  width: 100%;
+  outline: none;
+}
+
+.form-control:hover {
+  border-color: #949191c8;
+}
+
+.form-control:active {
+  border-color: #4caf4fe5;
+}
+
+.form-control:focus {
+  border: 1px solid #60b363e5;
+  box-shadow: 0 0 0 0.2rem #65cd6993;
+}

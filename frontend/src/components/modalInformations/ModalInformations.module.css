@@ -1,0 +1,177 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+/* Conteúdo do Modal */
+.modalContent {
+  background: white;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Botão  */
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #16a34a;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: #f5f5f4;
+  color: #16a34a;
+}
+
+/* Header */
+.modalHeader {
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.iconCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.modalHeader h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1c1917;
+  margin-bottom: 8px;
+}
+
+.description {
+  color: #78716c;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Seções */
+.section {
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #16a34a;
+  margin-bottom: 16px;
+}
+
+.sectionTitleWarning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ea580c;
+  margin-bottom: 16px;
+}
+
+.checkIcon {
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+.warningIcon {
+  color: #ea580c;
+  flex-shrink: 0;
+}
+
+/* Listas */
+.stepsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stepsList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: #1c1917;
+  line-height: 1.6;
+}
+
+.stepsList li svg {
+  color: #16a34a;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.stepsList li span {
+  flex: 1;
+}
+
+.warningsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.warningsList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: #1c1917;
+  line-height: 1.6;
+}
+
+.warningsList li svg {
+  color: #ea580c;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.warningsList li span {
+  flex: 1;
+}
+
+/* Responsivo */
+@media (max-width: 640px) {
+  .modalContent {
+    padding: 24px;
+  }
+
+  .modalHeader h2 {
+    font-size: 1.5rem;
+  }
+
+  .iconCircle {
+    width: 56px;
+    height: 56px;
+  }
+}

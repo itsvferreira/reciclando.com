@@ -1,16 +1,19 @@
 package com.reciclando.app.dtos.ad;
 
+import com.reciclando.app.models.enums.Material;
+import java.util.List;
+
 public class AdRequestDto {
     private String title;
     private String description;
     private Long donorId;
-    private String materialCategory;
+    private List<Material> category;
 
-    public AdRequestDto(String title, String description, Long donorId, String materialCategory) {
+    public AdRequestDto(String title, String description, Long donorId, List<Material> category) {
         this.title = title;
         this.description = description;
         this.donorId = donorId;
-        this.materialCategory = materialCategory;
+        this.category = category;
     }
 
     public String getTitle() {
@@ -25,7 +28,7 @@ public class AdRequestDto {
         return donorId;
     }
 
-    public String getMaterialCategory() {
-        return materialCategory;
+    public List<Material> getCategory() {
+        return category;
     }
 }

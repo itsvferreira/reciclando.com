@@ -1,0 +1,27 @@
+.card {
+  border-radius: 15px;
+}
+
+.card:hover {
+  box-shadow: 5px 5px 16px -5px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s;
+}
+
+.card-title {
+  font-weight: 400;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 15px 0 0 15px;
+}
+
+.locale {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
