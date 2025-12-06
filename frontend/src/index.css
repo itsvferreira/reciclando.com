@@ -12,7 +12,6 @@
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-/* Global Styles */
 html,
 body {
   background: var(--bg-color);
@@ -40,117 +39,12 @@ p {
   color: #fff;
 }
 
-/* How To Recycle */
-.comoContainer {
-  width: 90%;
-  max-width: 1200px;
-  margin: 30px auto;
-  text-align: center;
-}
-
-.comoTitulo {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1c1917;
-  margin-bottom: 10px;
-}
-
-.comoSubtitulo {
-  font-size: 1.1rem;
-  color: #78716c;
-  margin-bottom: 40px;
-}
-
-.gridMateriais {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(300px, 1fr));
-  gap: 25px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-@media (max-width: 900px) {
-  .gridMateriais {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .gridMateriais {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Login */
-.container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f5f5f5;
-  padding: 20px;
-}
-
-.card {
-  background: white;
-  border-radius: 24px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
-  padding: 48px;
-  max-width: 1100px;
-  width: 100%;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #1c1917;
-  margin-bottom: 8px;
-}
-
-.subtitle {
-  color: #78716c;
-  font-size: 1rem;
-}
-
-.tabs {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  margin-bottom: 40px;
-  background: #e5e7eb;
-  border-radius: 40px;
-  padding: 4px;
-}
-
-.tab {
-  padding: 12px 24px;
-  font-size: 1rem;
+.btn-secondary {
+  background-color: rgb(223, 223, 223);
   font-weight: 500;
-  background: transparent;
   border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: #1c1917;
-  font-family: inherit;
-  border-radius: 40px;
 }
 
-.tabActive {
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-@media (max-width: 640px) {
-  .card {
-    padding: 32px 24px;
-  }
-
-  .title {
-    font-size: 1.5rem;
-  }
+.btn-secondary:hover {
+  background-color: rgb(231, 231, 231);
 }

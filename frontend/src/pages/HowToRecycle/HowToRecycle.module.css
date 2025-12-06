@@ -1,0 +1,39 @@
+.comoContainer {
+  width: 90%;
+  max-width: 1200px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.comoTitulo {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1c1917;
+  margin-bottom: 10px;
+}
+
+.comoSubtitulo {
+  font-size: 1.1rem;
+  color: #78716c;
+  margin-bottom: 40px;
+}
+
+.gridMateriais {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .gridMateriais {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .gridMateriais {
+    grid-template-columns: 1fr;
+  }
+}

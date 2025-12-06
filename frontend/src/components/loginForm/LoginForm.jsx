@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styles from "./LoginForm.module.css";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './LoginForm.module.css';
 
 export function LoginForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: "",
-    password: ""
+    email: '',
+    password: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Usuários mockados
     const mockUsers = {
       comum: {
@@ -31,10 +31,10 @@ export function LoginForm() {
         lastName: "Almeida"
       },
       reciclador: {
-        email: "reciclador@teste.com",
-        password: "123456",
-        tipo: "reciclador"
-      }
+        email: 'reciclador@teste.com',
+        password: '123456',
+        tipo: 'reciclador',
+      },
     };
 
     // Verifica o usuário
@@ -48,7 +48,7 @@ export function LoginForm() {
       localStorage.setItem("user", JSON.stringify(userReciclador));
       navigate("/how-to-recycle"); //temporário
     } else {
-      alert("Email ou senha incorretos!");
+      alert('Email ou senha incorretos!');
     }
   };
 
@@ -57,9 +57,9 @@ export function LoginForm() {
       <div className={styles.inputGroup}>
         <label className={styles.label}>E-mail</label>
         <input
-          type="email"
-          name="email"
-          placeholder="seu@email.com"
+          type='email'
+          name='email'
+          placeholder='seu@email.com'
           value={formData.email}
           onChange={handleChange}
           className={styles.input}
@@ -69,22 +69,18 @@ export function LoginForm() {
       <div className={styles.inputGroup}>
         <label className={styles.label}>Senha</label>
         <input
-          type="password"
-          name="password"
-          placeholder="••••••••"
+          type='password'
+          name='password'
+          placeholder='••••••••'
           value={formData.password}
           onChange={handleChange}
           className={styles.input}
         />
       </div>
 
-      <button type="submit" className={styles.submitButton}>
+      <button type='submit' className={styles.submitButton}>
         Entrar
       </button>
-
-    
-
-      
     </form>
   );
 }

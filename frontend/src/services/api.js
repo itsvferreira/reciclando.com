@@ -19,4 +19,9 @@ export const adsService = {
   search: (params) => api.get(`/ads?${params}`),
 };
 
+export const recyclersService = {
+  getAll: () => api.get('/recyclers'),
+  search: (params) => api.get(`/recyclers?${params}`),
+};
+
 export default api;

@@ -4,7 +4,14 @@ import styles from './SearchBar.module.css';
 export default function SearchBar({ placeholder, onSearchChange }) {
   function handleClear(event) {
     if (event.target.value === '') {
-      onSearchChange(event);
+      onSearchChange('');
+    }
+  }
+
+  function handleSearchChange(event) {
+    if (event.key === 'Enter') {
+      const value = event.target.value.trim();
+      onSearchChange(value);
     }
   }
 
@@ -17,6 +24,7 @@ export default function SearchBar({ placeholder, onSearchChange }) {
         placeholder={placeholder}
         aria-label='Search'
         onChange={handleClear}
+        onKeyDown={handleSearchChange}
       ></input>
     </div>
   );
