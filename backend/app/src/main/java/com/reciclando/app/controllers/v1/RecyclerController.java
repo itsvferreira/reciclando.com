@@ -6,11 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.reciclando.app.dtos.CreateRecyclerDTO;
-import com.reciclando.app.dtos.RecyclerDTO;
-import com.reciclando.app.dtos.RecyclerResponseDTO;
-import com.reciclando.app.dtos.UpdateMaterialsDTO;
-import com.reciclando.app.models.enums.Material;
+import com.reciclando.app.dtos.recycler.CreateRecyclerDTO;
+import com.reciclando.app.dtos.recycler.RecyclerDTO;
+import com.reciclando.app.dtos.recycler.RecyclerResponseDTO;
+import com.reciclando.app.dtos.recycler.UpdateMaterialsDTO;
 import com.reciclando.app.services.RecyclerService;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -25,34 +24,30 @@ public class RecyclerController {
         this.recyclerService = recyclerService;
     }
 
-
-   @GetMapping
+    @GetMapping
     public ResponseEntity<List<RecyclerResponseDTO>> getRecyclers(
             @RequestParam(required = false) String city,
-            @RequestParam(required = false) Material material) {
-                
-        var recyclers = recyclerService.search(city, material)
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String search) {
+
+        var recyclers = recyclerService.search(city, category, search)
                 .stream()
                 .map(RecyclerResponseDTO::fromRecycler)
                 .toList();
         return ResponseEntity.ok(recyclers);
-}
+    }
 
-
-    
     @GetMapping("/{id}")
     public ResponseEntity<RecyclerResponseDTO> getRecyclerById(@PathVariable Long id) {
         try {
             RecyclerResponseDTO recycler = RecyclerResponseDTO.fromRecycler(
-                recyclerService.getByUserID(id)
-            );
+                    recyclerService.getByUserID(id));
             return ResponseEntity.status(HttpStatus.OK).body(recycler);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
-   
     @PostMapping("/new")
     public ResponseEntity<RecyclerDTO> createRecycler(@RequestBody CreateRecyclerDTO createDto) {
         try {
@@ -64,10 +59,9 @@ public class RecyclerController {
         }
     }
 
-    
     @PutMapping("/{id}/materials")
     public ResponseEntity<RecyclerDTO> updateMaterials(
-            @PathVariable Long id, 
+            @PathVariable Long id,
             @RequestBody UpdateMaterialsDTO updateDto) {
         try {
             var recycler = recyclerService.updateMaterials(id, updateDto.acceptedMaterials());
