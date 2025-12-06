@@ -25,8 +25,8 @@ public class AdService {
     }
 
     @Transactional(readOnly = true)
-    public List<AdResponseDto> getAdsOrderByCreatedAt(String filter) {
-        String[] categories = filter != null ? filter.split("--") : null;
+    public List<AdResponseDto> getAdsOrderByCreatedAt(String category, String city) {
+        String[] categories = category != null ? category.split("--") : null;
         List<Ad> ads = postRepository.findAllByOrderByCreatedAtDesc();
         ads = ads.stream()
                 .filter(post -> {
@@ -34,21 +34,29 @@ public class AdService {
                         return true; // Se nenhuma categoria for fornecida, retorna todos os ads
                     }
                     for (String cat : categories) {
-                        if (post.getMaterialCategory().toString().equalsIgnoreCase(cat)) {
-                            return true;
+                        for (Material m : post.getCategory()) {
+                            if (m.name().equalsIgnoreCase(cat)) {
+                                return true;
+                            }
                         }
                     }
                     return false;
+                }).filter(ad -> {
+                    if (city != null) {
+                        return ad.getDonor().getAddress().getCity().equals(city);
+                    }
+                    return true;
                 })
                 .toList();
         return ads.stream()
                 .map(ad -> new AdResponseDto(
+                        ad.getId(),
                         ad.getTitle(),
                         ad.getDescription(),
                         ad.getDonor().getFullName(),
                         ad.getDonor().getContact(),
                         ad.getLocationString(),
-                        ad.getMaterialCategory().toString(),
+                        ad.getCategory(),
                         ad.getFormatedCreationDate()))
                 .toList();
     }
@@ -58,12 +66,13 @@ public class AdService {
         Ad ad = postRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
         return new AdResponseDto(
+                ad.getId(),
                 ad.getTitle(),
                 ad.getDescription(),
                 ad.getDonor().getFullName(),
                 ad.getDonor().getContact(),
                 ad.getLocationString(),
-                ad.getMaterialCategory().toString(),
+                ad.getCategory(),
                 ad.getFormatedCreationDate());
     }
 
@@ -71,16 +80,16 @@ public class AdService {
     public AdResponseDto createPost(AdRequestDto post) {
         Donor donor = donorService.findById(post.getDonorId())
                 .orElseThrow(() -> new EntityNotFoundException("Donor not found"));
-        Ad newPost = new Ad(post.getTitle(), post.getDescription(), donor,
-                Material.valueOf(post.getMaterialCategory()));
+        Ad newPost = new Ad(post.getTitle(), post.getDescription(), donor, post.getCategory());
         postRepository.save(newPost);
         return new AdResponseDto(
+                newPost.getId(),
                 newPost.getTitle(),
                 newPost.getDescription(),
                 newPost.getDonor().getFullName(),
                 newPost.getDonor().getContact(),
                 newPost.getLocationString(),
-                newPost.getMaterialCategory().toString(),
+                newPost.getCategory(),
                 newPost.getFormatedCreationDate());
     }
 }

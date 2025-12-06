@@ -20,7 +20,13 @@ INSERT INTO recycler_materials (user_id, material) VALUES
   (2, 'PLASTIC'),
   (3, 'PAPER');
 
-INSERT INTO ads (title, description, donor_id, material_category, address_id, created_at, updated_at) VALUES
-  ('Old Newspaper', 'Bundle of old newspapers available for recycling.', 1, 'PAPER', 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()),
-  ('Plastic Bottles', 'Collection of used plastic bottles.', 1, 'PLASTIC', 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()),
-  ('Glass Jars', 'Several glass jars ready for recycling.', 1, 'GLASS', 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+INSERT INTO ads (title, description, donor_id, address_id, created_at, updated_at) VALUES
+  ('Old Newspaper', 'Bundle of old newspapers available for recycling.', 1, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()),
+  ('Plastic Bottles', 'Collection of used plastic bottles.', 1, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP()),
+  ('Glass Jars', 'Several glass jars ready for recycling.', 1, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+
+INSERT INTO ad_categories (ad_id, category) VALUES
+  (1, 'PAPER'),
+  (1, 'GLASS'),
+  (2, 'PLASTIC'),
+  (3, 'PAPER');
