@@ -1,12 +1,12 @@
 import styles from './Categories.module.css';
 
 const MATERIALS = [
-  { label: 'Plástico', value: 'PLASTIC' },
-  { label: 'Papel', value: 'PAPER' },
-  { label: 'Metal', value: 'METAL' },
-  { label: 'Vidro', value: 'GLASS' },
-  { label: 'Eletrônicos', value: 'ELECTRONICS' },
-  { label: 'Baterias', value: 'BATTERIES' },
+  { label: 'Plástico', value: 'plastic' },
+  { label: 'Papel', value: 'paper' },
+  { label: 'Metal', value: 'metal' },
+  { label: 'Vidro', value: 'glass' },
+  { label: 'Eletrônicos', value: 'electronics' },
+  { label: 'Baterias', value: 'battery' },
 ];
 
 export default function Categories({ categories, onCategoriesChange }) {
@@ -42,7 +42,6 @@ export default function Categories({ categories, onCategoriesChange }) {
             type='checkbox'
             name='categoriesList'
             id={value}
-            value={value}
             checked={categories.includes(value)}
             onChange={() => handleCategoryChange(value)}
           />
