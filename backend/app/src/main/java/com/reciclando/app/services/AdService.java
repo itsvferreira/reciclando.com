@@ -1,9 +1,11 @@
 package com.reciclando.app.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.reciclando.app.dtos.ad.AdRequestDto;
 import com.reciclando.app.dtos.ad.AdResponseDto;
@@ -18,10 +20,12 @@ import jakarta.persistence.EntityNotFoundException;
 public class AdService {
     private final AdRepository postRepository;
     private final DonorService donorService;
+    private final FileStorageService fileStorageService;
 
-    public AdService(AdRepository postRepository, DonorService donorService) {
+    public AdService(AdRepository postRepository, DonorService donorService, FileStorageService fileStorageService) {
         this.postRepository = postRepository;
         this.donorService = donorService;
+        this.fileStorageService = fileStorageService;
     }
 
     @Transactional(readOnly = true)
@@ -57,7 +61,8 @@ public class AdService {
                         ad.getDonor().getContact(),
                         ad.getLocationString(),
                         ad.getCategory(),
-                        ad.getFormatedCreationDate()))
+                        ad.getFormatedCreationDate(),
+                        ad.getImagesPath()))
                 .toList();
     }
 
@@ -73,14 +78,18 @@ public class AdService {
                 ad.getDonor().getContact(),
                 ad.getLocationString(),
                 ad.getCategory(),
-                ad.getFormatedCreationDate());
+                ad.getFormatedCreationDate(),
+                ad.getImagesPath());
     }
 
     @Transactional
-    public AdResponseDto createPost(AdRequestDto post) {
+    public AdResponseDto createPost(AdRequestDto post, MultipartFile[] files) {
         Donor donor = donorService.findById(post.getDonorId())
                 .orElseThrow(() -> new EntityNotFoundException("Donor not found"));
         Ad newPost = new Ad(post.getTitle(), post.getDescription(), donor, post.getCategory());
+
+        newPost.setImagesPath(getImagePaths(files));
+
         postRepository.save(newPost);
         return new AdResponseDto(
                 newPost.getId(),
@@ -90,6 +99,15 @@ public class AdService {
                 newPost.getDonor().getContact(),
                 newPost.getLocationString(),
                 newPost.getCategory(),
-                newPost.getFormatedCreationDate());
+                newPost.getFormatedCreationDate(),
+                newPost.getImagesPath());
+    }
+
+    private List<String> getImagePaths(MultipartFile[] files) {
+        List<String> imagesPath = new ArrayList<>();
+        for (MultipartFile file : files) {
+            imagesPath.add(fileStorageService.getStoredFiles(file));
+        }
+        return imagesPath;
     }
 }

@@ -12,9 +12,10 @@ public class AdResponseDto {
     private String donorLocation;
     private List<Material> category;
     private String createdAt;
+    private List<String> imagesPath;
 
     public AdResponseDto(Long id, String title, String description, String donorName, String donorContact,
-            String donorLocation, List<Material> category, String createdAt) {
+            String donorLocation, List<Material> category, String createdAt, List<String> imagesPath) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -23,6 +24,7 @@ public class AdResponseDto {
         this.donorLocation = donorLocation;
         this.category = category;
         this.createdAt = createdAt;
+        this.imagesPath = imagesPath;
     }
 
     public long getId() {
@@ -55,5 +57,9 @@ public class AdResponseDto {
 
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    public List<String> getImagesPath() {
+        return imagesPath;
     }
 }

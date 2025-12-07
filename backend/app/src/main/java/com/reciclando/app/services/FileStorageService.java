@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.reciclando.app.config.FileStorageConfig;
-import com.reciclando.app.dtos.UploadFile.UploadFileDTO;
 import com.reciclando.app.exception.FileStorageException;
 
 @Service
@@ -33,7 +32,7 @@ public class FileStorageService {
         }
     }
 
-    public UploadFileDTO getStoredFiles(MultipartFile file) {
+    public String getStoredFiles(MultipartFile file) {
         String fileName = storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -41,9 +40,7 @@ public class FileStorageService {
                 .path(fileName)
                 .toUriString();
 
-        UploadFileDTO uploadedFile = new UploadFileDTO(fileName, fileDownloadUri,
-                file.getContentType(), file.getSize());
-        return uploadedFile;
+        return fileDownloadUri;
     }
 
     public String storeFile(MultipartFile file) {

@@ -30,7 +30,7 @@ public class Ad {
 
     private String title;
     private String description;
-    private String photoPath;
+    private List<String> imagesPath;
 
     @ManyToOne
     @JoinColumn(name = "address_id")
@@ -89,12 +89,12 @@ public class Ad {
         this.description = description;
     }
 
-    public String getPhotoPath() {
-        return photoPath;
+    public List<String> getImagesPath() {
+        return imagesPath;
     }
 
-    public void setPhotoPath(String photoPath) {
-        this.photoPath = photoPath;
+    public void setImagesPath(List<String> imagesPath) {
+        this.imagesPath = imagesPath;
     }
 
     public Address getLocation() {
@@ -149,7 +149,7 @@ public class Ad {
 
     @Override
     public String toString() {
-        return "Post [id=" + id + ", title=" + title + ", description=" + description + ", photoPath=" + photoPath
+        return "Post [id=" + id + ", title=" + title + ", description=" + description + ", imagesPath=" + imagesPath
                 + ", location=" + location + ", donor=" + donor + ", category=" + category
                 + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
     }
