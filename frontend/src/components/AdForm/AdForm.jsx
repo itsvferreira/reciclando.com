@@ -1,13 +1,13 @@
 import Categories from '../Categories/Categories';
 import styles from './AdForm.module.css';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import STATES_LIST from '../../utils/statesList';
 
 export default function Form() {
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState('');
-  const [formData, setFormData] = useState({
+  const [adData, setFormData] = useState({
     image: '',
     title: '',
     description: '',
@@ -21,13 +21,18 @@ export default function Form() {
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...adData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    formData.category = categories;
+    adData.category = categories;
+    adData.image = image;
+
+    const formData = new FormData();
+    formData.append('files', image);
+    formData.append('postRequest', JSON.stringify(adData));
 
     try {
       const response = await axios.post(
@@ -41,7 +46,11 @@ export default function Form() {
   };
 
   return (
-    <div className={styles['form-container']} style={{ maxWidth: '800px' }}>
+    <div
+      className={styles['form-container']}
+      style={{ maxWidth: '800px' }}
+      encType='multipart/form-data'
+    >
       <h2>Informações do Anúncio</h2>
       <p>
         Preencha os dados abaixo para criar seu anúncio de materiais recicláveis
@@ -56,7 +65,7 @@ export default function Form() {
             className='form-control'
             name='title'
             id='title'
-            value={formData.title}
+            value={adData.title}
             onChange={handleChange}
             placeholder='Ex: Papelão e garrafas PET para doação'
           />
@@ -70,7 +79,7 @@ export default function Form() {
             placeholder='Descreva os materiais que você tem disponível, quantidade aproximada e qualquer informação adicional relevante...'
             id='description'
             name='description'
-            value={formData.description}
+            value={adData.description}
             onChange={handleChange}
             style={{ height: '120px' }}
           ></textarea>
@@ -84,7 +93,7 @@ export default function Form() {
             name='adImage'
             className='form-control'
             id='adImage'
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={(e) => setImage(e.target.image[0])}
           />
         </div>
         <div className='col-md-12 mb-0'>
@@ -109,7 +118,7 @@ export default function Form() {
                 className='form-control'
                 id='city'
                 name='city'
-                value={formData.city}
+                value={adData.city}
                 onChange={handleChange}
               />
             </div>
@@ -122,7 +131,7 @@ export default function Form() {
                 className='form-select'
                 name='state'
                 onChange={handleChange}
-                value={formData.state}
+                value={adData.state}
               >
                 <option value='' disabled>
                   Selecione uma opção...
@@ -143,7 +152,7 @@ export default function Form() {
                 className='form-control'
                 id='postalCode'
                 name='postalCode'
-                value={formData.postalCode}
+                value={adData.postalCode}
                 onChange={handleChange}
               />
             </div>
@@ -162,7 +171,7 @@ export default function Form() {
                 id='phone'
                 placeholder='(00) 00000-0000'
                 name='phone'
-                value={formData.phone}
+                value={adData.phone}
                 onChange={handleChange}
               />
             </div>
@@ -176,7 +185,7 @@ export default function Form() {
                 id='email'
                 placeholder='seu@email.com'
                 name='email'
-                value={formData.email}
+                value={adData.email}
                 onChange={handleChange}
               />
             </div>
