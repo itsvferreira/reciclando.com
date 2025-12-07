@@ -44,22 +44,26 @@ export default function UserCard({ user, adsStats }) {
         </p>
       </div>
 
-      <h3 className={styles.statsTitle}>Estatísticas</h3>
+      {adsStats && (
+        <>
+          <h3 className={styles.statsTitle}>Estatísticas</h3>
 
-      <div className={styles.userStats}>
-        <div className={styles.statItem}>
-          <div className={styles.statNumber}>{adsStats.total}</div>
-          <div className={styles.statLabel}>Total</div>
-        </div>
-        <div className={styles.statItem}>
-          <div className={styles.statNumber}>{adsStats.active}</div>
-          <div className={styles.statLabel}>Ativos</div>
-        </div>
-        <div className={styles.statItem}>
-          <div className={styles.statNumber}>{adsStats.concluded}</div>
-          <div className={styles.statLabel}>Concluídos</div>
-        </div>
-      </div>
+          <div className={styles.userStats}>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>{adsStats.total}</div>
+              <div className={styles.statLabel}>Total</div>
+            </div>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>{adsStats.active}</div>
+              <div className={styles.statLabel}>Ativos</div>
+            </div>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>{adsStats.concluded}</div>
+              <div className={styles.statLabel}>Concluídos</div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

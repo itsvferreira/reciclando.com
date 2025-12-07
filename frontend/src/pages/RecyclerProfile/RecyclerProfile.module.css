@@ -1,10 +1,10 @@
-.profile-container {
+.profileContainer {
   background: var(--bg-color);
   min-height: 100vh;
   padding: 20px;
 }
 
-.profile-back-button {
+.profileBackButton {
   background: white;
   border: 1px solid var(--border);
   padding: 10px 20px;
@@ -14,13 +14,11 @@
   margin-bottom: 20px;
 }
 
-.profile-back-button:hover {
+.profileBackButton:hover {
   background: var(--bg-color);
 }
 
-
-
-.profile-layout {
+.profileLayout {
   display: grid;
   grid-template-columns: 350px 1fr;
   gap: 30px;
@@ -28,60 +26,40 @@
   margin: 0 auto;
 }
 
-.profile-sidebar {
+.profileSidebar {
   position: sticky;
   top: 20px;
   height: fit-content;
 }
 
-.profile-main {
+.profileMain {
   background: white;
   border-radius: 16px;
   padding: 30px;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
 }
 
-.profile-header {
+.profileHeader {
+  margin-bottom: 24px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-  gap: 16px;
+  align-items: flex-start;
 }
 
-.profile-header h2 {
+.profileHeader h2 {
   font-size: 28px;
   font-weight: 700;
   color: var(--black);
+  margin: 0 0 4px;
+}
+
+.collectsCount {
+  color: var(--light-font);
   margin: 0;
+  font-size: 14px;
 }
 
-
-.header-actions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.btn-recyclers {
-  background: white;
-  color: var(--black);
-  border: 1px solid var(--border);
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.btn-recyclers:hover {
-  background: var(--bg-color);
-  border-color: var(--green);
-}
-
-.btn-create-ad {
+.profileAdsButton {
   background: var(--green);
   color: white;
   border: none;
@@ -90,19 +68,20 @@
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  transition: opacity 0.2s;
 }
 
-.btn-create-ad:hover {
-  background: var(--btn-hover);
+.profileAdsButton:hover {
+  opacity: 0.9;
 }
 
-.ads-list {
+.collectsList {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.no-ads {
+.noCollects {
   text-align: center;
   padding: 60px 20px;
   color: var(--light-font);
@@ -110,11 +89,11 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .profile-layout {
+  .profileLayout {
     grid-template-columns: 1fr;
   }
 
-  .profile-sidebar {
+  .profileSidebar {
     position: relative;
     top: 0;
   }

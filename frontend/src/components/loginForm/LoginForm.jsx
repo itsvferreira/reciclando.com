@@ -31,9 +31,12 @@ export function LoginForm() {
         lastName: "Almeida"
       },
       reciclador: {
-        email: 'reciclador@teste.com',
+        id: 3,
+        email: 'carlos@example.com',
         password: '123456',
         tipo: 'reciclador',
+        firstName: "Carlos",
+        lastName: "Silva"
       },
     };
 
@@ -46,7 +49,7 @@ export function LoginForm() {
       navigate("/user-profile");
     } else if (formData.email === userReciclador.email && formData.password === userReciclador.password) {
       localStorage.setItem("user", JSON.stringify(userReciclador));
-      navigate("/how-to-recycle"); //temporário
+      navigate("/recycler-profile");
     } else {
       alert('Email ou senha incorretos!');
     }

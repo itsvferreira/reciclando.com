@@ -9,8 +9,10 @@ import com.reciclando.app.dtos.ad.AdRequestDto;
 import com.reciclando.app.dtos.ad.AdResponseDto;
 import com.reciclando.app.models.Ad;
 import com.reciclando.app.models.Donor;
+import com.reciclando.app.models.Recycler;
 import com.reciclando.app.models.enums.Material;
 import com.reciclando.app.repositories.AdRepository;
+import com.reciclando.app.repositories.RecyclerRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -18,10 +20,12 @@ import jakarta.persistence.EntityNotFoundException;
 public class AdService {
     private final AdRepository postRepository;
     private final DonorService donorService;
+    private final RecyclerRepository recyclerRepository;
 
-    public AdService(AdRepository postRepository, DonorService donorService) {
+    public AdService(AdRepository postRepository, DonorService donorService, RecyclerRepository recyclerRepository) {
         this.postRepository = postRepository;
         this.donorService = donorService;
+        this.recyclerRepository = recyclerRepository;
     }
 
     @Transactional(readOnly = true)
@@ -57,7 +61,8 @@ public class AdService {
                         ad.getDonor().getContact(),
                         ad.getLocationString(),
                         ad.getCategory(),
-                        ad.getFormatedCreationDate()))
+                        ad.getFormatedCreationDate(),
+                        ad.getStatus()))
                 .toList();
     }
 
@@ -92,7 +97,8 @@ public class AdService {
                 ad.getDonor().getContact(),
                 ad.getLocationString(),
                 ad.getCategory(),
-                ad.getFormatedCreationDate());
+                ad.getFormatedCreationDate(),
+                ad.getStatus());
     }
 
     @Transactional
@@ -132,7 +138,14 @@ public class AdService {
             throw new IllegalArgumentException("Recycler code is required");
         }
         
+        // Buscar reciclador pelo código
+        Recycler recycler = recyclerRepository.findAll().stream()
+                .filter(r -> recyclerCode.equals(r.getCode()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid recycler code"));
+        
         ad.setStatus("concluded");
+        ad.setRecycler(recycler);
         postRepository.save(ad);
         
         return new AdResponseDto(

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { adsService } from "../services/api";
-import UserCard from "../components/UserCard/UserCard";
-import AdsFilter from "../components/AdsFilter/AdsFilter";
-import UserAdCard from "../components/UserAdCard/UserAdCard";
-import ConfirmDeleteModal from "../components/ConfirmDeleteModal/ConfirmDeleteModal";
-import ConcludeAdModal from "../components/ConcludeAdModal/ConcludeAdModal";
-import "../index.css";
-import "./UserProfile.css";
+import { useNavigate } from "react-router-dom";
+import { adsService } from "../../services/api";
+import UserCard from "../../components/UserCard/UserCard";
+import AdsFilter from "../../components/AdsFilter/AdsFilter";
+import UserAdCard from "../../components/UserAdCard/UserAdCard";
+import ConfirmDeleteModal from "../../components/ConfirmDeleteModal/ConfirmDeleteModal";
+import ConcludeAdModal from "../../components/ConcludeAdModal/ConcludeAdModal";
+import "../../index.css";
+import styles from "./UserProfile.module.css";
 
 export default function UserProfile() {
+  const navigate = useNavigate();
   const [user] = useState(() => {
     const userData = localStorage.getItem("user");
     return userData ? JSON.parse(userData) : null;
@@ -126,25 +128,25 @@ export default function UserProfile() {
  
 
   return (
-    <div className="profile-container">
-      <button className="profile-back-button" onClick={() => window.history.back()}>
+    <div className={styles.profileContainer}>
+      <button className={styles.profileBackButton} onClick={() => window.history.back()}>
         ← Voltar
       </button>
 
-      <div className="profile-layout">
-        <aside className="profile-sidebar">
+      <div className={styles.profileLayout}>
+        <aside className={styles.profileSidebar}>
           <UserCard user={user} adsStats={adsStats} />
         </aside>
 
-        <main className="profile-main">
-          <div className="profile-header">
+        <main className={styles.profileMain}>
+          <div className={styles.profileHeader}>
             <div>
               <h2>Meus Anúncios</h2>
-              <p className="ads-count">{filteredAds.length} anúncios encontrados</p>
+              <p className={styles.adsCount}>{filteredAds.length} anúncios encontrados</p>
             </div>
-            <div className="header-actions">
-              <button className="btn-recyclers">Ver Catadores</button>
-              <button className="btn-create-ad">+ Criar Anúncio</button>
+            <div className={styles.headerActions}>
+              <button className={styles.btnRecyclers} onClick={() => navigate('/recyclers')}>Recicladores</button>
+              <button className={styles.btnCreateAd}>+ Criar Anúncio</button>
             </div>
           </div>
 
@@ -153,9 +155,9 @@ export default function UserProfile() {
             onFilterChange={setFilter}
           />
 
-          <div className="ads-list">
+          <div className={styles.adsList}>
             {filteredAds.length === 0 ? (
-              <div className="no-ads">
+              <div className={styles.noAds}>
                 <p>Nenhum anúncio encontrado</p>
               </div>
             ) : (
