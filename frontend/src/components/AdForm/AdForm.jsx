@@ -6,7 +6,7 @@ import STATES_LIST from '../../utils/statesList';
 
 export default function Form() {
   const [categories, setCategories] = useState([]);
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
   const [adData, setFormData] = useState({
     image: '',
     title: '',
@@ -27,12 +27,14 @@ export default function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    adData.category = categories;
-    adData.image = image;
+    setFormData({ ...adData, category: categories });
 
     const formData = new FormData();
     formData.append('files', image);
-    formData.append('postRequest', JSON.stringify(adData));
+    formData.append(
+      'postRequest',
+      new Blob([JSON.stringify(adData)], { type: 'application/json' })
+    );
 
     try {
       const response = await axios.post(
@@ -46,16 +48,16 @@ export default function Form() {
   };
 
   return (
-    <div
-      className={styles['form-container']}
-      style={{ maxWidth: '800px' }}
-      encType='multipart/form-data'
-    >
+    <div className={styles['form-container']} style={{ maxWidth: '800px' }}>
       <h2>Informações do Anúncio</h2>
       <p>
         Preencha os dados abaixo para criar seu anúncio de materiais recicláveis
       </p>
-      <form className='row g-3' onSubmit={handleSubmit}>
+      <form
+        className='row g-3'
+        onSubmit={handleSubmit}
+        encType='multipart/form-data'
+      >
         <div className='col-md-12'>
           <label htmlFor='title' className='form-label'>
             Título do Anúncio
@@ -93,7 +95,7 @@ export default function Form() {
             name='adImage'
             className='form-control'
             id='adImage'
-            onChange={(e) => setImage(e.target.image[0])}
+            onChange={(e) => setImage(e.target.files[0])}
           />
         </div>
         <div className='col-md-12 mb-0'>
