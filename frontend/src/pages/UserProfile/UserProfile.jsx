@@ -173,7 +173,7 @@ export default function UserProfile() {
               <p className={styles.adsCount}>{filteredAds.length} anúncios encontrados</p>
             </div>
             <div className={styles.headerActions}>
-              <button className={styles.btnRecyclers} onClick={() => navigate('/recyclers')}>Recicladores</button>
+              <button className={styles.btnRecyclers} onClick={() => navigate('/recicladores')}>Recicladores</button>
               <button className={styles.btnCreateAd}>+ Criar Anúncio</button>
             </div>
           </div>
