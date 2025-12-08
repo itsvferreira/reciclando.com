@@ -22,6 +22,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String phone;
+    private String email;
 
     @OneToOne
     @JoinColumn(name = "address_id")
@@ -39,6 +40,14 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
+        this.accountType = accountType;
+    }
+
+    public User(String firstName, String lastName, String phone, String email, AccountType accountType) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
         this.accountType = accountType;
     }
 
@@ -68,6 +77,14 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Address getAddress() {
