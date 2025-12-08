@@ -1,9 +1,11 @@
 package com.reciclando.app.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.reciclando.app.dtos.ad.AdRequestDTO;
 import com.reciclando.app.dtos.ad.AdResponseDTO;
@@ -23,13 +25,16 @@ public class AdService {
     private final AdRepository adRepository;
     private final DonorRepository donorRepository;
     private final AddressRepository addressRepository;
+    private final FileStorageService fileStorageService;
     private final RecyclerRepository recyclerRepository;
 
     public AdService(AdRepository adRepository, DonorRepository donorRepository,
-            AddressRepository addressRepository, RecyclerRepository recyclerRepository) {
+            AddressRepository addressRepository, RecyclerRepository recyclerRepository,
+            FileStorageService fileStorageService) {
         this.adRepository = adRepository;
         this.donorRepository = donorRepository;
         this.addressRepository = addressRepository;
+        this.fileStorageService = fileStorageService;
         this.recyclerRepository = recyclerRepository;
     }
 
@@ -78,7 +83,7 @@ public class AdService {
     }
 
     @Transactional
-    public AdResponseDTO createAd(AdRequestDTO ad) {
+    public AdResponseDTO createAd(AdRequestDTO ad, MultipartFile[] files) {
         Donor donor = donorRepository.findById(ad.getDonorId())
                 .orElseThrow(() -> new EntityNotFoundException("Donor not found"));
 
@@ -90,7 +95,8 @@ public class AdService {
         }
 
         Ad newAd = new Ad(ad.getTitle(), ad.getDescription(), donor, ad.getCategory(), address);
-        System.out.println(newAd);
+        newAd.setImagesPath(getImagePaths(files));
+
         adRepository.save(newAd);
         return createResponseDTO(newAd);
     }
@@ -108,7 +114,17 @@ public class AdService {
                 ad.getState(),
                 ad.getNeighborhood(),
                 ad.getCreatedAt().toString(),
-                ad.getStatus());
+                ad.getImagesPath(),
+                ad.getStatus(),
+                ad.getConclusionCode());
+    }
+
+    private List<String> getImagePaths(MultipartFile[] files) {
+        List<String> imagesPath = new ArrayList<>();
+        for (MultipartFile file : files) {
+            imagesPath.add(fileStorageService.getStoredFiles(file));
+        }
+        return imagesPath;
     }
 
     @Transactional

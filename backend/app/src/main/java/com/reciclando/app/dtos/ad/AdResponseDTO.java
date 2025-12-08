@@ -15,11 +15,13 @@ public class AdResponseDTO {
     private String state;
     private String neighborhood;
     private String createdAt;
+    private List<String> imagesPath;
     private String status;
+    private String conclusionCode;
 
-    public AdResponseDTO(long id, String title, String description, String donorName, String donorContact,
+    public AdResponseDTO(Long id, String title, String description, String donorName, String donorContact,
             List<Material> category, String postalCode, String city, String state, String neighborhood,
-            String createdAt) {
+            String createdAt, List<String> imagesPath, String status, String conclusionCode) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -31,24 +33,9 @@ public class AdResponseDTO {
         this.state = state;
         this.neighborhood = neighborhood;
         this.createdAt = createdAt;
-        this.status = "active"; // default
-    }
-
-    public AdResponseDTO(long id, String title, String description, String donorName, String donorContact,
-            List<Material> category, String postalCode, String city, String state, String neighborhood,
-            String createdAt, String status) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.donorName = donorName;
-        this.donorContact = donorContact;
-        this.category = category;
-        this.postalCode = postalCode;
-        this.city = city;
-        this.state = state;
-        this.neighborhood = neighborhood;
-        this.createdAt = createdAt;
+        this.imagesPath = imagesPath;
         this.status = status;
+        this.conclusionCode = conclusionCode;
     }
 
     public long getId() {
@@ -95,7 +82,15 @@ public class AdResponseDTO {
         return createdAt;
     }
 
+    public List<String> getImagesPath() {
+        return imagesPath;
+    }
+
     public String getStatus() {
         return status;
+    }
+
+    public String getConclusionCode() {
+        return conclusionCode;
     }
 }
