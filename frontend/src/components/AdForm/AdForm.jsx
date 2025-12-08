@@ -16,8 +16,8 @@ export default function Form({ id }) {
     city: '',
     state: '',
     postalCode: '',
-    phone: '',
-    email: '',
+    donorContact: '',
+    donorEmail: '',
   });
 
   const handleChange = (e) => {
@@ -32,9 +32,13 @@ export default function Form({ id }) {
       category: categories,
     };
 
-    const form = new FormData();
-    form.append('files', image);
-    form.append(
+    const payload = new FormData();
+
+    if (image) {
+      payload.append('image', image);
+    }
+
+    payload.append(
       'postRequest',
       new Blob([JSON.stringify(body)], { type: 'application/json' })
     );
@@ -44,12 +48,12 @@ export default function Form({ id }) {
       : 'http://localhost:8081/api/v1/ads/new';
 
     try {
-      const response = adId
-        ? await axios.put(url, payload)
+      const response = id
+        ? await axios.put(url, body)
         : await axios.post(url, payload);
 
       console.log(
-        adId ? 'Dados atualizados com sucesso:' : 'Dados enviados com sucesso:',
+        id ? 'Dados atualizados com sucesso:' : 'Dados enviados com sucesso:',
         response.data
       );
     } catch (error) {
@@ -191,29 +195,29 @@ export default function Form({ id }) {
           <h3>Informações de Contato</h3>
           <div className='row gap-2 mb-0'>
             <div className='col-md-5'>
-              <label htmlFor='phone' className='form-label'>
+              <label htmlFor='donorContact' className='form-label'>
                 Telefone
               </label>
               <input
                 type='text'
                 className='form-control'
-                id='phone'
+                id='donorContact'
                 placeholder='(00) 00000-0000'
-                name='phone'
-                value={formData.phone}
+                name='donorContact'
+                value={formData.donorContact}
                 onChange={handleChange}
               />
             </div>
             <div className='col-md'>
-              <label htmlFor='email' className='form-label'>
+              <label htmlFor='donorEmail' className='form-label'>
                 E-mail
               </label>
               <input
                 type='text'
                 className='form-control'
-                id='email'
+                id='donorEmail'
                 placeholder='seu@email.com'
-                name='email'
+                name='donorEmail'
                 value={formData.email}
                 onChange={handleChange}
               />
