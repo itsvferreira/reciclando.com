@@ -1,0 +1,105 @@
+.adsFilterContainer {
+  margin-bottom: 24px;
+}
+
+.adsFilterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.adsFilterHeader h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--black);
+  margin: 0;
+}
+
+.adsCount {
+  font-size: 14px;
+  color: var(--light-font);
+  margin-top: 4px;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btnRecyclers {
+  background: white;
+  color: var(--black);
+  border: 1px solid var(--border);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btnRecyclers:hover {
+  background: var(--bg-color);
+  border-color: var(--green);
+}
+
+.btnCreateAd {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btnCreateAd:hover {
+  background: var(--btn-hover);
+}
+
+.adsFilters {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.filterBtn {
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--light-font);
+  transition: all 0.3s;
+}
+
+.filterBtn:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.filterBtn.active {
+  background: var(--light-green);
+  border-color: var(--green);
+  color: var(--green-font);
+}
+
+@media (max-width: 768px) {
+  .adsFilterHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .adsFilters {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

@@ -46,6 +46,12 @@ public class Ad {
     @Enumerated(EnumType.STRING)
     private List<Material> category;
 
+    private String status;
+    
+    @ManyToOne
+    @JoinColumn(name = "recycler_id")
+    private Recycler recycler;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -67,6 +73,7 @@ public class Ad {
         this.description = description;
         this.donor = donor;
         this.category = category;
+        this.status = "active";
     }
 
     public Long getId() {
@@ -119,6 +126,22 @@ public class Ad {
 
     public void setCategory(List<Material> category) {
         this.category = category;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Recycler getRecycler() {
+        return recycler;
+    }
+
+    public void setRecycler(Recycler recycler) {
+        this.recycler = recycler;
     }
 
     public String getFormatedCreationDate() {

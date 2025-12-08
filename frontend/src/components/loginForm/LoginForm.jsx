@@ -23,14 +23,21 @@ export function LoginForm() {
     // Usuários mockados
     const mockUsers = {
       comum: {
-        email: 'usuario@teste.com',
-        password: '123456',
-        tipo: 'comum',
+        id: 4, 
+        email: "luiza@exemplo.com",
+        password: "123456",
+        tipo: "comum",
+        firstName: "Luiza",
+        lastName: "Almeida"
       },
       reciclador: {
-        email: 'reciclador@teste.com',
+        id: 3,
+        email: 'carlos@example.com',
         password: '123456',
         tipo: 'reciclador',
+        firstName: "Carlos",
+        lastName: "Silva",
+        code: "5678"
       },
     };
 
@@ -38,18 +45,12 @@ export function LoginForm() {
     const userComum = mockUsers.comum;
     const userReciclador = mockUsers.reciclador;
 
-    if (
-      formData.email === userComum.email &&
-      formData.password === userComum.password
-    ) {
-      localStorage.setItem('user', JSON.stringify(userComum));
-      navigate('/como-reciclar'); //temporário
-    } else if (
-      formData.email === userReciclador.email &&
-      formData.password === userReciclador.password
-    ) {
-      localStorage.setItem('user', JSON.stringify(userReciclador));
-      navigate('/como-reciclar'); //temporário
+    if (formData.email === userComum.email && formData.password === userComum.password) {
+      localStorage.setItem("user", JSON.stringify(userComum));
+      navigate("/user-profile");
+    } else if (formData.email === userReciclador.email && formData.password === userReciclador.password) {
+      localStorage.setItem("user", JSON.stringify(userReciclador));
+      navigate("/recycler-profile");
     } else {
       alert('Email ou senha incorretos!');
     }

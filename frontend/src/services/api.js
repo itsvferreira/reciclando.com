@@ -12,7 +12,10 @@ const api = axios.create({
 export const adsService = {
   getAll: () => api.get('/ads'),
   getById: (id) => api.get(`/ads/${id}`),
+  getByDonor: (donorId) => api.get(`/ads/donor/${donorId}`),
   create: (data) => api.post('/ads', data),
+  delete: (id) => api.delete(`/ads/${id}`),
+  conclude: (id, recyclerCode) => api.patch(`/ads/${id}/conclude?recyclerCode=${recyclerCode}`),
   search: (params) => api.get(`/ads?${params}`),
 };
 
