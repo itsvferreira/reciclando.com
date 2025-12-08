@@ -7,7 +7,7 @@ import STATES_LIST from '../../utils/statesList';
 export default function Form() {
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState(null);
-  const [adData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     image: '',
     title: '',
     description: '',
@@ -21,19 +21,22 @@ export default function Form() {
   });
 
   const handleChange = (e) => {
-    setFormData({ ...adData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setFormData({ ...adData, category: categories });
+    const body = {
+      ...formData,
+      category: categories,
+    };
 
     const formData = new FormData();
     formData.append('files', image);
     formData.append(
       'postRequest',
-      new Blob([JSON.stringify(adData)], { type: 'application/json' })
+      new Blob([JSON.stringify(body)], { type: 'application/json' })
     );
 
     try {
@@ -67,7 +70,7 @@ export default function Form() {
             className='form-control'
             name='title'
             id='title'
-            value={adData.title}
+            value={formData.title}
             onChange={handleChange}
             placeholder='Ex: Papelão e garrafas PET para doação'
           />
@@ -81,7 +84,7 @@ export default function Form() {
             placeholder='Descreva os materiais que você tem disponível, quantidade aproximada e qualquer informação adicional relevante...'
             id='description'
             name='description'
-            value={adData.description}
+            value={formData.description}
             onChange={handleChange}
             style={{ height: '120px' }}
           ></textarea>
@@ -120,7 +123,7 @@ export default function Form() {
                 className='form-control'
                 id='city'
                 name='city'
-                value={adData.city}
+                value={formData.city}
                 onChange={handleChange}
               />
             </div>
@@ -133,7 +136,7 @@ export default function Form() {
                 className='form-select'
                 name='state'
                 onChange={handleChange}
-                value={adData.state}
+                value={formData.state}
               >
                 <option value='' disabled>
                   Selecione uma opção...
@@ -154,7 +157,7 @@ export default function Form() {
                 className='form-control'
                 id='postalCode'
                 name='postalCode'
-                value={adData.postalCode}
+                value={formData.postalCode}
                 onChange={handleChange}
               />
             </div>
@@ -173,7 +176,7 @@ export default function Form() {
                 id='phone'
                 placeholder='(00) 00000-0000'
                 name='phone'
-                value={adData.phone}
+                value={formData.phone}
                 onChange={handleChange}
               />
             </div>
@@ -187,7 +190,7 @@ export default function Form() {
                 id='email'
                 placeholder='seu@email.com'
                 name='email'
-                value={adData.email}
+                value={formData.email}
                 onChange={handleChange}
               />
             </div>
