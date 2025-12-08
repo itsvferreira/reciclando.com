@@ -6,12 +6,13 @@ import Ads from "./pages/Ads/Ads";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import RecyclerProfile from "./pages/RecyclerProfile/RecyclerProfile";
 import Recyclers from "./pages/Recyclers/Recyclers";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/how-to-recycle" element={<HowToRecycle />} />
         <Route path="/anuncios" element={<Ads />} />
