@@ -15,6 +15,7 @@ public class AdResponseDTO {
     private String state;
     private String neighborhood;
     private String createdAt;
+    private String status;
 
     public AdResponseDTO(long id, String title, String description, String donorName, String donorContact,
             List<Material> category, String postalCode, String city, String state, String neighborhood,
@@ -30,6 +31,20 @@ public class AdResponseDTO {
         this.state = state;
         this.neighborhood = neighborhood;
         this.createdAt = createdAt;
+        this.status = "active"; // default
+    }
+
+    public AdResponseDto(Long id, String title, String description, String donorName, String donorContact,
+            String donorLocation, List<Material> category, String createdAt, String status) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.donorName = donorName;
+        this.donorContact = donorContact;
+        this.donorLocation = donorLocation;
+        this.category = category;
+        this.createdAt = createdAt;
+        this.status = status;
     }
 
     public long getId() {
@@ -74,5 +89,13 @@ public class AdResponseDTO {
 
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

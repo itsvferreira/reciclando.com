@@ -34,6 +34,9 @@ public class Recycler {
     @Enumerated(EnumType.STRING)
     private List<Material> acceptedMaterials;
 
+    @Column(name = "code")
+    private String code;
+
     protected Recycler() {
     }
 
@@ -56,6 +59,14 @@ public class Recycler {
 
     public void setAcceptedMaterials(List<Material> acceptedMaterials) {
         this.acceptedMaterials = acceptedMaterials;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override
