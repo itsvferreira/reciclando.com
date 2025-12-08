@@ -17,10 +17,12 @@ public class AdResponseDTO {
     private String createdAt;
     private List<String> imagesPath;
     private String status;
+    private String conclusionCode;
 
     public AdResponseDTO(Long id, String title, String description, String donorName, String donorContact,
             List<Material> category, String postalCode, String city, String state, String neighborhood,
-            String createdAt, List<String> imagesPath) {
+            String createdAt, List<String> imagesPath, String status, String conclusionCode) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.donorName = donorName;
@@ -32,7 +34,8 @@ public class AdResponseDTO {
         this.neighborhood = neighborhood;
         this.createdAt = createdAt;
         this.imagesPath = imagesPath;
-        this.status = "active"; // default
+        this.status = status;
+        this.conclusionCode = conclusionCode;
     }
 
     public long getId() {
@@ -85,5 +88,9 @@ public class AdResponseDTO {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getConclusionCode() {
+        return conclusionCode;
     }
 }

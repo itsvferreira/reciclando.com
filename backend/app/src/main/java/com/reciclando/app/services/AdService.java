@@ -26,6 +26,7 @@ public class AdService {
     private final DonorRepository donorRepository;
     private final AddressRepository addressRepository;
     private final FileStorageService fileStorageService;
+    private final RecyclerRepository recyclerRepository;
 
     public AdService(AdRepository adRepository, DonorRepository donorRepository,
             AddressRepository addressRepository, RecyclerRepository recyclerRepository,
@@ -35,7 +36,6 @@ public class AdService {
         this.addressRepository = addressRepository;
         this.fileStorageService = fileStorageService;
         this.recyclerRepository = recyclerRepository;
-
     }
 
     @Transactional(readOnly = true)
@@ -114,7 +114,9 @@ public class AdService {
                 ad.getState(),
                 ad.getNeighborhood(),
                 ad.getCreatedAt().toString(),
-                ad.getImagesPath());
+                ad.getImagesPath(),
+                ad.getStatus(),
+                ad.getConclusionCode());
     }
 
     private List<String> getImagePaths(MultipartFile[] files) {

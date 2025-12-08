@@ -17,6 +17,7 @@ import com.reciclando.app.dtos.ad.AdResponseDTO;
 import com.reciclando.app.models.enums.Material;
 import com.reciclando.app.services.AdService;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -39,15 +40,15 @@ public class AdControllerTests {
         ads.add(new AdResponseDTO(1L, "Title1", "Description1", "Donor1", "Contact1",
                 List.of(Material.PAPER), "12345-678", "City1", "State1", "Neighborhood1",
                 "2024-06-01, 10:00",
-                new ArrayList<>()));
+                new ArrayList<>(), "active", null));
         ads.add(new AdResponseDTO(2L, "Title2", "Description2", "Donor2", "Contact2",
                 List.of(Material.PLASTIC), "87654-321", "City2", "State2", "Neighborhood2",
                 "2024-06-02, 11:00",
-                new ArrayList<>()));
+                new ArrayList<>(), "concluded", "1234"));
         ads.add(new AdResponseDTO(3L, "Title3", "Description3", "Donor3", "Contact3",
                 List.of(Material.PAPER), "12345-678", "City3", "State3", "Neighborhood3",
                 "2024-06-03, 12:00",
-                new ArrayList<>()));
+                new ArrayList<>(), "active", null));
     }
 
     @Test
@@ -92,13 +93,17 @@ public class AdControllerTests {
     public void testCreateAd_Success() throws Exception {
         AdResponseDTO newAdResponse = new AdResponseDTO(4L, "New Title", "New Description", "Donor3",
                 "Contact3", List.of(Material.PAPER), "12345-678", "City3", "State3", "Neighborhood3",
-                "2024-06-03, 12:00", new ArrayList<>());
+                "2024-06-03, 12:00", new ArrayList<>(), "active", null);
         String requestBody = """
                 {
-                "title": "New Title",
-                "description": "New Description",
-                "donorId": 1,
-                "category": ["PAPER"]
+                    "title": "New Title",
+                    "description": "New Description",
+                    "donorId": 1,
+                    "category": [0, 1],
+                    "postalCode": "123456790",
+                    "city": "City1",
+                    "state": "State1",
+                    "neighborhood": "Neighborhood1"
                 }
                 """;
         MockMultipartFile multipartFile = new MockMultipartFile(
@@ -149,32 +154,6 @@ public class AdControllerTests {
     }
 
     @Test
-    public void testCreateAd() throws Exception {
-        AdRequestDTO newAdRequest = new AdRequestDTO("New Title", "New Description", 1L,
-                List.of(Material.PLASTIC), "11111111", "City1", "State1", "Neighborhood1");
-        AdResponseDTO newAdResponse = new AdResponseDTO(1L, "New Title", "New Description", "Donor1",
-                "Contact1",
-                List.of(Material.PLASTIC), "11111111", "City1", "State1", "Neighborhood1",
-                "2025-12-06T12:50:40.569022236");
-        String requestBody = """
-                {
-                    "title": "New Title",
-                    "description": "New Description",
-                    "donorId": 1,
-                    "category": [0],
-                    "postalCode": "123456790",
-                    "city": "City1",
-                    "state": "State1",
-                    "neighborhood": "Neighborhood1"
-                }""";
-        when(adService.createAd(newAdRequest)).thenReturn(newAdResponse);
-        mockMvc.perform(post("/api/v1/ads/new")
-                .contentType("application/json")
-                .content(requestBody))
-                .andExpect(status().isCreated());
-    }
-
-    @Test
     public void testGetAdsByDonor() throws Exception {
         Long donorId = 4L;
         List<AdResponseDTO> donorAds = List.of(ads.get(0));
@@ -204,9 +183,11 @@ public class AdControllerTests {
         Long adId = 1L;
         String recyclerCode = "5678";
 
-        AdResponseDTO concludedAd = new AdResponseDTO(adId, "Title1", "Description1", "Donor1", "Contact1",
-                List.of(Material.PLASTIC), "11111111", "City1", "State1", "Neighborhood1",
-                "2023-06-01, 10:00", "concluded");
+        AdResponseDTO concludedAd = new AdResponseDTO(
+                1L, "Title1", "Description1", "Donor1", "Contact1",
+                List.of(Material.PAPER), "12345-678", "City3", "State3", "Neighborhood3",
+                "2024-06-03, 12:00",
+                new ArrayList<>(), "concluded", "1234");
 
         when(adService.concludeAd(adId, recyclerCode)).thenReturn(concludedAd);
 
