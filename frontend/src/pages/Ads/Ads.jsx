@@ -3,6 +3,8 @@ import { adsService } from '../../services/api';
 import AdCard from '../../components/AdCard/AdCard';
 import LocationSelect from '../../components/LocationSelect/LocationSelect';
 import Categories from '../../components/Categories/Categories';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import { buildQuery } from '../../utils/buildQuery';
 
 const Ads = () => {
@@ -32,7 +34,9 @@ const Ads = () => {
   }, [categories, city]);
 
   return (
-    <main>
+    <>
+    <Header />
+    <main style={{ marginTop: '2rem' }}>
       <div className='container'>
         <h1>Anúncios Disponíveis</h1>
         <p>
@@ -53,6 +57,8 @@ const Ads = () => {
         ))}
       </div>
     </main>
+    <Footer />
+    </>
   );
 };
 

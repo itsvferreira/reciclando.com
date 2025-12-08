@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { adsService } from "../../services/api";
 import UserCard from "../../components/UserCard/UserCard";
 import UserAdCard from "../../components/UserAdCard/UserAdCard";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import "../../index.css";
 import styles from "./RecyclerProfile.module.css";
 
@@ -54,11 +56,9 @@ export default function RecyclerProfile() {
   }
 
   return (
+    <>
+    <Header />
     <div className={styles.profileContainer}>
-      <button className={styles.profileBackButton} onClick={() => window.history.back()}>
-        ← Voltar
-      </button>
-
       <div className={styles.profileLayout}>
         <aside className={styles.profileSidebar}>
           <UserCard user={user} />
@@ -95,5 +95,7 @@ export default function RecyclerProfile() {
         </main>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

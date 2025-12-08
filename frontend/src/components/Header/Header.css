@@ -84,9 +84,25 @@ nav.menu a:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.btn-login.btn-create {
+    background-color: var(--green);
+    color: white;
+    border: none;
+}
+
+.btn-login.btn-create:hover {
+    background-color: var(--btn-hover);
+}
+
+.btn-login.logout:hover {
+    background-color: #fee2e2; /* Vermelho claro no hover para logout */
+    color: #991b1b; /* Texto vermelho escuro */
+}
+
 /* Container para o botão */
 .header-right {
     display: flex;
     align-items: center;
+    gap: 12px;
     height: 100%;
 }

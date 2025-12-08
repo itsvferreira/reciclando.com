@@ -5,7 +5,7 @@ import Ads from './pages/Ads/Ads';
 import UserProfile from './pages/UserProfile/UserProfile';
 import RecyclerProfile from './pages/RecyclerProfile/RecyclerProfile';
 import Recyclers from './pages/Recyclers/Recyclers';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 
 function App() {
   return (

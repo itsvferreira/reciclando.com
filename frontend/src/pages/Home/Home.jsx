@@ -1,10 +1,14 @@
-import fotoHome from "../assets/foto-home-1.jpg";
+import fotoHome from "../../assets/foto-home-1.jpg";
 import "./Home.css";
 import { Recycle, FileText, Package, Wine, Cpu, Battery } from "lucide-react";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 export default function Home() {
     return (
-        <div className="home-page">
+        <>
+            <Header />
+            <div className="home-page">
             
             <section className="home-hero">
                 <div className="home-container">
@@ -107,5 +111,7 @@ export default function Home() {
                 </div>
             </section>
         </div>
+        <Footer />
+        </>
     );
 }
