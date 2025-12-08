@@ -7,10 +7,6 @@ import RecyclerProfile from './pages/RecyclerProfile/RecyclerProfile';
 import Recyclers from './pages/Recyclers/Recyclers';
 import AdCreation from './pages/AdCreation/AdCreation';
 import AdUpdate from './pages/AdUpdate/AdUpdate';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HowToRecycle from './pages/HowToRecycle/HowToRecycle';
-import Login from './pages/Login/Login';
-import Ads from './pages/Ads/Ads';
 
 function App() {
   return (
