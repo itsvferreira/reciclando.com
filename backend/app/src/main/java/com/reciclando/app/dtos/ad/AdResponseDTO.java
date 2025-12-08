@@ -34,15 +34,19 @@ public class AdResponseDTO {
         this.status = "active"; // default
     }
 
-    public AdResponseDto(Long id, String title, String description, String donorName, String donorContact,
-            String donorLocation, List<Material> category, String createdAt, String status) {
+    public AdResponseDTO(long id, String title, String description, String donorName, String donorContact,
+            List<Material> category, String postalCode, String city, String state, String neighborhood,
+            String createdAt, String status) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.donorName = donorName;
         this.donorContact = donorContact;
-        this.donorLocation = donorLocation;
         this.category = category;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.state = state;
+        this.neighborhood = neighborhood;
         this.createdAt = createdAt;
         this.status = status;
     }
@@ -93,9 +97,5 @@ public class AdResponseDTO {
 
     public String getStatus() {
         return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

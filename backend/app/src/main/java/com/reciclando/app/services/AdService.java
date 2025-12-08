@@ -10,7 +10,6 @@ import com.reciclando.app.dtos.ad.AdResponseDTO;
 import com.reciclando.app.models.Ad;
 import com.reciclando.app.models.Address;
 import com.reciclando.app.models.Donor;
-import com.reciclando.app.models.Recycler;
 import com.reciclando.app.models.enums.Material;
 import com.reciclando.app.repositories.AdRepository;
 import com.reciclando.app.repositories.AddressRepository;
@@ -63,10 +62,10 @@ public class AdService {
     }
 
     @Transactional(readOnly = true)
-    public List<AdResponseDto> getAdsByDonorId(Long donorId) {
-        Donor donor = donorService.findById(donorId)
+    public List<AdResponseDTO> getAdsByDonorId(Long donorId) {
+        Donor donor = donorRepository.findById(donorId)
                 .orElseThrow(() -> new EntityNotFoundException("Donor not found"));
-        List<Ad> ads = postRepository.findByDonorOrderByCreatedAtDesc(donor);
+        List<Ad> ads = adRepository.findByDonorOrderByCreatedAtDesc(donor);
         return ads.stream()
                 .map(ad -> createResponseDTO(ad)).toList();
     }
@@ -114,14 +113,14 @@ public class AdService {
 
     @Transactional
     public void deleteAd(Long id) {
-        Ad ad = postRepository.findById(id)
+        Ad ad = adRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
-        postRepository.delete(ad);
+        adRepository.delete(ad);
     }
 
     @Transactional
-    public AdResponseDto concludeAd(Long id, String recyclerCode) {
-        Ad ad = postRepository.findById(id)
+    public AdResponseDTO concludeAd(Long id, String recyclerCode) {
+        Ad ad = adRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
 
         if (!"active".equals(ad.getStatus())) {
@@ -135,7 +134,7 @@ public class AdService {
         if (recyclerRepository.findByCode(recyclerCode) != null) {
             ad.setStatus("concluded");
             ad.setConclusionCode(recyclerCode);
-            postRepository.save(ad);
+            adRepository.save(ad);
             return createResponseDTO(ad);
         }
 

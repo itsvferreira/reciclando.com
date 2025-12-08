@@ -49,9 +49,9 @@ public class AdController {
     }
 
     @GetMapping("/donor/{donorId}")
-    public ResponseEntity<List<AdResponseDto>> getAdsByDonor(@PathVariable Long donorId) {
+    public ResponseEntity<List<AdResponseDTO>> getAdsByDonor(@PathVariable Long donorId) {
         try {
-            List<AdResponseDto> ads = postService.getAdsByDonorId(donorId);
+            List<AdResponseDTO> ads = postService.getAdsByDonorId(donorId);
             return ResponseEntity.status(HttpStatus.OK).body(ads);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -79,11 +79,11 @@ public class AdController {
     }
 
     @PatchMapping("/{id}/conclude")
-    public ResponseEntity<AdResponseDto> concludeAd(
+    public ResponseEntity<AdResponseDTO> concludeAd(
             @PathVariable Long id,
             @RequestParam String recyclerCode) {
         try {
-            AdResponseDto concludedAd = postService.concludeAd(id, recyclerCode);
+            AdResponseDTO concludedAd = postService.concludeAd(id, recyclerCode);
             return ResponseEntity.status(HttpStatus.OK).body(concludedAd);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

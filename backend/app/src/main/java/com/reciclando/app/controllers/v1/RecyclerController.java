@@ -6,10 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.reciclando.app.dtos.CreateRecyclerDTO;
-import com.reciclando.app.dtos.RecyclerDTO;
-import com.reciclando.app.dtos.RecyclerResponseDTO;
-import com.reciclando.app.dtos.UpdateMaterialsDTO;
+import com.reciclando.app.dtos.recycler.CreateRecyclerDTO;
+import com.reciclando.app.dtos.recycler.RecyclerDTO;
+import com.reciclando.app.dtos.recycler.RecyclerResponseDTO;
+import com.reciclando.app.dtos.recycler.UpdateMaterialsDTO;
 import com.reciclando.app.models.enums.Material;
 import com.reciclando.app.services.RecyclerService;
 
