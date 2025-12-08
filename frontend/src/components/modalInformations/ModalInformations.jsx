@@ -1,4 +1,3 @@
-import React from 'react';
 import { X, CircleCheckBig, CircleAlert } from 'lucide-react';
 import styles from './ModalInformations.module.css';
 

@@ -1,4 +1,4 @@
-package com.reciclando.app.dtos;
+package com.reciclando.app.dtos.recycler;
 
 import java.util.List;
 

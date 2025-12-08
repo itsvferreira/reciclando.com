@@ -30,11 +30,11 @@ public class Ad {
 
     private String title;
     private String description;
-    private String photoPath;
+    private String imagePath;
 
     @ManyToOne
     @JoinColumn(name = "address_id")
-    private Address location;
+    private Address address;
 
     @ManyToOne
     @JoinColumn(name = "donor_id")
@@ -47,11 +47,7 @@ public class Ad {
     private List<Material> category;
 
     private String status;
-    
-    @ManyToOne
-    @JoinColumn(name = "recycler_id")
-    private Recycler recycler;
-
+    private String conclusionCode;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -68,11 +64,12 @@ public class Ad {
     protected Ad() {
     }
 
-    public Ad(String title, String description, Donor donor, List<Material> category) {
+    public Ad(String title, String description, Donor donor, List<Material> category, Address address) {
         this.title = title;
         this.description = description;
         this.donor = donor;
         this.category = category;
+        this.address = address;
         this.status = "active";
     }
 
@@ -96,20 +93,20 @@ public class Ad {
         this.description = description;
     }
 
-    public String getPhotoPath() {
-        return photoPath;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setPhotoPath(String photoPath) {
-        this.photoPath = photoPath;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
-    public Address getLocation() {
-        return location;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setLocation(Address location) {
-        this.location = location;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Donor getDonor() {
@@ -128,25 +125,20 @@ public class Ad {
         this.category = category;
     }
 
+    public String getConclusionCode() {
+        return conclusionCode;
+    }
+
+    public void setConclusionCode(String conclusionCode) {
+        this.conclusionCode = conclusionCode;
+    }
+
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Recycler getRecycler() {
-        return recycler;
-    }
-
-    public void setRecycler(Recycler recycler) {
-        this.recycler = recycler;
-    }
-
-    public String getFormatedCreationDate() {
-        String fullDate = createdAt.toString();
-        return fullDate.substring(0, 10) + ", " + fullDate.substring(11, 16);
     }
 
     public LocalDateTime getCreatedAt() {
@@ -157,23 +149,27 @@ public class Ad {
         return updatedAt;
     }
 
-    public String getLocationString() {
-        return buildLocationString();
+    public String getCity() {
+        return address.getCity();
     }
 
-    private String buildLocationString() {
-        if (donor.getAddress() != null) {
-            String city = donor.getAddress().getCity();
-            String state = donor.getAddress().getState();
-            return city + " - " + state;
-        }
-        return "No address provided";
+    public String getPostalCode() {
+        return address.getPostalCode();
+    }
+
+    public String getState() {
+        return address.getState();
+    }
+
+    public String getNeighborhood() {
+        return address.getNeighborhood();
     }
 
     @Override
     public String toString() {
-        return "Post [id=" + id + ", title=" + title + ", description=" + description + ", photoPath=" + photoPath
-                + ", location=" + location + ", donor=" + donor + ", category=" + category
-                + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+        return "Ad [id=" + id + ", title=" + title + ", description=" + description + ", imagePath=" + imagePath
+                + ", address=" + address + ", donor=" + donor + ", category=" + category + ", status=" + status
+                + ", conclusionCode=" + conclusionCode + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+                + "]";
     }
 }

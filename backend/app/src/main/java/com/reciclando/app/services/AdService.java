@@ -5,40 +5,45 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.reciclando.app.dtos.ad.AdRequestDto;
-import com.reciclando.app.dtos.ad.AdResponseDto;
+import com.reciclando.app.dtos.ad.AdRequestDTO;
+import com.reciclando.app.dtos.ad.AdResponseDTO;
 import com.reciclando.app.models.Ad;
+import com.reciclando.app.models.Address;
 import com.reciclando.app.models.Donor;
-import com.reciclando.app.models.Recycler;
 import com.reciclando.app.models.enums.Material;
 import com.reciclando.app.repositories.AdRepository;
+import com.reciclando.app.repositories.AddressRepository;
+import com.reciclando.app.repositories.DonorRepository;
 import com.reciclando.app.repositories.RecyclerRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class AdService {
-    private final AdRepository postRepository;
-    private final DonorService donorService;
+    private final AdRepository adRepository;
+    private final DonorRepository donorRepository;
+    private final AddressRepository addressRepository;
     private final RecyclerRepository recyclerRepository;
 
-    public AdService(AdRepository postRepository, DonorService donorService, RecyclerRepository recyclerRepository) {
-        this.postRepository = postRepository;
-        this.donorService = donorService;
+    public AdService(AdRepository adRepository, DonorRepository donorRepository,
+            AddressRepository addressRepository, RecyclerRepository recyclerRepository) {
+        this.adRepository = adRepository;
+        this.donorRepository = donorRepository;
+        this.addressRepository = addressRepository;
         this.recyclerRepository = recyclerRepository;
     }
 
     @Transactional(readOnly = true)
-    public List<AdResponseDto> getAdsOrderByCreatedAt(String category, String city) {
+    public List<AdResponseDTO> getAdsOrderByCreatedAt(String category, String city) {
         String[] categories = category != null ? category.split("--") : null;
-        List<Ad> ads = postRepository.findAllByOrderByCreatedAtDesc();
+        List<Ad> ads = adRepository.findAllByOrderByCreatedAtDesc();
         ads = ads.stream()
-                .filter(post -> {
+                .filter(ad -> {
                     if (categories == null || categories.length == 0) {
                         return true; // Se nenhuma categoria for fornecida, retorna todos os ads
                     }
                     for (String cat : categories) {
-                        for (Material m : post.getCategory()) {
+                        for (Material m : ad.getCategory()) {
                             if (m.name().equalsIgnoreCase(cat)) {
                                 return true;
                             }
@@ -47,116 +52,92 @@ public class AdService {
                     return false;
                 }).filter(ad -> {
                     if (city != null) {
-                        return ad.getDonor().getAddress().getCity().equals(city);
+                        return ad.getCity().equals(city);
                     }
                     return true;
                 })
                 .toList();
         return ads.stream()
-                .map(ad -> new AdResponseDto(
-                        ad.getId(),
-                        ad.getTitle(),
-                        ad.getDescription(),
-                        ad.getDonor().getFullName(),
-                        ad.getDonor().getContact(),
-                        ad.getLocationString(),
-                        ad.getCategory(),
-                        ad.getFormatedCreationDate(),
-                        ad.getStatus()))
-                .toList();
+                .map(ad -> createResponseDTO(ad)).toList();
     }
 
     @Transactional(readOnly = true)
-    public List<AdResponseDto> getAdsByDonorId(Long donorId) {
-        Donor donor = donorService.findById(donorId)
+    public List<AdResponseDTO> getAdsByDonorId(Long donorId) {
+        Donor donor = donorRepository.findById(donorId)
                 .orElseThrow(() -> new EntityNotFoundException("Donor not found"));
-        List<Ad> ads = postRepository.findByDonorOrderByCreatedAtDesc(donor);
+        List<Ad> ads = adRepository.findByDonorOrderByCreatedAtDesc(donor);
         return ads.stream()
-                .map(ad -> new AdResponseDto(
-                        ad.getId(),
-                        ad.getTitle(),
-                        ad.getDescription(),
-                        ad.getDonor().getFullName(),
-                        ad.getDonor().getContact(),
-                        ad.getLocationString(),
-                        ad.getCategory(),
-                        ad.getFormatedCreationDate(),
-                        ad.getStatus()))
-                .toList();
+                .map(ad -> createResponseDTO(ad)).toList();
     }
 
     @Transactional(readOnly = true)
-    public AdResponseDto getPostById(long id) {
-        Ad ad = postRepository.findById(id)
+    public AdResponseDTO getAdById(long id) {
+        Ad ad = adRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
-        return new AdResponseDto(
+        return createResponseDTO(ad);
+    }
+
+    @Transactional
+    public AdResponseDTO createAd(AdRequestDTO ad) {
+        Donor donor = donorRepository.findById(ad.getDonorId())
+                .orElseThrow(() -> new EntityNotFoundException("Donor not found"));
+
+        Address address = addressRepository.findByPostalCode(ad.getPostalCode());
+
+        if (address == null) {
+            address = new Address(ad.getPostalCode(), ad.getCity(), ad.getState(), ad.getNeighborhood());
+            addressRepository.save(address);
+        }
+
+        Ad newAd = new Ad(ad.getTitle(), ad.getDescription(), donor, ad.getCategory(), address);
+        System.out.println(newAd);
+        adRepository.save(newAd);
+        return createResponseDTO(newAd);
+    }
+
+    private AdResponseDTO createResponseDTO(Ad ad) {
+        return new AdResponseDTO(
                 ad.getId(),
                 ad.getTitle(),
                 ad.getDescription(),
                 ad.getDonor().getFullName(),
                 ad.getDonor().getContact(),
-                ad.getLocationString(),
                 ad.getCategory(),
-                ad.getFormatedCreationDate(),
+                ad.getPostalCode(),
+                ad.getCity(),
+                ad.getState(),
+                ad.getNeighborhood(),
+                ad.getCreatedAt().toString(),
                 ad.getStatus());
-    }
-
-    @Transactional
-    public AdResponseDto createPost(AdRequestDto post) {
-        Donor donor = donorService.findById(post.getDonorId())
-                .orElseThrow(() -> new EntityNotFoundException("Donor not found"));
-        Ad newPost = new Ad(post.getTitle(), post.getDescription(), donor, post.getCategory());
-        postRepository.save(newPost);
-        return new AdResponseDto(
-                newPost.getId(),
-                newPost.getTitle(),
-                newPost.getDescription(),
-                newPost.getDonor().getFullName(),
-                newPost.getDonor().getContact(),
-                newPost.getLocationString(),
-                newPost.getCategory(),
-                newPost.getFormatedCreationDate());
     }
 
     @Transactional
     public void deleteAd(Long id) {
-        Ad ad = postRepository.findById(id)
+        Ad ad = adRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
-        postRepository.delete(ad);
+        adRepository.delete(ad);
     }
 
     @Transactional
-    public AdResponseDto concludeAd(Long id, String recyclerCode) {
-        Ad ad = postRepository.findById(id)
+    public AdResponseDTO concludeAd(Long id, String recyclerCode) {
+        Ad ad = adRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
-        
+
         if (!"active".equals(ad.getStatus())) {
             throw new IllegalArgumentException("Only active ads can be concluded");
         }
-        
+
         if (recyclerCode == null || recyclerCode.trim().isEmpty()) {
             throw new IllegalArgumentException("Recycler code is required");
         }
-        
-        // Buscar reciclador pelo código
-        Recycler recycler = recyclerRepository.findAll().stream()
-                .filter(r -> recyclerCode.equals(r.getCode()))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Invalid recycler code"));
-        
-        ad.setStatus("concluded");
-        ad.setRecycler(recycler);
-        postRepository.save(ad);
-        
-        return new AdResponseDto(
-                ad.getId(),
-                ad.getTitle(),
-                ad.getDescription(),
-                ad.getDonor().getFullName(),
-                ad.getDonor().getContact(),
-                ad.getLocationString(),
-                ad.getCategory(),
-                ad.getFormatedCreationDate(),
-                ad.getStatus());
+
+        if (recyclerRepository.findByCode(recyclerCode) != null) {
+            ad.setStatus("concluded");
+            ad.setConclusionCode(recyclerCode);
+            adRepository.save(ad);
+            return createResponseDTO(ad);
+        }
+
+        throw new IllegalArgumentException("Invalid confirmation code");
     }
 }

@@ -1,8 +1,9 @@
-INSERT INTO addresses (id, postal_code, city, state, neighborhood) VALUES
-  (1, '12345-678', 'Sample City', 'SC', 'Central District'),
-  (2, '98765-432', 'Example Town', 'ET', 'Green Neighborhood'),
-  (3, '90000-000', 'São Paulo', 'SP', 'Centro'),
-  (4, '01310-100', 'São Paulo', 'SP', 'Bela Vista');
+INSERT INTO addresses (postal_code, city, state, neighborhood) VALUES
+  ('12345-678', 'Sample City', 'SC', 'Central District'),
+  ('98765-432', 'Example Town', 'ET', 'Green Neighborhood'),
+  ('90000-000', 'Porto Alegre', 'RS', 'Centro'),
+  ('90000-000', 'São Paulo', 'SP', 'Centro'),
+  ('01310-100', 'São Paulo', 'SP', 'Bela Vista');
 
 INSERT INTO users (first_name, last_name, phone, email, account_type, address_id) VALUES
   ('John', 'Doe', '1234567890', 'john@example.com', 'DONOR', 1),
@@ -23,7 +24,7 @@ INSERT INTO recycler_materials (user_id, material) VALUES
   (2, 'PLASTIC'),
   (3, 'PAPER');
 
-INSERT INTO ads (title, description, donor_id, address_id, status, created_at, updated_at, recycler_id) VALUES
+INSERT INTO ads (title, description, donor_id, address_id, status, created_at, updated_at, conclusion_code) VALUES
   ('Old Newspaper', 'Bundle of old newspapers available for recycling.', 1, 1, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL),
   ('Plastic Bottles', 'Collection of used plastic bottles.', 1, 1, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL),
   ('Glass Jars', 'Several glass jars ready for recycling.', 1, 1, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL),
