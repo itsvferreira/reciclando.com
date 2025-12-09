@@ -28,6 +28,10 @@ export default function UserAdCard({ ad, onEdit, onDelete, onConclude }) {
 
         <div className={styles.userAdMaterialTag}>{ad.material}</div>
 
+        <span className={styles.userAdDate}>
+          <CalendarDays size={14} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'text-bottom' }} />
+          {ad.date}
+        </span>
         <div className={styles.userAdFooter}>
           <div className={styles.userAdActions}>
             {ad.status === 'active' && (
@@ -46,10 +50,6 @@ export default function UserAdCard({ ad, onEdit, onDelete, onConclude }) {
               </>
             )}
           </div>
-          <span className={styles.userAdDate}>
-            <CalendarDays size={14} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'text-bottom' }} />
-            {ad.date}
-          </span>
         </div>
       </div>
     </div>
