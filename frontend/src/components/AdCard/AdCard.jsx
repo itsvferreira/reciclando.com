@@ -1,7 +1,7 @@
 import { MapPin, Clock4, UserRound, PhoneCall } from 'lucide-react';
 import Badge from '../ui/Badge/Badge';
 import styles from './AdCard.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Ad(props) {
   const {
@@ -10,20 +10,19 @@ export default function Ad(props) {
     description,
     donorName,
     donorContact,
-    donorLocation,
+    city,
+    state,
     category,
     createdAt,
   } = props;
 
-  const [citiesOption, setCitiesOption] = useState([]);
-
   return (
     <div className={`card mb-4 ${styles.card}`}>
       <div className='row g-0'>
-        <div className={`${styles['image-container']} col-md-3`}>
+        <div className={`${styles['image-container']} col-md`}>
           <img src={imageSrc} className='img-fluid' />
         </div>
-        <div className='col-md ms-4'>
+        <div className={`col-md ${styles['margin-left']}`}>
           <div className='card-body'>
             <div className='mb-3 d-flex gap-2'>
               {category.map((category, idx) => (
@@ -39,7 +38,9 @@ export default function Ad(props) {
             <div className={`${styles.locale} mb-3`}>
               <p className='card-text d-flex align-items-center gap-1 mb-2'>
                 <MapPin size={20} />
-                <small className='text-body-secondary'>{donorLocation}</small>
+                <small className='text-body-secondary'>
+                  {city}, {state}
+                </small>
               </p>
               <p className='card-text d-flex align-items-center gap-1'>
                 <Clock4 size={20} />

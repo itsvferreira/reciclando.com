@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AdCard from '../../components/AdCard/AdCard';
 import LocationSelect from '../../components/LocationSelect/LocationSelect';
 import Categories from '../../components/Categories/Categories';
@@ -8,30 +8,35 @@ const Ads = () => {
   const [ads, setAds] = useState([]);
   const [categories, setCategories] = useState([]);
   const [city, setCity] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  useFetchAds(categories, city, setAds);
+  useFetchAds(categories, city, setAds, setLoading);
 
   return (
     <main>
-      <div className='container'>
-        <h1>Anúncios Disponíveis</h1>
-        <p>
-          Encontre materiais recicláveis disponíveis para coleta na sua região
-        </p>
-        <div style={{ margin: '2rem 0' }}>
-          <LocationSelect onCityChange={setCity} />
-          <Categories
-            categories={categories}
-            onCategoriesChange={setCategories}
-          />
+      {loading ? (
+        <p>Carregando...</p>
+      ) : (
+        <div className='container'>
+          <h1>Anúncios Disponíveis</h1>
+          <p>
+            Encontre materiais recicláveis disponíveis para coleta na sua região
+          </p>
+          <div style={{ margin: '2rem 0' }}>
+            <LocationSelect onCityChange={setCity} />
+            <Categories
+              categories={categories}
+              onCategoriesChange={setCategories}
+            />
+          </div>
+          <p style={{ marginBottom: '1.65rem' }}>
+            {ads.length} resultados encontrados
+          </p>
+          {ads.map((ad) => (
+            <AdCard key={ad.id} {...ad} />
+          ))}
         </div>
-        <p style={{ marginBottom: '1.65rem' }}>
-          {ads.length} resultados encontrados
-        </p>
-        {ads.map((ad) => (
-          <AdCard key={ad.id} {...ad} />
-        ))}
-      </div>
+      )}
     </main>
   );
 };
