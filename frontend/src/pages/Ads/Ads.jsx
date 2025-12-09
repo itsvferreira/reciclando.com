@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { adsService } from '../services/api';
-import AdCard from '../components/AdCard/AdCard';
-import LocationSelect from '../components/LocationSelect/LocationSelect';
-import Categories from '../components/Categories/Categories';
-import { buildQuery } from '../utils/buildQuery';
+import { adsService } from '../../services/api';
+import AdCard from '../../components/AdCard/AdCard';
+import LocationSelect from '../../components/LocationSelect/LocationSelect';
+import Categories from '../../components/Categories/Categories';
+import { buildQuery } from '../../utils/buildQuery';
 
 const Ads = () => {
   const [ads, setAds] = useState([]);

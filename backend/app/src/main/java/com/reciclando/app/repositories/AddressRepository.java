@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.reciclando.app.models.Address;
 
 public interface AddressRepository extends CrudRepository<Address, Long> {
-    
+    Address findByPostalCode(String postalCode);
 }

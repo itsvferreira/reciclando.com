@@ -1,0 +1,398 @@
+/* HERO SECTION */
+.home-hero {
+  background: linear-gradient(to bottom, rgba(240, 253, 244, 0.5), transparent);
+  width: 100%;
+  padding: 64px 0;
+}
+
+.home-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+/* LADO ESQUERDO (CONTEÚDO DE TEXTO)  */
+.home-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.home-left h1 {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--black);
+  margin: 0 0 16px 0;
+}
+
+@media (min-width: 768px) {
+  .home-left h1 {
+    font-size: 48px;
+  }
+}
+
+.home-left p {
+  font-size: 16px;
+  color: var(--light-font);
+  line-height: 1.625;
+  margin-bottom: 24px;
+}
+
+/* LISTA DE VANTAGENS */
+.home-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.home-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--black);
+  font-size: 16px;
+}
+
+.home-list li::before {
+  content: '✓';
+  background-color: var(--green);
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* BOTÕES DE AÇÃO */
+.home-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-primary {
+  background-color: var(--green);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-outline {
+  background-color: white;
+  color: var(--green-font);
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 2px solid var(--green);
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background-color: var(--light-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+/* LADO DIREITO (IMAGEM)  */
+.home-right {
+  position: relative;
+  height: 500px;
+  margin-top: 32px;
+}
+
+.home-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.home-right::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+  border-radius: 12px;
+}
+
+/* LAYOUT GRID PARA DESKTOP */
+@media (min-width: 768px) {
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .home-right {
+    margin-top: 0;
+    height: 500px;
+  }
+}
+
+/* SEÇÃO "MATERIAIS ACEITOS" */
+.home-materiais-aceitos {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  width: 100%;
+}
+
+.materiais-cabecalho {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.materiais-cabecalho h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--black);
+  margin: 0 0 8px 0;
+}
+
+.materiais-cabecalho p {
+  font-size: 15px;
+  color: var(--light-font);
+  line-height: 1.5;
+}
+
+.materiais-cards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* CARDS DE MATERIAIS (POR CLASSE) */
+.material-item {
+  border: 1px solid;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-height: 120px;
+  justify-content: center;
+  transform: scale(1);
+}
+
+/* CORES POR CLASSE */
+.material-item.plastico {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border-color: #bfdbfe;
+}
+
+.material-item.papel {
+  background-color: #f8fafc;
+  color: #475569;
+  border-color: #e2e8f0;
+}
+
+.material-item.metal {
+  background-color: #f0fdfa;
+  color: #0d9488;
+  border-color: #99f6e4;
+}
+
+.material-item.vidro {
+  background-color: #faf5ff;
+  color: #7c3aed;
+  border-color: #d8b4fe;
+}
+
+.material-item.eletronicos {
+  background-color: #fff7ed;
+  color: #ea580c;
+  border-color: #fdba74;
+}
+
+.material-item.pilhas {
+  background-color: #fefce8;
+  color: #ca8a04;
+  border-color: #fde047;
+}
+
+/* HOVER EFFECTS */
+.material-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.material-item:active {
+  transform: scale(0.95);
+}
+
+.material-item.plastico:hover {
+  background-color: #dbeafe;
+}
+
+.material-item.papel:hover {
+  background-color: #f1f5f9;
+}
+
+.material-item.metal:hover {
+  background-color: #ccfbf1;
+}
+
+.material-item.vidro:hover {
+  background-color: #f3e8ff;
+}
+
+.material-item.eletronicos:hover {
+  background-color: #ffedd5;
+}
+
+.material-item.pilhas:hover {
+  background-color: #fef9c3;
+}
+
+/* SEÇÃO "COMO FUNCIONA" */
+.home-como-funciona {
+  background: linear-gradient(to bottom, rgba(240, 253, 244, 0.5), transparent);
+  padding: 64px 0;
+  width: 100%;
+}
+
+.como-funciona-conteudo {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.como-funciona-cabecalho {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.como-funciona-cabecalho h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 8px;
+}
+
+.como-funciona-cabecalho p {
+  font-size: 15px;
+  color: var(--light-font);
+}
+
+.como-funciona-cards-container {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.como-funciona-card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  min-height: 280px;
+  transition: transform 0.3s ease;
+}
+
+.como-funciona-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card-numero {
+  background-color: var(--green);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.75rem;
+  margin-bottom: 8px;
+}
+
+.card-conteudo h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--black);
+}
+
+.card-conteudo p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1200px) {
+  .como-funciona-cards-container {
+    gap: 16px;
+  }
+
+  .como-funciona-card {
+    min-height: 260px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .como-funciona-cards-container {
+    flex-wrap: wrap;
+  }
+
+  .como-funciona-card {
+    flex: 0 0 calc(50% - 12px);
+    min-height: 240px;
+  }
+
+  .materiais-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .materiais-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .como-funciona-card {
+    flex: 0 0 100%;
+  }
+}
