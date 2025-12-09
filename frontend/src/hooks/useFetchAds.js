@@ -10,8 +10,6 @@ export function useFetchAds(categories, city, setAds, setLoading) {
       try {
         const query = buildQuery(city, categories);
 
-        console.log(query);
-
         if (query.length > 0) {
           response = await adsService.search(query);
         } else {
