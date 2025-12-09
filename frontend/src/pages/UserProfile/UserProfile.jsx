@@ -139,7 +139,7 @@ export default function UserProfile() {
   };
 
   const handleEditAd = (id) => {
-    alert(`Editar anúncio ${id}`);
+    navigate(`/anuncios/edicao/${id}`);
   };
 
   const filteredAds = ads.filter(ad => {
@@ -174,7 +174,7 @@ export default function UserProfile() {
             </div>
             <div className={styles.headerActions}>
               <button className={styles.btnRecyclers} onClick={() => navigate('/recicladores')}>Recicladores</button>
-              <button className={styles.btnCreateAd}>+ Criar Anúncio</button>
+              <button className={styles.btnCreateAd} onClick={() => navigate('/anuncios/novo')}>+ Criar Anúncio</button>
             </div>
           </div>
 

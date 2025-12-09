@@ -6,6 +6,8 @@ import UserProfile from './pages/UserProfile/UserProfile';
 import RecyclerProfile from './pages/RecyclerProfile/RecyclerProfile';
 import Recyclers from './pages/Recyclers/Recyclers';
 import Home from './pages/Home/Home';
+import AdCreation from './pages/AdCreation/AdCreation';
+import AdUpdate from './pages/AdUpdate/AdUpdate';
 
 function App() {
   return (

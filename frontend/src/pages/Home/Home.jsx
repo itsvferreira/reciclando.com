@@ -16,7 +16,7 @@ export default function Home() {
         if (!isLoggedIn) {
             navigate('/login');
         } else if (isDonor) {
-            alert('Página de criar anúncio em desenvolvimento');
+            navigate('/anuncios/novo');
         } else if (isRecycler) {
             navigate('/anuncios');
         }
@@ -41,7 +41,9 @@ export default function Home() {
                             <button className="btn-primary" onClick={handleCreateAd}>
                                 {isRecycler ? 'Ver Anúncios' : 'Anunciar Materiais'}
                             </button>
-                            <button className="btn-outline" onClick={() => navigate('/recicladores')}>Recicladores</button>
+                                                        {!isRecycler && (
+                                                            <button className="btn-outline" onClick={() => navigate('/recicladores')}>Recicladores</button>
+                                                        )}
                         </div>
                     </div>
                     <div className="home-right">

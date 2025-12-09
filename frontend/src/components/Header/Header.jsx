@@ -25,7 +25,7 @@ export default function Header(){
             <nav className="menu">
                 <Link to="/">Início</Link>
                 <Link to="/como-reciclar">Como Reciclar</Link>
-                <Link to="/recicladores">Recicladores</Link>
+                {!isRecycler && <Link to="/recicladores">Recicladores</Link>}
                 {isRecycler && <Link to="/anuncios">Anúncios</Link>}
             </nav>
 
@@ -39,7 +39,7 @@ export default function Header(){
                                         Meu Perfil
                                     </button>
                                 </Link>
-                                <button className="btn-login btn-create" onClick={() => alert('Página de criar anúncio em desenvolvimento')}>
+                                <button className="btn-login btn-create" onClick={() => navigate('/anuncios/novo')}>
                                     Criar Anúncio
                                 </button>
                             </>

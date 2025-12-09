@@ -2,7 +2,10 @@ import React from "react";
 import { MapPin, Package, CalendarDays, SquarePen, Trash2 } from "lucide-react";
 import styles from "./UserAdCard.module.css";
 
+import { useNavigate } from 'react-router-dom';
+
 export default function UserAdCard({ ad, onEdit, onDelete, onConclude }) {
+  const navigate = useNavigate();
   return (
     <div className={styles.userAdCard}>
       <div className={styles.userAdImage}>
@@ -35,7 +38,7 @@ export default function UserAdCard({ ad, onEdit, onDelete, onConclude }) {
                 <button className={styles.btnConclude} onClick={() => onConclude(ad.id)}>
                   Concluir Anúncio
                 </button>
-                <button className={styles.btnEdit} onClick={() => onEdit(ad.id)}>
+                <button className={styles.btnEdit} onClick={() => navigate(`/anuncios/edicao/${ad.id}`)}>
                   <SquarePen size={16} />
                   Editar
                 </button>
