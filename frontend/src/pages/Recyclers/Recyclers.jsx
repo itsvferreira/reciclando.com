@@ -19,8 +19,6 @@ const Recyclers = () => {
       try {
         const query = buildQuery(city, categories, searchText);
 
-        console.log(query);
-
         if (query.length > 0) {
           response = await recyclersService.search(query);
         } else {

@@ -1,0 +1,93 @@
+.form-container {
+  background-color: #fff;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  margin-bottom: 40px;
+}
+
+.form-container h2 {
+  font-size: 22px;
+}
+
+.form-container p {
+  font-weight: 18px;
+  margin-bottom: 30px;
+}
+
+.form-container label {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+form input {
+  height: 36px;
+}
+
+form textarea {
+  resize: none;
+}
+
+form div {
+  margin-bottom: 10px;
+}
+
+.location-info,
+.contact-info {
+  padding-top: 25px;
+  border-top: 1px solid var(--border);
+  margin-top: 0;
+}
+
+.location-info h3,
+.contact-info h3 {
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.contact-info div:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.button-wrapper button {
+  width: 100%;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.textarea:active,
+.form-container input:active {
+  border-color: #4caf4fe5;
+}
+
+.textarea:focus,
+.form-container input:focus {
+  border: 1px solid #60b363e5;
+  box-shadow: 0 0 0 0.2rem #65cd694d;
+}
+
+.btn-secondary {
+  background-color: rgb(223, 223, 223);
+  font-weight: 500;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: rgb(231, 231, 231);
+}
+
+.address-wrapper {
+  gap: 10px;
+}
+
+.textarea {
+  height: 100px;
+}
+
+@media (max-width: 765px) {
+  .address-wrapper {
+    gap: 0;
+  }
+}

@@ -9,7 +9,11 @@ const MATERIALS = [
   { label: 'Baterias', value: 'BATTERIES' },
 ];
 
-export default function Categories({ categories, onCategoriesChange }) {
+export default function Categories({
+  categories,
+  onCategoriesChange,
+  showAll = true,
+}) {
   const isAllSelected = categories.length === 0;
 
   function handleSelectAll() {
@@ -27,15 +31,17 @@ export default function Categories({ categories, onCategoriesChange }) {
 
   return (
     <div className='d-flex flex-wrap gap-2 mb-4 align-items-center'>
-      <span className={styles['category-item']}>
-        <input
-          type='checkbox'
-          id='optDefault'
-          checked={isAllSelected}
-          onChange={handleSelectAll}
-        />
-        <label htmlFor='optDefault'>Todos</label>
-      </span>
+      {showAll && (
+        <span className={styles['category-item']}>
+          <input
+            type='checkbox'
+            id='optDefault'
+            checked={isAllSelected}
+            onChange={handleSelectAll}
+          />
+          <label htmlFor='optDefault'>Todos</label>
+        </span>
+      )}
       {MATERIALS.map(({ label, value }, idx) => (
         <span className={styles['category-item']} key={idx}>
           <input
