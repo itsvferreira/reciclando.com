@@ -5,11 +5,11 @@ import Categories from '../../components/Categories/Categories';
 import { useFetchAds } from '../../hooks/useFetchAds';
 
 const Ads = () => {
-  const [ads] = useState([]);
+  const [ads, setAds] = useState([]);
   const [categories, setCategories] = useState([]);
   const [city, setCity] = useState('');
 
-  useFetchAds(categories, city);
+  useFetchAds(categories, city, setAds);
 
   return (
     <main>

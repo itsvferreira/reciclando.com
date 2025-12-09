@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { buildQuery } from '../utils/buildQuery';
-import { adsService } from '../services/adsService';
+import { adsService } from '../services/api';
 
-export function useFetchAds(categories, city) {
+export function useFetchAds(categories, city, setAds) {
   useEffect(() => {
     const fetchAds = async () => {
       let response;
@@ -22,5 +22,5 @@ export function useFetchAds(categories, city) {
       }
     };
     fetchAds();
-  }, [categories, city]);
+  }, [categories, city, setAds]);
 }

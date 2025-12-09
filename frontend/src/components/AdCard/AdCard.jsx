@@ -1,6 +1,7 @@
 import { MapPin, Clock4, UserRound, PhoneCall } from 'lucide-react';
 import Badge from '../ui/Badge/Badge';
 import styles from './AdCard.module.css';
+import { useState } from 'react';
 
 export default function Ad(props) {
   const {
@@ -13,6 +14,8 @@ export default function Ad(props) {
     category,
     createdAt,
   } = props;
+
+  const [citiesOption, setCitiesOption] = useState([]);
 
   return (
     <div className={`card mb-4 ${styles.card}`}>
