@@ -12,9 +12,11 @@ public class AdRequestDTO {
     private String city;
     private String state;
     private String neighborhood;
+    private String contact;
+    private String email;
 
     public AdRequestDTO(String title, String description, Long donorId, List<Material> category, String postalCode,
-            String city, String state, String neighborhood) {
+            String city, String state, String neighborhood, String contact, String email) {
         this.title = title;
         this.description = description;
         this.donorId = donorId;
@@ -23,6 +25,8 @@ public class AdRequestDTO {
         this.city = city;
         this.state = state;
         this.neighborhood = neighborhood;
+        this.contact = contact;
+        this.email = email;
     }
 
     public String getTitle() {
@@ -57,4 +61,11 @@ public class AdRequestDTO {
         return neighborhood;
     }
 
+    public String getContact() {
+        return contact;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

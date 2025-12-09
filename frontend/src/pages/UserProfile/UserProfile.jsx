@@ -7,6 +7,8 @@ import UserAdCard from "../../components/UserAdCard/UserAdCard";
 import ConfirmDeleteModal from "../../components/ConfirmDeleteModal/ConfirmDeleteModal";
 import ConcludeAdModal from "../../components/ConcludeAdModal/ConcludeAdModal";
 import FeedbackModal from "../../components/FeedbackModal/FeedbackModal";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import "../../index.css";
 import styles from "./UserProfile.module.css";
 
@@ -156,11 +158,9 @@ export default function UserProfile() {
  
 
   return (
+    <>
+    <Header />
     <div className={styles.profileContainer}>
-      <button className={styles.profileBackButton} onClick={() => window.history.back()}>
-        ← Voltar
-      </button>
-
       <div className={styles.profileLayout}>
         <aside className={styles.profileSidebar}>
           <UserCard user={user} adsStats={adsStats} />
@@ -173,7 +173,7 @@ export default function UserProfile() {
               <p className={styles.adsCount}>{filteredAds.length} anúncios encontrados</p>
             </div>
             <div className={styles.headerActions}>
-              <button className={styles.btnRecyclers} onClick={() => navigate('/recyclers')}>Recicladores</button>
+              <button className={styles.btnRecyclers} onClick={() => navigate('/recicladores')}>Recicladores</button>
               <button className={styles.btnCreateAd}>+ Criar Anúncio</button>
             </div>
           </div>
@@ -224,5 +224,7 @@ export default function UserProfile() {
         message={feedbackModal.message}
       />
     </div>
+    <Footer />
+    </>
   );
 }

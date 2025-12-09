@@ -48,6 +48,8 @@ public class Ad {
 
     private String status;
     private String conclusionCode;
+    private String contact;
+    private String email;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -71,6 +73,8 @@ public class Ad {
         this.category = category;
         this.address = address;
         this.status = "active";
+        this.contact = donor.getContact();
+        this.email = donor.getEmail();
     }
 
     public Long getId() {
@@ -165,10 +169,27 @@ public class Ad {
         return address.getNeighborhood();
     }
 
+    public String getPhone() {
+        return contact;
+    }
+
+    public void setPhone(String contact) {
+        this.contact = donor.getContact();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = donor.getEmail();
+    }
+
     @Override
     public String toString() {
         return "Ad [id=" + id + ", title=" + title + ", description=" + description + ", imagesPath=" + imagesPath
                 + ", address=" + address + ", donor=" + donor + ", category=" + category + ", status=" + status
-                + ", conclusionCode=" + conclusionCode + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+                + ", conclusionCode=" + conclusionCode + ", contact=" + contact + ", email="
+                + email + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
     }
 }

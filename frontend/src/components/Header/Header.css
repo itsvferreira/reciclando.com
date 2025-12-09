@@ -1,0 +1,108 @@
+/* Header.css */
+:root {
+    --green: #10B981;
+    --btn-hover: #059669;
+    --border: #E5E7EB;
+    --black: #1F2937;
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.header {
+    width: 100%;
+    height: 70px;
+    background: white;
+    /* border-bottom: 1px solid var(--border); */ 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    font-family: var(--font-sans);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    max-width: 1280px; 
+    margin: 0 auto; 
+}
+
+.header-left img {
+    height: 50px;
+    width: auto;
+    cursor: pointer;
+}
+
+nav.menu {
+    display: flex;
+    gap: 32px;
+}
+
+nav.menu a {
+    color: var(--black);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+
+nav.menu a:hover {
+    color: var(--green);
+}
+
+.btn-login {
+    
+    all: unset;
+    
+    /* Estilos da imagem */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 8px;
+    
+    /* Dimensões */
+    height: 16px;
+    padding: 8px 12px;
+    
+    /* Cores e tipografia */
+    background-color: #FAFAF9;
+    color: #1C1917;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 14px;
+    font-weight: 500;
+    
+    /* Interatividade */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    /* Sombra/borda */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-login:hover {
+    background-color: #dcfce7; /* Cor mais escura no hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-login.btn-create {
+    background-color: var(--green);
+    color: white;
+    border: none;
+}
+
+.btn-login.btn-create:hover {
+    background-color: var(--btn-hover);
+}
+
+.btn-login.logout:hover {
+    background-color: #fee2e2; /* Vermelho claro no hover para logout */
+    color: #991b1b; /* Texto vermelho escuro */
+}
+
+/* Container para o botão */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 100%;
+}

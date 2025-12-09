@@ -87,12 +87,7 @@ public class AdService {
         Donor donor = donorRepository.findById(ad.getDonorId())
                 .orElseThrow(() -> new EntityNotFoundException("Donor not found"));
 
-        Address address = addressRepository.findByPostalCode(ad.getPostalCode());
-
-        if (address == null) {
-            address = new Address(ad.getPostalCode(), ad.getCity(), ad.getState(), ad.getNeighborhood());
-            addressRepository.save(address);
-        }
+        Address address = getAddress(ad);
 
         Ad newAd = new Ad(ad.getTitle(), ad.getDescription(), donor, ad.getCategory(), address);
         newAd.setImagesPath(getImagePaths(files));
@@ -101,30 +96,23 @@ public class AdService {
         return createResponseDTO(newAd);
     }
 
-    private AdResponseDTO createResponseDTO(Ad ad) {
-        return new AdResponseDTO(
-                ad.getId(),
-                ad.getTitle(),
-                ad.getDescription(),
-                ad.getDonor().getFullName(),
-                ad.getDonor().getContact(),
-                ad.getCategory(),
-                ad.getPostalCode(),
-                ad.getCity(),
-                ad.getState(),
-                ad.getNeighborhood(),
-                ad.getCreatedAt().toString(),
-                ad.getImagesPath(),
-                ad.getStatus(),
-                ad.getConclusionCode());
-    }
+    @Transactional
+    public AdResponseDTO updateAd(Long id, AdRequestDTO updatedAd) {
+        Ad ad = adRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Ad not found"));
 
-    private List<String> getImagePaths(MultipartFile[] files) {
-        List<String> imagesPath = new ArrayList<>();
-        for (MultipartFile file : files) {
-            imagesPath.add(fileStorageService.getStoredFiles(file));
-        }
-        return imagesPath;
+        ad.setTitle(updatedAd.getTitle());
+        ad.setDescription(updatedAd.getDescription());
+        ad.setCategory(updatedAd.getCategory());
+
+        Address address = getAddress(updatedAd);
+        ad.setAddress(address);
+
+        ad.setPhone(ad.getPhone());
+        ad.setEmail(ad.getEmail());
+
+        adRepository.save(ad);
+        return createResponseDTO(ad);
     }
 
     @Transactional
@@ -155,5 +143,44 @@ public class AdService {
         }
 
         throw new IllegalArgumentException("Invalid confirmation code");
+    }
+
+    private Address getAddress(AdRequestDTO ad) {
+        Address address = addressRepository.findByPostalCode(ad.getPostalCode());
+
+        if (address == null) {
+            address = new Address(ad.getPostalCode(), ad.getCity(), ad.getState(), ad.getNeighborhood());
+            addressRepository.save(address);
+        }
+
+        return address;
+    }
+
+    private List<String> getImagePaths(MultipartFile[] files) {
+        List<String> imagesPath = new ArrayList<>();
+        for (MultipartFile file : files) {
+            imagesPath.add(fileStorageService.getStoredFiles(file));
+        }
+        return imagesPath;
+    }
+
+    private AdResponseDTO createResponseDTO(Ad ad) {
+        return new AdResponseDTO(
+                ad.getId(),
+                ad.getTitle(),
+                ad.getDescription(),
+                ad.getDonor().getFullName(),
+                ad.getDonor().getContact(),
+                ad.getCategory(),
+                ad.getPostalCode(),
+                ad.getCity(),
+                ad.getState(),
+                ad.getNeighborhood(),
+                ad.getCreatedAt().toString(),
+                ad.getImagesPath(),
+                ad.getStatus(),
+                ad.getPhone(),
+                ad.getEmail(),
+                ad.getConclusionCode());
     }
 }

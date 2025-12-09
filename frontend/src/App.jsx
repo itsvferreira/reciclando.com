@@ -7,12 +7,15 @@ import RecyclerProfile from './pages/RecyclerProfile/RecyclerProfile';
 import Recyclers from './pages/Recyclers/Recyclers';
 import AdCreation from './pages/AdCreation/AdCreation';
 import AdUpdate from './pages/AdUpdate/AdUpdate';
+import Home from './pages/Home/Home';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Login />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/como-reciclar' element={<HowToRecycle />} />
         <Route path='/anuncios' element={<Ads />} />
         <Route path='/anuncios/novo' element={<AdCreation />} />
         <Route path='/anuncios/edicao/:id' element={<AdUpdate />} />'

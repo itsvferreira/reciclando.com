@@ -1,10 +1,31 @@
-import fotoHome from "../assets/foto-home-1.jpg";
+import fotoHome from "../../assets/foto-home-1.jpg";
 import "./Home.css";
 import { Recycle, FileText, Package, Wine, Cpu, Battery } from "lucide-react";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+    const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const isLoggedIn = !!user.id;
+    const isDonor = user.tipo === 'comum';
+    const isRecycler = user.tipo === 'reciclador';
+
+    const handleCreateAd = () => {
+        if (!isLoggedIn) {
+            navigate('/login');
+        } else if (isDonor) {
+            alert('Página de criar anúncio em desenvolvimento');
+        } else if (isRecycler) {
+            navigate('/anuncios');
+        }
+    };
+
     return (
-        <div className="home-page">
+        <>
+            <Header />
+            <div className="home-page">
             
             <section className="home-hero">
                 <div className="home-container">
@@ -17,8 +38,10 @@ export default function Home() {
                             <li>Impacto social e ambiental</li>
                         </ul>
                         <div className="home-buttons">
-                            <button className="btn-primary">Anunciar Materiais</button>
-                            <button className="btn-outline">Recicladores</button>
+                            <button className="btn-primary" onClick={handleCreateAd}>
+                                {isRecycler ? 'Ver Anúncios' : 'Anunciar Materiais'}
+                            </button>
+                            <button className="btn-outline" onClick={() => navigate('/recicladores')}>Recicladores</button>
                         </div>
                     </div>
                     <div className="home-right">
@@ -107,5 +130,7 @@ export default function Home() {
                 </div>
             </section>
         </div>
+        <Footer />
+        </>
     );
 }

@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -51,12 +53,22 @@ public class AdController {
     }
 
     @PostMapping(path = "/new", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public ResponseEntity<AdResponseDTO> createPost(@RequestPart AdRequestDTO postRequest,
-            @RequestPart MultipartFile[] files) {
+    public ResponseEntity<AdResponseDTO> createAd(@RequestPart("postRequest") AdRequestDTO postRequest,
+            @RequestPart("files") MultipartFile[] files) {
         try {
-            AdResponseDTO createdPost = adService.createAd(postRequest, files);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
+            AdResponseDTO createdAd = adService.createAd(postRequest, files);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdAd);
         } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AdResponseDTO> updateAd(@PathVariable Long id, @RequestBody AdRequestDTO updatedPost) {
+        try {
+            AdResponseDTO updatedAd = adService.updateAd(id, updatedPost);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedAd);
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }

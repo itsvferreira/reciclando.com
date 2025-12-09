@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,6 +19,7 @@ import com.reciclando.app.models.enums.Material;
 import com.reciclando.app.services.AdService;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -40,15 +42,15 @@ public class AdControllerTests {
         ads.add(new AdResponseDTO(1L, "Title1", "Description1", "Donor1", "Contact1",
                 List.of(Material.PAPER), "12345-678", "City1", "State1", "Neighborhood1",
                 "2024-06-01, 10:00",
-                new ArrayList<>(), "active", null));
+                new ArrayList<>(), "active", "+11234567890", "contact1@email.com", null));
         ads.add(new AdResponseDTO(2L, "Title2", "Description2", "Donor2", "Contact2",
                 List.of(Material.PLASTIC), "87654-321", "City2", "State2", "Neighborhood2",
                 "2024-06-02, 11:00",
-                new ArrayList<>(), "concluded", "1234"));
+                new ArrayList<>(), "concluded", "+22345678901", "contact2@email.com", "1234"));
         ads.add(new AdResponseDTO(3L, "Title3", "Description3", "Donor3", "Contact3",
                 List.of(Material.PAPER), "12345-678", "City3", "State3", "Neighborhood3",
                 "2024-06-03, 12:00",
-                new ArrayList<>(), "active", null));
+                new ArrayList<>(), "active", "+33456789012", "contact3@email.com", null));
     }
 
     @Test
@@ -93,7 +95,8 @@ public class AdControllerTests {
     public void testCreateAd_Success() throws Exception {
         AdResponseDTO newAdResponse = new AdResponseDTO(4L, "New Title", "New Description", "Donor3",
                 "Contact3", List.of(Material.PAPER), "12345-678", "City3", "State3", "Neighborhood3",
-                "2024-06-03, 12:00", new ArrayList<>(), "active", null);
+                "2024-06-03, 12:00", new ArrayList<>(), "active", "+11234567890", "contact@email.com",
+                null);
         String requestBody = """
                 {
                     "title": "New Title",
@@ -187,7 +190,7 @@ public class AdControllerTests {
                 1L, "Title1", "Description1", "Donor1", "Contact1",
                 List.of(Material.PAPER), "12345-678", "City3", "State3", "Neighborhood3",
                 "2024-06-03, 12:00",
-                new ArrayList<>(), "concluded", "1234");
+                new ArrayList<>(), "concluded", "+11234567890", "contact@email.com", "1234");
 
         when(adService.concludeAd(adId, recyclerCode)).thenReturn(concludedAd);
 
@@ -214,6 +217,39 @@ public class AdControllerTests {
                 .andExpect(status().isBadRequest());
 
         verify(adService, times(1)).concludeAd(adId, invalidCode);
+    }
+
+    @Test
+    public void testUpdateAd_Success() throws Exception {
+        Long adId = 1L;
+        AdResponseDTO updatedAd = new AdResponseDTO(
+                1L, "Updated Title", "Updated Description", "Updated Donor", "Updated Contact",
+                List.of(Material.PAPER), "12345-678", "Updated City", "Updated State",
+                "Updated Neighborhood",
+                "2024-06-03, 12:00",
+                new ArrayList<>(), "active", "+11234567890", "updated@email.com", null);
+
+        String requestBody = """
+                {
+                    "title": "Updated Title",
+                    "description": "Updated Description",
+                    "donorId": 1,
+                    "category": ["PAPER"],
+                    "postalCode": "12345678",
+                    "city": "Updated City",
+                    "state": "Updated State",
+                    "neighborhood": "Updated Neighborhood",
+                    "phone": "11234567890",
+                    "email": "updated@email.com"
+                }
+                """;
+
+        when(adService.updateAd(eq(adId), any(AdRequestDTO.class))).thenReturn(updatedAd);
+        mockMvc.perform(put("/api/v1/ads/{id}", adId)
+                .contentType("application/json")
+                .content(requestBody))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Updated Title"));
     }
 
 }
