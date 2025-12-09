@@ -44,4 +44,8 @@ public class Donor {
     public Address getAddress() {
         return user.getAddress();
     }
+
+    public String getEmail() {
+        return user.getEmail();
+    }
 }
