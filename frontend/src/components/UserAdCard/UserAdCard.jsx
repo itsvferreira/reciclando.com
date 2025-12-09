@@ -37,7 +37,7 @@ export default function UserAdCard({ ad, onEdit, onDelete, onConclude }) {
             {ad.status === 'active' && (
               <>
                 <button className={styles.btnConclude} onClick={() => onConclude(ad.id)}>
-                  Concluir Anúncio
+                  Finalizar
                 </button>
                 <button className={styles.btnEdit} onClick={() => onEdit(ad.id)}>
                   <SquarePen size={16} />
