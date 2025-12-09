@@ -1,35 +1,15 @@
-import { useState, useEffect } from 'react';
-import { adsService } from '../../services/api';
+import { useState } from 'react';
 import AdCard from '../../components/AdCard/AdCard';
 import LocationSelect from '../../components/LocationSelect/LocationSelect';
 import Categories from '../../components/Categories/Categories';
-import { buildQuery } from '../../utils/buildQuery';
+import { useFetchAds } from '../../hooks/useFetchAds';
 
 const Ads = () => {
-  const [ads, setAds] = useState([]);
+  const [ads] = useState([]);
   const [categories, setCategories] = useState([]);
   const [city, setCity] = useState('');
 
-  useEffect(() => {
-    const fetchAds = async () => {
-      let response;
-
-      try {
-        const query = buildQuery(city, categories);
-
-        if (query.length > 0) {
-          response = await adsService.search(query);
-        } else {
-          response = await adsService.getAll();
-        }
-
-        setAds(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchAds();
-  }, [categories, city]);
+  useFetchAds(categories, city);
 
   return (
     <main>
