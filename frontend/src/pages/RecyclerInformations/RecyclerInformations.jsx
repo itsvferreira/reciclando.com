@@ -17,7 +17,7 @@ import avatar1 from '../../assets/avaliacao-homem-1.jpg';
 import avatar2 from '../../assets/avalicao-mulher.jpg'; 
 import avatar3 from '../../assets/avaliacao-homem-2.jpg'; 
 
-import './RecyclerProfile.css';
+import './RecyclerInformations.css';
 
 const RecyclerProfile = () => {
   const [loading, setLoading] = useState(true);

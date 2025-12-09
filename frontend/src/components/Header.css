@@ -1,88 +1,286 @@
-/* Header.css */
 :root {
-    --green: #10B981;
-    --btn-hover: #059669;
-   
-    --black: #1F2937;
-    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --green: #10B981;
+  --btn-hover: #059669;
+  --black: #1F2937;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --transition: all 0.3s ease;
 }
 
+/* HEADER PRINCIPAL */
 .header {
-    width: 100%;
-    height: 70px;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
-    font-family: var(--font-sans);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    
+  width: 100%;
+  height: 70px;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.header-left img {
-    height: 50px;
-    width: auto;
-    cursor: pointer;
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
 }
 
-nav.menu {
-    display: flex;
-    gap: 32px;
+/* LOGO */
+.header-left {
+  display: flex;
+  align-items: center;
 }
 
-
-nav.menu a,
-nav.menu a:link,
-nav.menu a:visited,
-nav.menu a:active {
-    color: var(--black);
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.2s;
-    white-space: nowrap;
+.logo-img {
+  height: 50px;
+  width: auto;
+  cursor: pointer;
 }
 
-nav.menu a:hover {
-    color: var(--green);
+/* MENU DESKTOP */
+.menu-desktop {
+  display: flex;
+  gap: 32px;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-/* Se quiser que fique verde quando a página estiver ativa */
-nav.menu a.active {
-    color: var(--green);
-    font-weight: 600;
+.menu-desktop a {
+  color: var(--black);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.2s;
+  white-space: nowrap;
 }
 
+.menu-desktop a:hover {
+  color: var(--green);
+}
+
+.menu-desktop a.active {
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* LADO DIREITO DO HEADER */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* BOTÃO LOGIN DESKTOP */
 .btn-login {
-    all: unset;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    border-radius: 8px;
-    height: 16px;
-    padding: 8px 12px;
-    background-color: #FAFAF9;
-    color: #1C1917;
-    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: 8px;
+  height: 40px;
+  padding: 0 20px;
+  background-color: #FAFAF9;
+  color: #1C1917;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .btn-login:hover {
-    background-color: #dcfce7;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #dcfce7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.header-right {
-    display: flex;
-    align-items: center;
-    height: 100%;
+/* MENU HAMBURGER  */
+.menu-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--black);
+  transition: var(--transition);
+}
+
+.menu-hamburger:hover {
+  color: var(--green);
+}
+
+/* MENU MOBILE  */
+.menu-mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.menu-mobile-overlay.active {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* MENU MOBILE  */
+.menu-mobile {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 280px;
+  height: 100vh;
+  background: white;
+  z-index: 1000;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.menu-mobile.active {
+  right: 0;
+}
+
+/* MENU MOBILE */
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-logo {
+  height: 40px;
+  width: auto;
+}
+
+.close-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--black);
+  transition: var(--transition);
+}
+
+.close-menu:hover {
+  color: var(--green);
+}
+
+/*  MENU MOBILE */
+.mobile-menu-items {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mobile-menu-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  color: var(--black);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.mobile-menu-link:hover {
+  background-color: #f3f4f6;
+  color: var(--green);
+}
+
+.mobile-menu-link.active {
+  background-color: #dcfce7;
+  color: var(--green);
+}
+
+/*  LOGIN MOBILE */
+.mobile-login-container {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.btn-login-mobile {
+  width: 100%;
+  padding: 14px 24px;
+  background-color: var(--green);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.btn-login-mobile:hover {
+  background-color: var(--btn-hover);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .header-content {
+    padding: 0 20px;
+  }
+  
+  .menu-desktop {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-desktop {
+    display: none;
+  }
+  
+  .btn-login {
+    display: none;
+  }
+  
+  .menu-hamburger {
+    display: block;
+  }
+  
+  .header-content {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    height: 60px;
+  }
+  
+  .header-content {
+    padding: 0 16px;
+  }
+  
+  .logo-img {
+    height: 40px;
+  }
+  
+  .menu-mobile {
+    width: 100%;
+  }
 }

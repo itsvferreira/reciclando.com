@@ -1,410 +1,439 @@
+/* Home.css - VERSÃO DEFINITIVA COM HOVER */
+
+:root {
+  --green: #10B981;
+  --btn-hover: #059669;
+  --black: #1F2937;
+  --light-font: #6B7280;
+  --light-green: #F0FDF4;
+  --green-font: #047857;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --transition: all 0.3s ease;
+}
+
+/* RESET E BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home-page {
+  font-family: var(--font-sans);
+  width: 100%;
+}
+
 /* HERO SECTION */
 .home-hero {
-    background: linear-gradient(
-        to bottom,
-        rgba(240, 253, 244, 0.5),
-        transparent
-    );
-    width: 100%;
-    padding: 64px 0;
+  background: linear-gradient(to bottom, rgba(240, 253, 244, 0.5), transparent);
+  width: 100%;
+  padding: 64px 0;
 }
 
 .home-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 24px;
-    width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
 }
 
-/* LADO ESQUERDO (CONTEÚDO DE TEXTO)  */
 .home-left {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .home-left h1 {
-    font-size: 40px;
-    font-weight: 600;
-    line-height: 1.25;
-    color: var(--black);
-    margin: 0 0 16px 0;
-}
-
-@media (min-width: 768px) {
-    .home-left h1 {
-        font-size: 48px;
-    }
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--black);
+  margin: 0 0 16px 0;
 }
 
 .home-left p {
-    font-size: 16px;
-    color: var(--light-font);
-    line-height: 1.625;
-    margin-bottom: 24px;
+  font-size: 16px;
+  color: var(--light-font);
+  line-height: 1.625;
+  margin-bottom: 24px;
 }
 
-/* LISTA DE VANTAGENS */
 .home-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 24px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .home-list li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--black);
-    font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--black);
+  font-size: 16px;
 }
 
 .home-list li::before {
-    content: "✓";
-    background-color: var(--green);
-    color: white;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: bold;
+  content: "✓";
+  background-color: var(--green);
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
 }
 
-/* BOTÕES DE AÇÃO */
 .home-buttons {
-    display: flex;
-    gap: 12px;
+  display: flex;
+  gap: 12px;
+}
+
+.btn-primary, .btn-outline {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
 }
 
 .btn-primary {
-    background-color: var(--green);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 8px;
-    border: none;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  background-color: var(--green);
+  color: white;
 }
 
 .btn-primary:hover {
-    background-color: var(--btn-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  background-color: var(--btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
 .btn-outline {
-    background-color: white;
-    color: var(--green-font);
-    padding: 12px 24px;
-    border-radius: 8px;
-    border: 2px solid var(--green);
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  background-color: white;
+  color: var(--green-font);
+  border: 2px solid var(--green);
 }
 
 .btn-outline:hover {
-    background-color: var(--light-green);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+  background-color: var(--light-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
 }
 
-/* LADO DIREITO (IMAGEM)  */
 .home-right {
-    position: relative;
-    height: 500px;
-    margin-top: 32px;
+  position: relative;
+  height: 500px;
+  margin-top: 32px;
 }
 
 .home-right img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .home-right::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.2),
-        transparent
-    );
-    border-radius: 12px;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+  border-radius: 12px;
 }
 
-/* LAYOUT GRID PARA DESKTOP */
-@media (min-width: 768px) {
-    .home-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 48px;
-        align-items: center;
-    }
-    
-    .home-right {
-        margin-top: 0;
-        height: 500px;
-    }
-}
-
-/* SEÇÃO "MATERIAIS ACEITOS" */
+/* ================================================ */
+/* SEÇÃO MATERIAIS ACEITOS - ESTILO NOVO E SIMPLES */
+/* ================================================ */
 .home-materiais-aceitos {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 80px 24px;
-    width: 100%;
+  width: 100%;
+  padding: 80px 24px;
+  background: white;
+}
+
+.materiais-container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .materiais-cabecalho {
-    text-align: center;
-    margin-bottom: 48px;
+  text-align: center;
+  margin-bottom: 48px;
 }
 
 .materiais-cabecalho h2 {
-    font-size: 28px;
-    font-weight: 600;
-    color: var(--black);
-    margin: 0 0 8px 0;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1F2937;
+  margin-bottom: 12px;
 }
 
 .materiais-cabecalho p {
-    font-size: 15px;
-    color: var(--light-font);
-    line-height: 1.5;
+  font-size: 1.125rem;
+  color: #6B7280;
+  line-height: 1.5;
 }
 
-.materiais-cards {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 16px;
-    max-width: 1000px;
-    margin: 0 auto;
+/* CONTAINER FLEX SIMPLES - 6 ITENS IGUAIS */
+.materiais-lista {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-/* CARDS DE MATERIAIS (POR CLASSE) */
-.material-item {
-    border: 1px solid;
-    border-radius: 12px;
-    padding: 24px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    min-height: 120px;
-    justify-content: center;
-    transform: scale(1);
+/* ITENS INDIVIDUAIS - ESTILO EXATO DO SEU EXEMPLO */
+.material-card {
+  flex: 1;
+  min-width: 140px;
+  max-width: calc(16.666% - 14px);
+  background-color: #fffbeb;
+  color: #ea580c;
+  border: 1px solid #fdba74;
+  border-radius: 12px;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* CORES POR CLASSE */
-.material-item.plastico {
-    background-color: #eff6ff;
-    color: #2563eb;
-    border-color: #bfdbfe;
+/* CORES INDIVIDUAIS */
+.material-card.plastico {
+  background-color: #eff6ff;
+  color: #2e6efc;
+  border-color: #bedbff;
 }
 
-.material-item.papel {
-    background-color: #f8fafc;
-    color: #475569;
-    border-color: #e2e8f0;
+.material-card.papel {
+  background-color: #fffbeb;
+  color: #e17100;
+  border-color: #fee685;
 }
 
-.material-item.metal {
-    background-color: #f0fdfa;
-    color: #0d9488;
-    border-color: #99f6e4;
+.material-card.metal {
+  background-color: #f8fafc;
+  color: #4a5970;
+  border-color: #e9edf3;
 }
 
-.material-item.vidro {
-    background-color: #faf5ff;
-    color: #7c3aed;
-    border-color: #d8b4fe;
+.material-card.vidro {
+  background-color: #f0fdfa;
+  color: #009689;
+  border-color: #cefbf2;
 }
 
-.material-item.eletronicos {
-    background-color: #fff7ed;
-    color: #ea580c;
-    border-color: #fdba74;
+.material-card.eletronicos {
+  background-color: #faf5ff;
+  color: #9810fa;
+  border-color: #ead7ff;
 }
 
-.material-item.pilhas {
-    background-color: #fefce8;
-    color: #ca8a04;
-    border-color: #fde047;
+.material-card.pilhas {
+  background-color: #fff7ed;
+  color: #f54a00;
+  border-color: #ffd9af;
 }
 
-/* HOVER EFFECTS */
-.material-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+/* ÍCONES */
+.material-card svg {
+  width: 48px;
+  height: 48px;
+  stroke-width: 1.5;
 }
 
-.material-item:active {
-    transform: scale(0.95);
-}
-
-.material-item.plastico:hover {
-    background-color: #dbeafe;
-}
-
-.material-item.papel:hover {
-    background-color: #f1f5f9;
-}
-
-.material-item.metal:hover {
-    background-color: #ccfbf1;
-}
-
-.material-item.vidro:hover {
-    background-color: #f3e8ff;
-}
-
-.material-item.eletronicos:hover {
-    background-color: #ffedd5;
-}
-
-.material-item.pilhas:hover {
-    background-color: #fef9c3;
-}
-
-/* SEÇÃO "COMO FUNCIONA" */
+/* ================================================ */
+/* SEÇÃO COMO FUNCIONA - COM HOVER */
+/* ================================================ */
 .home-como-funciona {
-    background: linear-gradient(
-        to bottom,
-        rgba(240, 253, 244, 0.5),
-        transparent
-    );
-    padding: 64px 0;
-    width: 100%;
+  background: linear-gradient(to bottom, rgba(240, 253, 244, 0.5), transparent);
+  padding: 64px 0;
+  width: 100%;
 }
 
 .como-funciona-conteudo {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 .como-funciona-cabecalho {
-    text-align: center;
-    margin-bottom: 48px;
+  text-align: center;
+  margin-bottom: 48px;
 }
 
 .como-funciona-cabecalho h1 {
-    font-size: 28px;
-    font-weight: 600;
-    color: var(--black);
-    margin-bottom: 8px;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 8px;
 }
 
 .como-funciona-cabecalho p {
-    font-size: 15px;
-    color: var(--light-font);
+  font-size: 15px;
+  color: var(--light-font);
 }
 
 .como-funciona-cards-container {
-    display: flex;
-    flex-direction: row;
-    gap: 24px;
-    max-width: 1000px;
-    margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .como-funciona-card {
-    background-color: white;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-    text-align: center;
-    flex: 1;
-    min-height: 280px;
-    transition: transform 0.3s ease;
+  flex: 1;
+  min-width: 200px;
+  background-color: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  transition: all 0.3s ease; /* TRANSITION ADICIONADA */
+  cursor: pointer;
 }
 
+/* HOVER EFFECT - ADICIONADO */
 .como-funciona-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  background-color: #f9fafb;
 }
 
 .card-numero {
-    background-color: var(--green);
-    color: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.75rem;
-    margin-bottom: 8px;
+  background-color: var(--green);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.75rem;
+  transition: all 0.3s ease; /* TRANSITION ADICIONADA */
+}
+
+/* HOVER NO NÚMERO - ADICIONADO */
+.como-funciona-card:hover .card-numero {
+  background-color: var(--btn-hover);
+  transform: scale(1.05);
 }
 
 .card-conteudo h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: var(--black);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--black);
+  transition: color 0.3s ease; /* TRANSITION ADICIONADA */
+}
+
+/* HOVER NO TÍTULO - ADICIONADO */
+.como-funciona-card:hover .card-conteudo h3 {
+  color: var(--green);
 }
 
 .card-conteudo p {
-    color: #666;
-    line-height: 1.6;
-    font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  transition: color 0.3s ease; /* TRANSITION ADICIONADA */
 }
 
+/* HOVER NO TEXTO - ADICIONADO */
+.como-funciona-card:hover .card-conteudo p {
+  color: #4b5563;
+}
+
+/* ================================================ */
 /* RESPONSIVIDADE */
+/* ================================================ */
+@media (min-width: 768px) {
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  
+  .home-right {
+    margin-top: 0;
+  }
+  
+  .home-left h1 {
+    font-size: 48px;
+  }
+}
+
 @media (max-width: 1200px) {
-    .como-funciona-cards-container {
-        gap: 16px;
-    }
-    
-    .como-funciona-card {
-        min-height: 260px;
-        padding: 20px;
-    }
+  .material-card {
+    max-width: calc(33.333% - 11px);
+  }
 }
 
-@media (max-width: 1000px) {
-    .como-funciona-cards-container {
-        flex-wrap: wrap;
-    }
-    
-    .como-funciona-card {
-        flex: 0 0 calc(50% - 12px);
-        min-height: 240px;
-    }
-    
-    .materiais-cards {
-        grid-template-columns: repeat(3, 1fr);
-    }
+@media (max-width: 768px) {
+  .materiais-lista {
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .material-card {
+    max-width: calc(50% - 8px);
+    padding: 20px 12px;
+    min-width: 120px;
+  }
+  
+  .material-card svg {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .materiais-cabecalho h2 {
+    font-size: 1.875rem;
+  }
+  
+  .materiais-cabecalho p {
+    font-size: 1rem;
+  }
+  
+  .como-funciona-card {
+    min-width: 100%;
+  }
 }
 
-@media (max-width: 640px) {
-    .materiais-cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .como-funciona-card {
-        flex: 0 0 100%;
-    }
+@media (max-width: 480px) {
+  .materiais-lista {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .material-card {
+    max-width: 280px;
+    width: 100%;
+  }
+  
+  .home-buttons {
+    flex-direction: column;
+  }
+  
+  .btn-primary, .btn-outline {
+    width: 100%;
+  }
 }

@@ -27,42 +27,44 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* MATERIAIS ACEITOS */}
+            {/* MATERIAIS ACEITOS - COM NOVAS CLASSES */}
             <section className="home-materiais-aceitos">
-                <div className="materiais-cabecalho">
-                    <h2>Materiais Aceitos</h2>
-                    <p>Veja o que pode ser reciclado</p>
-                </div>
-
-                <div className="materiais-cards">
-                    <div className="material-item plastico">
-                        <Recycle size={32} />
-                        <span>Plástico</span>
+                <div className="materiais-container">
+                    <div className="materiais-cabecalho">
+                        <h2>Materiais Aceitos</h2>
+                        <p>Veja o que pode ser reciclado</p>
                     </div>
 
-                    <div className="material-item papel">
-                        <FileText size={32} />
-                        <span>Papel</span>
-                    </div>
+                    <div className="materiais-lista">
+                        <div className="material-card plastico">
+                            <Recycle size={48} />
+                            <span>Plástico</span>
+                        </div>
 
-                    <div className="material-item metal">
-                        <Package size={32} />
-                        <span>Metal</span>
-                    </div>
+                        <div className="material-card papel">
+                            <FileText size={48} />
+                            <span>Papel</span>
+                        </div>
 
-                    <div className="material-item vidro">
-                        <Wine size={32} />
-                        <span>Vidro</span>
-                    </div>
+                        <div className="material-card metal">
+                            <Package size={48} />
+                            <span>Metal</span>
+                        </div>
 
-                    <div className="material-item eletronicos">
-                        <Cpu size={32} />
-                        <span>Eletrônicos</span>
-                    </div>
+                        <div className="material-card vidro">
+                            <Wine size={48} />
+                            <span>Vidro</span>
+                        </div>
 
-                    <div className="material-item pilhas">
-                        <Battery size={32} />
-                        <span>Pilhas</span>
+                        <div className="material-card eletronicos">
+                            <Cpu size={48} />
+                            <span>Eletrônicos</span>
+                        </div>
+
+                        <div className="material-card pilhas">
+                            <Battery size={48} />
+                            <span>Pilhas</span>
+                        </div>
                     </div>
                 </div>
             </section>
