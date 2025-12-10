@@ -1,6 +1,6 @@
 .carousel-item img {
-  min-height: 520px;
-  object-fit: 'cover';
+  min-height: 400px;
+  object-fit: cover;
 }
 
 .carousel-control-prev-icon,
