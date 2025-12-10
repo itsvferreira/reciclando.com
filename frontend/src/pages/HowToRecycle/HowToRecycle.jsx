@@ -1,8 +1,6 @@
 import { Wine, FileText, Laptop, BottleWine, Wrench, Leaf } from 'lucide-react';
 import { CardMaterials } from '../../components/cardMaterials/CardMaterials';
 import { CardTips } from '../../components/cardTips/CardTips';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import styles from './HowToRecycle.module.css';
 
 export default function HowToRecycle() {
@@ -125,7 +123,6 @@ export default function HowToRecycle() {
 
   return (
     <>
-    <Header />
     <div className={styles.comoContainer}>
       <h1 className={styles.comoTitulo}>Como funciona a Reciclagem</h1>
 
@@ -186,7 +183,6 @@ export default function HowToRecycle() {
 
       <CardTips />
     </div>
-    <Footer />
     </>
   );
 }

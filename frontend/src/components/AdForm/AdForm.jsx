@@ -327,7 +327,7 @@ export default function Form({ id, donorId }) {
             Cancelar
           </button>
           <button type='submit' className='btn btn-success'>
-            Atualizar Anúncio
+            {id ? 'Atualizar Anúncio' : 'Publicar Anúncio'}
           </button>
         </div>
       </form>

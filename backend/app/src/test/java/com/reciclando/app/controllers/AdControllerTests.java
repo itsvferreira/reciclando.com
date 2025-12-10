@@ -28,6 +28,18 @@ import jakarta.persistence.EntityNotFoundException;
 
 @WebMvcTest(AdController.class)
 public class AdControllerTests {
+        @Test
+        public void testGetAdsByRecyclerCodeHistory() throws Exception {
+                String recyclerCode = "1234";
+                List<AdResponseDTO> recyclerAds = List.of(ads.get(1)); // só o concluído com código 1234
+                when(adService.getAdsByRecyclerCode(recyclerCode)).thenReturn(recyclerAds);
+
+                mockMvc.perform(get("/api/v1/ads/recycler/{recyclerCode}/history", recyclerCode))
+                                .andExpect(status().isOk())
+                                .andExpect(jsonPath("$.length()").value(1))
+                                .andExpect(jsonPath("$[0].title").value("Title2"))
+                                .andExpect(jsonPath("$[0].conclusionCode").value(recyclerCode));
+        }
     @Autowired
     private MockMvc mockMvc;
 

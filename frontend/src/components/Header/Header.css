@@ -1,12 +1,127 @@
-
-:root {
-  --green: #10B981;
-  --btn-hover: #059669;
-  --black: #1F2937;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --transition: all 0.3s ease;
+/* Ajuste dos botões no menu lateral mobile */
+@media (max-width: 900px) {
+  .mobile-menu-items .mobile-btn {
+    width: 100%;
+    margin: 0 0 12px 0;
+    box-sizing: border-box;
+    justify-content: center;
+    font-size: 1.1rem;
+    padding: 12px 0;
+  }
+  .mobile-menu-items .btn-profile.mobile-btn {
+    background: #fff;
+    color: #222;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 16px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mobile-menu-items .btn-create-ad.mobile-btn {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (max-width: 900px) {
+  .header-right .btn-profile,
+  .header-right .btn-create-ad {
+    display: none !important;
+  }
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+/* Meu Perfil button */
+.btn-profile {
+  background: #fff;
+  color: #222;
+  border: 1px solid #e5e7eb;
+  padding: 7px 18px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  margin-right: 10px;
+  margin-left: 24px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  transition: var(--transition);
+}
+.btn-profile:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
 }
 
+/* Criar Anúncio button */
+.btn-create-ad {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  padding: 7px 28px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: 600;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+}
+.btn-create-ad:hover {
+  background: var(--btn-hover);
+}
+
+/* Sair button */
+.btn-logout {
+  background: #fff;
+  color: #222;
+  border: 1px solid #e5e7eb;
+  padding: 7px 18px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition);
+}
+.btn-logout:hover {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
+
+.btn-logout-mobile {
+  background: #fff;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-family: var(--font-sans);
+  width: 100%;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn-logout-mobile:hover {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
 
 * {
   margin: 0;
