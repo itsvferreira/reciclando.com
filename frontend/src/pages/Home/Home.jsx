@@ -7,18 +7,14 @@ import { useNavigate } from "react-router-dom";
 
 export default function Home() {
     const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    const isLoggedIn = !!user.id;
-    const isDonor = user.tipo === 'comum';
-    const isRecycler = user.tipo === 'reciclador';
+    const user = JSON.parse(localStorage.getItem('user') || 'null');
+    const isComumLoggedIn = user && user.id && user.tipo === 'comum';
 
     const handleCreateAd = () => {
-        if (!isLoggedIn) {
-            navigate('/login');
-        } else if (isDonor) {
+        if (isComumLoggedIn) {
             navigate('/anuncios/novo');
-        } else if (isRecycler) {
-            navigate('/anuncios');
+        } else {
+            navigate('/login');
         }
     };
 
@@ -39,11 +35,9 @@ export default function Home() {
                         </ul>
                         <div className="home-buttons">
                             <button className="btn-primary" onClick={handleCreateAd}>
-                                {isRecycler ? 'Ver Anúncios' : 'Anunciar Materiais'}
+                                Anunciar Materiais
                             </button>
-                                                        {!isRecycler && (
-                                                            <button className="btn-outline" onClick={() => navigate('/recicladores')}>Recicladores</button>
-                                                        )}
+                            <button className="btn-outline" onClick={() => navigate('/recicladores')}>Recicladores</button>
                         </div>
                     </div>
                     <div className="home-right">
