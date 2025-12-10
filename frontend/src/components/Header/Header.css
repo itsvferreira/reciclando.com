@@ -1,108 +1,355 @@
-/* Header.css */
+
 :root {
-    --green: #10B981;
-    --btn-hover: #059669;
-    --border: #E5E7EB;
-    --black: #1F2937;
-    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --green: #10B981;
+  --btn-hover: #059669;
+  --black: #1F2937;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --transition: all 0.3s ease;
 }
 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* HEADER PRINCIPAL */
 .header {
-    width: 100%;
-    height: 70px;
-    background: white;
-    /* border-bottom: 1px solid var(--border); */ 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
-    font-family: var(--font-sans);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    max-width: 1280px; 
-    margin: 0 auto; 
+  width: 100%;
+  height: 70px;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.header-left img {
-    height: 50px;
-    width: auto;
-    cursor: pointer;
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
 }
 
-nav.menu {
-    display: flex;
-    gap: 32px;
+/* LOGO */
+.header-left {
+  display: flex;
+  align-items: center;
 }
 
-nav.menu a {
-    color: var(--black);
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.2s;
-    white-space: nowrap;
+.logo-img {
+  height: 50px;
+  width: auto;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
-nav.menu a:hover {
-    color: var(--green);
+.logo-img:hover {
+  opacity: 0.9;
 }
 
+/* MENU DESKTOP */
+.menu-desktop {
+  display: flex;
+  gap: 32px;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.menu-desktop a {
+  color: var(--black);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: var(--transition);
+  white-space: nowrap;
+  padding: 8px 0;
+  position: relative;
+}
+
+.menu-desktop a:hover {
+  color: var(--green);
+}
+
+.menu-desktop a.active {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.menu-desktop a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--green);
+  transition: var(--transition);
+}
+
+.menu-desktop a:hover::after {
+  width: 100%;
+}
+
+/* LADO DIREITO DO HEADER */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* BOTÃO LOGIN DESKTOP */
 .btn-login {
-    
-    all: unset;
-    
-    /* Estilos da imagem */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    border-radius: 8px;
-    
-    /* Dimensões */
-    height: 16px;
-    padding: 8px 12px;
-    
-    /* Cores e tipografia */
-    background-color: #FAFAF9;
-    color: #1C1917;
-    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 14px;
-    font-weight: 500;
-    
-    /* Interatividade */
-    cursor: pointer;
-    transition: all 0.2s ease;
-    
-    /* Sombra/borda */
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: 8px;
+  height: 40px;
+  padding: 0 20px;
+  background-color: #FAFAF9;
+  color: #1C1917;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .btn-login:hover {
-    background-color: #dcfce7; /* Cor mais escura no hover */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #dcfce7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: var(--green);
 }
 
-.btn-login.btn-create {
-    background-color: var(--green);
-    color: white;
-    border: none;
+/* MENU HAMBURGER PARA MOBILE */
+.menu-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--black);
+  transition: var(--transition);
+  border-radius: 4px;
 }
 
-.btn-login.btn-create:hover {
-    background-color: var(--btn-hover);
+.menu-hamburger:hover {
+  color: var(--green);
+  background-color: #f3f4f6;
 }
 
-.btn-login.logout:hover {
-    background-color: #fee2e2; /* Vermelho claro no hover para logout */
-    color: #991b1b; /* Texto vermelho escuro */
+/* OVERLAY MENU MOBILE */
+.menu-mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
 }
 
-/* Container para o botão */
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    height: 100%;
+.menu-mobile-overlay.active {
+  opacity: 1;
+  visibility: visible;
 }
+
+/* MENU MOBILE */
+.menu-mobile {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 280px;
+  height: 100vh;
+  background: white;
+  z-index: 1000;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.menu-mobile.active {
+  right: 0;
+}
+
+/* CABEÇALHO DO MENU MOBILE */
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-logo {
+  height: 40px;
+  width: auto;
+}
+
+.close-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--black);
+  transition: var(--transition);
+  border-radius: 4px;
+}
+
+.close-menu:hover {
+  color: var(--green);
+  background-color: #f3f4f6;
+}
+
+/* ITENS DO MENU MOBILE */
+.mobile-menu-items {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.mobile-menu-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  color: var(--black);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.mobile-menu-link:hover {
+  background-color: #f3f4f6;
+  color: var(--green);
+  transform: translateX(4px);
+}
+
+.mobile-menu-link.active {
+  background-color: #dcfce7;
+  color: var(--green);
+}
+
+/* BOTÃO LOGIN MOBILE */
+.mobile-login-container {
+  margin-top: auto;
+  padding: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.btn-login-mobile {
+  width: 100%;
+  padding: 14px 24px;
+  background-color: var(--green);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.btn-login-mobile:hover {
+  background-color: var(--btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .header-content {
+    padding: 0 20px;
+  }
+
+  .menu-desktop {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-desktop {
+    display: none;
+  }
+
+  .btn-login {
+    display: none;
+  }
+
+  .menu-hamburger {
+    display: block;
+  }
+
+  .header-content {
+    justify-content: space-between;
+  }
+
+  .menu-desktop a {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    height: 60px;
+  }
+
+  .header-content {
+    padding: 0 16px;
+  }
+
+  .logo-img {
+    height: 40px;
+  }
+
+  .menu-mobile {
+    width: 85%;
+    max-width: 300px;
+  }
+
+  .mobile-menu-link {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+}
+
+/* MENU MOBILE */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.menu-mobile.active .mobile-menu-link {
+  animation: slideIn 0.3s ease forwards;
+}
+
+.menu-mobile.active .mobile-menu-link:nth-child(1) { animation-delay: 0.1s; }
+.menu-mobile.active .mobile-menu-link:nth-child(2) { animation-delay: 0.15s; }
+.menu-mobile.active .mobile-menu-link:nth-child(3) { animation-delay: 0.2s; }
+.menu-mobile.active .mobile-menu-link:nth-child(4) { animation-delay: 0.25s; }
+.menu-mobile.active .btn-login-mobile { animation-delay: 0.3s; }
