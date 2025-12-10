@@ -17,35 +17,28 @@ export default function RecyclerProfile() {
 
   useEffect(() => {
     const fetchCollects = async () => {
-      if (!user || !user.id) {
+      if (!user || !user.code) {
         return;
       }
-
       try {
-        // Buscar todos os anúncios concluídos
-        const response = await adsService.getAll();
-        
-        // Filtrar apenas anúncios concluídos
-        const concludedAds = response.data.filter(ad => ad.status === 'concluded');
-        
-        const mappedCollects = concludedAds.map(ad => ({
+        // Buscar histórico de coletas do reciclador logado
+        const response = await adsService.getHistoryByRecyclerCode(user.code);
+        const mappedCollects = response.data.map(ad => ({
           id: ad.id,
           title: ad.title,
           description: ad.description,
           material: ad.category?.[0] || "Não especificado",
           location: ad.donorLocation || "Não especificado",
           date: new Date(ad.createdAt).toLocaleDateString('pt-BR'),
-          status: 'concluded',
+          status: ad.status,
           image: "https://via.placeholder.com/150"
         }));
-        
         setCollects(mappedCollects);
       } catch (error) {
         console.error("Erro ao buscar coletas:", error);
         setCollects([]);
       }
     };
-
     fetchCollects();
   }, [user]);
 
