@@ -51,27 +51,8 @@ INSERT INTO recyclers (user_id, code) VALUES
 INSERT INTO donors (user_id) VALUES 
   (1),
   (6),
-  (11);
-
-INSERT INTO recyclers (user_id, code) VALUES
-  (2,  'A9K3Q'),
-  (3,  'Z7T1M'),
-  (4,  'Q3W9B'),
-  (5,  'M8D2S'),
-  (7,  'H4P7X'),
-  (8,  'T1F9C'),
-  (9,  'B6L2R'),
-  (10, 'P5N8V'),
-  (12, 'W2J6Y'),
-  (13, 'K9E3U'),
-  (14, 'R4C1Z');
-
-INSERT INTO donors (user_id) VALUES 
-  (1),
-  (6),
   (11),
   (15);
-
 
 INSERT INTO recycler_materials (user_id, material) VALUES
   (2, 'PLASTIC'),
