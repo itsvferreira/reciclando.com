@@ -8,6 +8,7 @@ import Recyclers from './pages/Recyclers/Recyclers';
 import AdCreation from './pages/AdCreation/AdCreation';
 import AdUpdate from './pages/AdUpdate/AdUpdate';
 import Home from './pages/Home/Home';
+import RecyclerInformations from './pages/RecyclerInformations/RecyclerInformations'; 
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/recicladores' element={<Recyclers />} />
         <Route path='/login' element={<Login />} />
         <Route path='/como-reciclar' element={<HowToRecycle />} />
+        <Route path='/perfil-reciclador' element={<RecyclerInformations  />} /> 
       </Routes>
     </Router>
   );
