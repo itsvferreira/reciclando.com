@@ -54,7 +54,7 @@ export default function Ad(props) {
                 <PhoneCall size={20} />
                 <a href={`tel:${donorContact}`}>{donorContact}</a>
               </p>
-              <button className='btn d-flex align-items-center gap-2 mt-3 btn-success'>
+              <button className='btn d-flex align-items-center gap-2 mt-3 btn-success' onClick={() => window.location.href = '/anuncios/novo'}>
                 <svg
                   className='w-6 h-6 text-gray-800 dark:text-white'
                   aria-hidden='true'

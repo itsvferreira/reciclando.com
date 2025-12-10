@@ -8,6 +8,8 @@ import Recyclers from './pages/Recyclers/Recyclers';
 import AdCreation from './pages/AdCreation/AdCreation';
 import AdUpdate from './pages/AdUpdate/AdUpdate';
 import Home from './pages/Home/Home';
+import AdCreation from './pages/AdCreation/AdCreation';
+import AdUpdate from './pages/AdUpdate/AdUpdate';
 
 function App() {
   return (
