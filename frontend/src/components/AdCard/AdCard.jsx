@@ -1,10 +1,11 @@
 import { MapPin, Clock4, UserRound, PhoneCall } from 'lucide-react';
 import Badge from '../ui/Badge/Badge';
 import styles from './AdCard.module.css';
-import ImageCarousel from '../ImageCarousel/ImageCarousel';
+import { ImageCarousel } from '../ImageCarousel/ImageCarousel';
 
 export default function Ad(props) {
   const {
+    id,
     imagesPath = [],
     title,
     description,
@@ -25,8 +26,7 @@ export default function Ad(props) {
     <div className={`card mb-4 ${styles.card}`}>
       <div className='row g-0'>
         <div className={`${styles['image-container']} col-md`}>
-          {/* <img src={imageSrc} className='img-fluid' /> */}
-          <ImageCarousel images={imagesPath} />
+          <ImageCarousel images={imagesPath} id={id} />
         </div>
         <div className={`col-md ${styles['margin-left']}`}>
           <div className='card-body'>

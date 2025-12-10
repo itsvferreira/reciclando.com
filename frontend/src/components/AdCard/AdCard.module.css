@@ -34,10 +34,10 @@
   margin-left: 15px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .image-container {
     max-width: fit-content;
-    align-items: center;
+    max-height: 200px;
   }
 
   .image-container img {
