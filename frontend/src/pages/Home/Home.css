@@ -1,4 +1,4 @@
-/* HERO SECTION */
+
 .home-hero {
     background: linear-gradient(
         to bottom,
@@ -82,8 +82,8 @@
     gap: 12px;
 }
 
-.btn-primary {
-    background-color: var(--green);
+ .btn-primary {
+    background-color: #10B981;
     color: white;
     padding: 12px 24px;
     border-radius: 8px;
@@ -201,7 +201,7 @@
     text-align: center;
     font-weight: 600;
     font-size: 16px;
-    cursor: pointer;
+    cursor: default; 
     transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
@@ -249,38 +249,37 @@
     border-color: #fde047;
 }
 
-/* HOVER EFFECTS */
 .material-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: scale(1); 
+    box-shadow: none; 
 }
 
 .material-item:active {
-    transform: scale(0.95);
+    transform: scale(1); 
 }
 
 .material-item.plastico:hover {
-    background-color: #dbeafe;
+    background-color: #eff6ff; 
 }
 
 .material-item.papel:hover {
-    background-color: #f1f5f9;
+    background-color: #f8fafc; 
 }
 
 .material-item.metal:hover {
-    background-color: #ccfbf1;
+    background-color: #f0fdfa; 
 }
 
 .material-item.vidro:hover {
-    background-color: #f3e8ff;
+    background-color: #faf5ff; 
 }
 
 .material-item.eletronicos:hover {
-    background-color: #ffedd5;
+    background-color: #fff7ed; 
 }
 
 .material-item.pilhas:hover {
-    background-color: #fef9c3;
+    background-color: #fefce8; 
 }
 
 /* SEÇÃO "COMO FUNCIONA" */

@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { adsService } from "../../services/api";
 import UserCard from "../../components/UserCard/UserCard";
 import UserAdCard from "../../components/UserAdCard/UserAdCard";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
 import "../../index.css";
 import styles from "./RecyclerProfile.module.css";
 
@@ -57,7 +55,6 @@ export default function RecyclerProfile() {
 
   return (
     <>
-    <Header />
     <div className={styles.profileContainer}>
       <div className={styles.profileLayout}>
         <aside className={styles.profileSidebar}>
@@ -95,7 +92,6 @@ export default function RecyclerProfile() {
         </main>
       </div>
     </div>
-    <Footer />
     </>
   );
 }

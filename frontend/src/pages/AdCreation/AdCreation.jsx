@@ -1,4 +1,4 @@
-import AdForm from '../../components/AdForm/AdForm';
+
 
 export default function AdCreation() {
   return (
@@ -13,3 +13,5 @@ export default function AdCreation() {
     </main>
   );
 }
+
+import AdForm from '../../components/AdForm/AdForm';

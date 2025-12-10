@@ -4,7 +4,6 @@ import styles from './AdCard.module.css';
 
 export default function Ad(props) {
   const {
-    id,
     imagesPath = [],
     title,
     description,

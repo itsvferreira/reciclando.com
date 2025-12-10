@@ -42,8 +42,19 @@
 .profileHeader {
   margin-bottom: 24px;
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
+  gap: 32px;
+}
+.profileHeader > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profileAdsButton {
+  margin-left: 32px;
 }
 
 .profileHeader h2 {
@@ -96,5 +107,20 @@
   .profileSidebar {
     position: relative;
     top: 0;
+  }
+
+  .profileHeader {
+    display: block;
+    gap: 0;
+    margin-bottom: 0;
+  }
+  .profileAdsButton {
+    margin-left: 0;
+    width: 180px;
+    max-width: 100%;
+    margin: 16px auto 12px auto;
+    white-space: nowrap;
+    display: block;
+    text-align: center;
   }
 }

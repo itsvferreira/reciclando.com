@@ -4,8 +4,6 @@ import RecyclerCard from '../../components/RecyclerCard/RecyclerCard';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import LocationSelect from '../../components/LocationSelect/LocationSelect';
 import Categories from '../../components/Categories/Categories';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import { buildQuery } from '../../utils/buildQuery';
 
 const Recyclers = () => {
@@ -37,7 +35,6 @@ const Recyclers = () => {
 
   return (
     <>
-    <Header />
     <main style={{ marginTop: '2rem' }}>
       <div className='container'>
         <h1>Recicladores</h1>
@@ -63,7 +60,7 @@ const Recyclers = () => {
         </div>
       </div>
     </main>
-    <Footer />
+    
     </>
   );
 };
