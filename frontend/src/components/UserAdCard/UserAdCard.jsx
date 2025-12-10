@@ -31,12 +31,16 @@ export default function UserAdCard({ ad, onEdit, onDelete, onConclude }) {
 
         <div className={styles.userAdMaterialTag}>{ad.material}</div>
 
+        <span className={styles.userAdDate}>
+          <CalendarDays size={14} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'text-bottom' }} />
+          {ad.date}
+        </span>
         <div className={styles.userAdFooter}>
           <div className={styles.userAdActions}>
             {ad.status === 'active' && (
               <>
                 <button className={styles.btnConclude} onClick={() => onConclude(ad.id)}>
-                  Concluir Anúncio
+                  Finalizar
                 </button>
                 <button className={styles.btnEdit} onClick={() => navigate(`/anuncios/edicao/${ad.id}`)}>
                   <SquarePen size={16} />
@@ -49,10 +53,6 @@ export default function UserAdCard({ ad, onEdit, onDelete, onConclude }) {
               </>
             )}
           </div>
-          <span className={styles.userAdDate}>
-            <CalendarDays size={14} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'text-bottom' }} />
-            {ad.date}
-          </span>
         </div>
       </div>
     </div>
