@@ -23,21 +23,21 @@ export function LoginForm() {
     // Usuários mockados
     const mockUsers = {
       comum: {
-        id: 4, 
-        email: "luiza@exemplo.com",
+        id: 1,
+        email: "luiza.sanchez@email.com",
         password: "123456",
         tipo: "comum",
         firstName: "Luiza",
-        lastName: "Almeida"
+        lastName: "Sanchez"
       },
       reciclador: {
-        id: 3,
-        email: 'carlos@example.com',
+        id: 2,
+        email: 'joao.silva@email.com',
         password: '123456',
         tipo: 'reciclador',
-        firstName: "Carlos",
+        firstName: "João",
         lastName: "Silva",
-        code: "5678"
+        code: "A9K3Q"
       },
     };
 

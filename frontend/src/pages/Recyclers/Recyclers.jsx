@@ -5,12 +5,16 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import LocationSelect from '../../components/LocationSelect/LocationSelect';
 import Categories from '../../components/Categories/Categories';
 import { buildQuery } from '../../utils/buildQuery';
+import { getCitiesOptions } from '../../utils/getCitiesOptions';
+import styles from './Recycler.module.css';
 
 const Recyclers = () => {
   const [recyclers, setRecyclers] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [categories, setCategories] = useState([]);
   const [city, setCity] = useState('');
+  const [citiesOptions, setCitiesOptions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRecyclers = async () => {
@@ -26,6 +30,7 @@ const Recyclers = () => {
         }
 
         setRecyclers(response.data);
+        setLoading(false);
       } catch (err) {
         console.error(err);
       }
@@ -33,35 +38,42 @@ const Recyclers = () => {
     fetchRecyclers();
   }, [categories, city, searchText]);
 
+  if (!loading && citiesOptions.length == 0) {
+    const options = getCitiesOptions(recyclers);
+    console.log(options);
+    setCitiesOptions(options);
+  }
+
   return (
-    <>
     <main style={{ marginTop: '2rem' }}>
-      <div className='container'>
-        <h1>Recicladores</h1>
-        <p>Encontre recicladores próximos a você</p>
-        <div style={{ margin: '2rem 0' }}>
-          <SearchBar
-            placeholder='Buscar por nome...'
-            onSearchChange={setSearchText}
-          />
-          <LocationSelect onCityChange={setCity} />
-          <Categories
-            categories={categories}
-            onCategoriesChange={setCategories}
-          />
+      {loading ? (
+        <p>Carregando...</p>
+      ) : (
+        <div className='container'>
+          <h1>Recicladores</h1>
+          <p>Encontre recicladores próximos a você</p>
+          <div style={{ margin: '2rem 0' }}>
+            <SearchBar
+              placeholder='Buscar por nome...'
+              onSearchChange={setSearchText}
+            />
+            <LocationSelect onCityChange={setCity} options={citiesOptions} />
+            <Categories
+              categories={categories}
+              onCategoriesChange={setCategories}
+            />
+          </div>
+          <p style={{ marginBottom: '1.65rem' }}>
+            {recyclers.length} recicladores encontrados
+          </p>
+          <div class={styles['recycler-grid']}>
+            {recyclers.map((rec) => (
+              <RecyclerCard key={rec.userId} {...rec} />
+            ))}
+          </div>
         </div>
-        <p style={{ marginBottom: '1.65rem' }}>
-          {recyclers.length} recicladores encontrados
-        </p>
-        <div class='row row-cols-1 row-cols-md-3 g-4'>
-          {recyclers.map((rec) => (
-            <RecyclerCard key={rec.userId} {...rec} />
-          ))}
-        </div>
-      </div>
+      )}
     </main>
-    
-    </>
   );
 };
 

@@ -123,15 +123,6 @@
   border-color: #ef4444;
 }
 
-:root {
-  --green: #10B981;
-  --btn-hover: #059669;
-  --black: #1F2937;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --transition: all 0.3s ease;
-}
-
-
 * {
   margin: 0;
   padding: 0;

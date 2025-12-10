@@ -61,12 +61,7 @@ const DropdownIndicator = (props) => {
   );
 };
 
-export default function LocationSelect({ onCityChange }) {
-  const options = [
-    { label: 'São Paulo', value: 'Sample City' },
-    { label: 'Belo Horizonte', value: 'Other Sample City' },
-  ]; // Dados de teste
-
+export default function LocationSelect({ onCityChange, options }) {
   function handleStateChange(state) {
     onCityChange(state.value);
   }
