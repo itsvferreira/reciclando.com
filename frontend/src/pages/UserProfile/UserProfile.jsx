@@ -7,8 +7,6 @@ import UserAdCard from "../../components/UserAdCard/UserAdCard";
 import ConfirmDeleteModal from "../../components/ConfirmDeleteModal/ConfirmDeleteModal";
 import ConcludeAdModal from "../../components/ConcludeAdModal/ConcludeAdModal";
 import FeedbackModal from "../../components/FeedbackModal/FeedbackModal";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
 import "../../index.css";
 import styles from "./UserProfile.module.css";
 
@@ -139,7 +137,7 @@ export default function UserProfile() {
   };
 
   const handleEditAd = (id) => {
-    navigate(`/anuncios/edicao/${id}`);
+    alert(`Editar anúncio ${id}`);
   };
 
   const filteredAds = ads.filter(ad => {
@@ -159,7 +157,6 @@ export default function UserProfile() {
 
   return (
     <>
-    <Header />
     <div className={styles.profileContainer}>
       <div className={styles.profileLayout}>
         <aside className={styles.profileSidebar}>
@@ -224,7 +221,7 @@ export default function UserProfile() {
         message={feedbackModal.message}
       />
     </div>
-    <Footer />
+    {/* Footer removido, agora global pelo App.jsx */}
     </>
   );
 }
