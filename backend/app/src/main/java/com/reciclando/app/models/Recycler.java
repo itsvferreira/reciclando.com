@@ -37,6 +37,9 @@ public class Recycler {
     @Column(name = "code")
     private String code;
 
+    @Column(name = "about_me", length = 500)  
+    private String aboutMe;
+
     protected Recycler() {
     }
 
@@ -69,8 +72,19 @@ public class Recycler {
         this.code = code;
     }
 
+    
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
     @Override
     public String toString() {
-        return "Recycler [userId=" + userId + ", user=" + user + ", acceptedMaterials=" + acceptedMaterials + "]";
+        return "Recycler [userId=" + userId + ", user=" + user + 
+               ", acceptedMaterials=" + acceptedMaterials + 
+               ", code=" + code + ", aboutMe=" + aboutMe + "]"; 
     }
 }
