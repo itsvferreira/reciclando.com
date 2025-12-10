@@ -54,7 +54,6 @@ INSERT INTO donors (user_id) VALUES
   (11),
   (15);
 
-
 INSERT INTO recycler_materials (user_id, material) VALUES
   (2, 'PLASTIC'),
   (2, 'METAL'),
