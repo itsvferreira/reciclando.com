@@ -14,6 +14,10 @@ INSERT INTO addresses (postal_code, city, state, neighborhood) VALUES
   ('30310150', 'Belo Horizonte', 'MG', 'Belvedere'),
   ('31275020', 'Belo Horizonte', 'MG', 'Pampulha');
 
+-- Endereço em São Paulo
+INSERT INTO addresses (postal_code, city, state, neighborhood) VALUES
+  ('04001000', 'São Paulo', 'SP', 'Paraíso');
+
 INSERT INTO users (first_name, last_name, phone, email, account_type, address_id) VALUES
   ('Luiza', 'Sanchez', '11987654321', 'luiza.sanchez@email.com', 'DONOR', 1),
   ('João', 'Silva', '11987654321', 'joao.silva@email.com', 'RECYCLER', 2),
@@ -28,7 +32,8 @@ INSERT INTO users (first_name, last_name, phone, email, account_type, address_id
   ('Yuri', 'Barreto', '21987654321', 'yuri.barreto@email.com', 'DONOR', 11),
   ('Marcos', 'Almeida', '31987654321', 'marcos.almeida@email.com', 'RECYCLER', 12),
   ('Patrícia', 'Menezes', '31987654321', 'patricia.menezes@email.com', 'RECYCLER', 13),
-  ('Rafael', 'Gomes',  '31987654321', 'rafael.gomes@email.com', 'RECYCLER', 14);
+  ('Rafael', 'Gomes',  '31987654321', 'rafael.gomes@email.com', 'RECYCLER', 14),
+  ('Bruno', 'Martins', '11999999999', 'bruno.martins@email.com', 'DONOR', 15);
 
 INSERT INTO recyclers (user_id, code) VALUES
   (2,  'A9K3Q'),
@@ -46,7 +51,8 @@ INSERT INTO recyclers (user_id, code) VALUES
 INSERT INTO donors (user_id) VALUES 
   (1),
   (6),
-  (11);
+  (11),
+  (15);
 
 
 INSERT INTO recycler_materials (user_id, material) VALUES
@@ -93,7 +99,8 @@ INSERT INTO ads (title, description, donor_id, address_id, status, created_at, u
   ('Pilhas e baterias usadas', 'Pacote com pilhas alcalinas e algumas baterias recarregáveis usadas — armazenadas com segurança.', 6, 6, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'B6L2R', ARRAY['http://localhost:8081/api/v1/files/as8ds65_pilhas-e-baterias.jpg']),
   ('Garrafas PET grandes', 'Garrafas PET (2L) lavadas e secas — lote para reciclagem.', 11, 12, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/e43367e_garrafas-pet.jpg']),
   ('Latas amassadas', 'Latas de alumínio limpas e amassadas, prontas para coleta.', 11, 12, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/54r30t0_latas.webp']),
-  ('Sucata eletrônica leve', 'Cabos, adaptadores e pequenos componentes eletrônicos — ideal para reciclagem de eletrônicos.', 11, 12, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/2148r5t_componentes-eletronicos.jpg']);
+  ('Sucata eletrônica leve', 'Cabos, adaptadores e pequenos componentes eletrônicos — ideal para reciclagem de eletrônicos.', 11, 12, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/2148r5t_componentes-eletronicos.jpg']),
+  ('Garrafas de vinho', 'Lote de garrafas de vinho limpas para reciclagem.', 15, 15, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'A9K3Q', ARRAY['http://localhost:8081/api/v1/files/71xgns2pEHL.jpg']);
 
 INSERT INTO ad_categories (ad_id, category) VALUES
   (1, 'PAPER'),
@@ -103,4 +110,5 @@ INSERT INTO ad_categories (ad_id, category) VALUES
   (5, 'BATTERIES'),
   (6, 'PLASTIC'),
   (7, 'METAL'),
-  (8, 'ELECTRONICS');
+  (8, 'ELECTRONICS'),
+  (9, 'GLASS');
