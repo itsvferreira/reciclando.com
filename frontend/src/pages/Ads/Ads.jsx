@@ -1,60 +1,50 @@
-import { useState, useEffect } from 'react';
-import { adsService } from '../../services/api';
+import { useState } from 'react';
 import AdCard from '../../components/AdCard/AdCard';
 import LocationSelect from '../../components/LocationSelect/LocationSelect';
 import Categories from '../../components/Categories/Categories';
-import { buildQuery } from '../../utils/buildQuery';
+import { useFetchAds } from '../../hooks/useFetchAds';
+import { getCitiesOptions } from '../../utils/getCitiesOptions';
 
 const Ads = () => {
   const [ads, setAds] = useState([]);
   const [categories, setCategories] = useState([]);
   const [city, setCity] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [citiesOptions, setCitiesOptions] = useState([]);
 
-  useEffect(() => {
-    const fetchAds = async () => {
-      let response;
+  useFetchAds(categories, city, setAds, setLoading);
 
-      try {
-        const query = buildQuery(city, categories);
-
-        if (query.length > 0) {
-          response = await adsService.search(query);
-        } else {
-          response = await adsService.getAll();
-        }
-
-        setAds(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchAds();
-  }, [categories, city]);
+  if (!loading && citiesOptions.length == 0) {
+    const options = getCitiesOptions(ads);
+    setCitiesOptions(options);
+  }
 
   return (
-    <>
-    <main style={{ marginTop: '2rem' }}>
-      <div className='container'>
-        <h1>Anúncios Disponíveis</h1>
-        <p>
-          Encontre materiais recicláveis disponíveis para coleta na sua região
-        </p>
-        <div style={{ margin: '2rem 0' }}>
-          <LocationSelect onCityChange={setCity} />
-          <Categories
-            categories={categories}
-            onCategoriesChange={setCategories}
-          />
+    <main>
+      {loading ? (
+        <p>Carregando...</p>
+      ) : (
+        <div className='container'>
+          <h1>Anúncios Disponíveis</h1>
+          <p>
+            Encontre materiais recicláveis disponíveis para coleta na sua região
+          </p>
+          <div style={{ margin: '2rem 0' }}>
+            <LocationSelect onCityChange={setCity} options={citiesOptions} />
+            <Categories
+              categories={categories}
+              onCategoriesChange={setCategories}
+            />
+          </div>
+          <p style={{ marginBottom: '1.65rem' }}>
+            {ads.length} resultados encontrados
+          </p>
+          {ads.map((ad) => (
+            <AdCard key={ad.id} {...ad} />
+          ))}
         </div>
-        <p style={{ marginBottom: '1.65rem' }}>
-          {ads.length} resultados encontrados
-        </p>
-        {ads.map((ad) => (
-          <AdCard key={ad.id} {...ad} />
-        ))}
-      </div>
+      )}
     </main>
-    </>
   );
 };
 

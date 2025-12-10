@@ -4,23 +4,29 @@ import styles from './AdCard.module.css';
 
 export default function Ad(props) {
   const {
-    imageSrc = 'https://placehold.co/600x400',
+    imagesPath = [],
     title,
     description,
     donorName,
     donorContact,
-    donorLocation,
+    city,
+    state,
     category,
     createdAt,
   } = props;
 
+  const goToWppApi = () => {
+    const url = `https://web.whatsapp.com/send?phone=+55${donorContact}`;
+    window.open(url, 'rel=noopener noreferrer');
+  };
+
   return (
     <div className={`card mb-4 ${styles.card}`}>
       <div className='row g-0'>
-        <div className={`${styles['image-container']} col-md-3`}>
-          <img src={imageSrc} className='img-fluid' />
+        <div className={`${styles['image-container']} col-md`}>
+          <img src={imagesPath[0]} alt="" />
         </div>
-        <div className='col-md ms-4'>
+        <div className={`col-md ${styles['margin-left']}`}>
           <div className='card-body'>
             <div className='mb-3 d-flex gap-2'>
               {category.map((category, idx) => (
@@ -36,7 +42,9 @@ export default function Ad(props) {
             <div className={`${styles.locale} mb-3`}>
               <p className='card-text d-flex align-items-center gap-1 mb-2'>
                 <MapPin size={20} />
-                <small className='text-body-secondary'>{donorLocation}</small>
+                <small className='text-body-secondary'>
+                  {city}, {state}
+                </small>
               </p>
               <p className='card-text d-flex align-items-center gap-1'>
                 <Clock4 size={20} />
@@ -46,15 +54,21 @@ export default function Ad(props) {
 
             <div>
               <h5 className='mb-3'>Informações de Contato</h5>
-              <p className='card-text d-flex align-items-center gap-1 mb-2'>
+              <p className='card-text d-flex align-items-center gap-2 mb-2'>
                 <UserRound size={20} />
                 {donorName}
               </p>
-              <p className='card-text d-flex align-items-center gap-1'>
+              <p className='card-text d-flex align-items-center gap-2'>
                 <PhoneCall size={20} />
-                <a href={`tel:${donorContact}`}>{donorContact}</a>
+                <a href={`tel:${donorContact}`}>
+                  ({donorContact.slice(0, 2)}) {donorContact.slice(2, 6)}-
+                  {donorContact.slice(6)}
+                </a>
               </p>
-              <button className='btn d-flex align-items-center gap-2 mt-3 btn-success' onClick={() => window.location.href = '/anuncios/novo'}>
+              <button
+                className='btn d-flex align-items-center gap-2 mt-3 btn-success'
+                onClick={goToWppApi}
+              >
                 <svg
                   className='w-6 h-6 text-gray-800 dark:text-white'
                   aria-hidden='true'
