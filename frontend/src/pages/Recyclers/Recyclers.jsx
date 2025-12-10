@@ -67,8 +67,8 @@ const Recyclers = () => {
             {recyclers.length} recicladores encontrados
           </p>
           <div class={styles['recycler-grid']}>
-            {recyclers.map((rec) => (
-              <RecyclerCard key={rec.userId} {...rec} />
+            {recyclers.map((rec, id) => (
+              <RecyclerCard key={rec.userId} {...rec} id={id + 1} />
             ))}
           </div>
         </div>

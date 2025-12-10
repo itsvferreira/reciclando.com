@@ -4,16 +4,7 @@ import styles from './RecyclerCard.module.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function RecyclerCard(props) {
-  const {
-    imageSrc = 'https://placehold.co/80',
-    userId,
-    firstName,
-    lastName,
-    city,
-    state,
-    neighborhood,
-    acceptedMaterials,
-  } = props;
+  const { userId, firstName, lastName, city, state, acceptedMaterials } = props;
 
   let navigate = useNavigate();
 
@@ -25,7 +16,7 @@ export default function RecyclerCard(props) {
     <div className={styles['recycler-card']}>
       <div className={`d-flex align-items-start gap-3 ${styles['card-info']}`}>
         <div className={styles['img-profile']}>
-          <img src={imageSrc} alt='' />
+          <img src={`src/assets/profile-${props.id}.jpg`} alt='' />
         </div>
         <div className='flex-fill'>
           <h5>
