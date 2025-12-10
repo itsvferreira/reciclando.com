@@ -1,17 +1,18 @@
 import fotoHome from "../../assets/foto-home-1.jpg";
 import "./Home.css";
 import { Recycle, FileText, Package, Wine, Cpu, Battery } from "lucide-react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user') || 'null');
     const isComumLoggedIn = user && user.id && user.tipo === 'comum';
+    const isRecicladorLoggedIn = user && user.id && user.tipo === 'reciclador';
 
-    const handleCreateAd = () => {
-        if (isComumLoggedIn) {
+    const handleMainButton = () => {
+        if (isRecicladorLoggedIn) {
+            navigate('/anuncios');
+        } else if (isComumLoggedIn) {
             navigate('/anuncios/novo');
         } else {
             navigate('/login');
@@ -20,7 +21,6 @@ export default function Home() {
 
     return (
         <>
-            <Header />
             <div className="home-page">
             
             <section className="home-hero">
@@ -34,10 +34,12 @@ export default function Home() {
                             <li>Impacto social e ambiental</li>
                         </ul>
                         <div className="home-buttons">
-                            <button className="btn-primary" onClick={handleCreateAd}>
-                                Anunciar Materiais
-                            </button>
-                            <button className="btn-outline" onClick={() => navigate('/recicladores')}>Recicladores</button>
+                                                        <button className="btn-primary" onClick={handleMainButton}>
+                                                                {isRecicladorLoggedIn ? 'Ver Anúncios' : 'Anunciar Materiais'}
+                                                        </button>
+                                                        {!isRecicladorLoggedIn && (
+                                                            <button className="btn-outline" onClick={() => navigate('/recicladores')}>Recicladores</button>
+                                                        )}
                         </div>
                     </div>
                     <div className="home-right">
@@ -126,7 +128,6 @@ export default function Home() {
                 </div>
             </section>
         </div>
-        <Footer />
         </>
     );
 }

@@ -30,7 +30,9 @@ export default function Header() {
         <nav className="menu-desktop">
           <a onClick={() => navigate('/')} style={{cursor:'pointer'}}>Início</a>
           <a onClick={() => navigate('/como-reciclar')} style={{cursor:'pointer'}}>Como Reciclar</a>
-          <a onClick={() => navigate('/recicladores')} style={{cursor:'pointer'}}>Recicladores</a>
+          {!isRecicladorLoggedIn && (
+            <a onClick={() => navigate('/recicladores')} style={{cursor:'pointer'}}>Recicladores</a>
+          )}
           {isRecicladorLoggedIn && (
             <a onClick={() => navigate('/anuncios')} style={{cursor:'pointer'}}>Anúncios</a>
           )}
@@ -44,6 +46,12 @@ export default function Header() {
               </button>
               <button className="btn-create-ad" onClick={() => navigate('/anuncios/novo')}>+ Anúncio</button>
             </>
+          )}
+          {isRecicladorLoggedIn && (
+            <button className="btn-profile" onClick={() => navigate('/recycler-profile')}>
+              <span style={{marginRight: '6px'}}><svg width="18" height="18" fill="none" stroke="#222" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></span>
+              Meu Perfil
+            </button>
           )}
           {isLoggedIn ? (
             <button className="btn-logout" onClick={handleLogout}>Sair</button>
@@ -69,12 +77,14 @@ export default function Header() {
         <div className="mobile-menu-items">
           <a onClick={() => {navigate('/'); closeMenu();}} className="mobile-menu-link">Início</a>
           <a onClick={() => {navigate('/como-reciclar'); closeMenu();}} className="mobile-menu-link">Como Reciclar</a>
-          <a onClick={() => {navigate('/recicladores'); closeMenu();}} className="mobile-menu-link">Recicladores</a>
+          {!isRecicladorLoggedIn && (
+            <a onClick={() => {navigate('/recicladores'); closeMenu();}} className="mobile-menu-link">Recicladores</a>
+          )}
           {isRecicladorLoggedIn && (
             <a onClick={() => {navigate('/anuncios'); closeMenu();}} className="mobile-menu-link">Anúncios</a>
           )}
 
-          {/* Botões especiais para usuário comum logado */}
+          {/* Botões especiais para usuário comum ou reciclador logado */}
           {isComumLoggedIn && (
             <>
               <button className="btn-profile mobile-btn" onClick={() => {navigate('/user-profile'); closeMenu();}}>
@@ -83,6 +93,12 @@ export default function Header() {
               </button>
               <button className="btn-create-ad mobile-btn" onClick={() => {navigate('/anuncios/novo'); closeMenu();}}>+ Anúncio</button>
             </>
+          )}
+          {isRecicladorLoggedIn && (
+            <button className="btn-profile mobile-btn" onClick={() => {navigate('/recycler-profile'); closeMenu();}}>
+              <span style={{marginRight: '6px'}}><svg width="18" height="18" fill="none" stroke="#222" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></span>
+              Meu Perfil
+            </button>
           )}
 
           <div className="mobile-login-container">
