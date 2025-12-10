@@ -106,4 +106,10 @@ public class AdController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
+
+    @GetMapping("/recycler/{recyclerCode}/history")
+    public ResponseEntity<List<AdResponseDTO>> getAdsByRecyclerCode(@PathVariable String recyclerCode) {
+        List<AdResponseDTO> ads = adService.getAdsByRecyclerCode(recyclerCode);
+        return ResponseEntity.status(HttpStatus.OK).body(ads);
+    }
 }
