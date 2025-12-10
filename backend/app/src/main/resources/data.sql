@@ -13,9 +13,11 @@ INSERT INTO addresses (postal_code, city, state, neighborhood) VALUES
   ('23050320', 'Rio de Janeiro', 'RJ', 'Campo Grande'),
   ('30130000', 'Belo Horizonte', 'MG', 'Centro'),
   ('30310150', 'Belo Horizonte', 'MG', 'Belvedere'),
-  ('31275020', 'Belo Horizonte', 'MG', 'Pampulha');
+  ('31275020', 'Belo Horizonte', 'MG', 'Pampulha'),
+  -- Endereço extra da branch main
+  ('04001000', 'São Paulo', 'SP', 'Paraíso');
 
--- Usuários (14 usuários, SEM 12 como RECYCLER)
+-- Usuários (15 usuários, com RECYCLER e DONOR corretos)
 INSERT INTO users (first_name, last_name, phone, email, account_type, address_id) VALUES
   ('Luiza', 'Sanchez', '11987654321', 'luiza.sanchez@email.com', 'DONOR', 1),
   ('João', 'Silva', '11987654321', 'joao.silva@email.com', 'RECYCLER', 2),
@@ -30,9 +32,11 @@ INSERT INTO users (first_name, last_name, phone, email, account_type, address_id
   ('Yuri', 'Barreto', '21987654321', 'yuri.barreto@email.com', 'DONOR', 11),
   ('Marcos', 'Almeida', '31987654321', 'marcos.almeida@email.com', 'RECYCLER', 12),
   ('Patrícia', 'Menezes', '31987654321', 'patricia.menezes@email.com', 'RECYCLER', 13),
-  ('Rafael', 'Gomes', '31987654321', 'rafael.gomes@email.com', 'RECYCLER', 14);
+  ('Rafael', 'Gomes', '31987654321', 'rafael.gomes@email.com', 'RECYCLER', 14),
+  -- Usuário extra da branch main
+  ('Bruno', 'Martins', '11999999999', 'bruno.martins@email.com', 'DONOR', 15);
 
--- Recicladores COM about_me (9 recicladores, SEM user_id 12)
+-- Recicladores COM about_me (10 recicladores)
 INSERT INTO recyclers (user_id, code, about_me) VALUES
   (2, 'A9K3Q', 'Sou um reciclador dedicado a transformar resíduos em novos recursos. Trabalho coletando e separando materiais para garantir que ganhem uma nova vida.'),
   (3, 'Z7T1M', 'Atuo na reciclagem há anos, ajudando a reduzir o impacto ambiental através da coleta e triagem de resíduos recicláveis.'),
@@ -49,9 +53,11 @@ INSERT INTO recyclers (user_id, code, about_me) VALUES
 INSERT INTO donors (user_id) VALUES 
   (1),
   (6),
-  (11);
+  (11),
+  -- Doador extra da branch main
+  (15);
 
--- Materiais aceitos pelos recicladores (SEM user_id 12)
+-- Materiais aceitos pelos recicladores (SEM user_id 12, conforme recycler-informations)
 INSERT INTO recycler_materials (user_id, material) VALUES
   (2, 'PLASTIC'),
   (2, 'METAL'),
@@ -77,7 +83,7 @@ INSERT INTO recycler_materials (user_id, material) VALUES
   (9, 'METAL'),
   (10, 'ELECTRONICS'),
   (10, 'METAL'),
-  -- REMOVIDO: (12, 'PAPER'), (12, 'PLASTIC'), (12, 'BATTERIES')
+  -- REMOVIDO: (12, 'PAPER'), (12, 'PLASTIC'), (12, 'BATTERIES') - conforme recycler-informations
   (13, 'PAPER'),
   (13, 'GLASS'),
   (13, 'BATTERIES'),
@@ -89,13 +95,15 @@ INSERT INTO recycler_materials (user_id, material) VALUES
 -- Anúncios
 INSERT INTO ads (title, description, donor_id, address_id, status, created_at, updated_at, conclusion_code, images_path) VALUES
   ('Jornais e revistas avulsas', 'Pacote de jornais e revistas em bom estado para reciclagem — aprox. 10kg.', 1, 1, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/a8d16fl_revistas.jpeg', 'http://localhost:8081/api/v1/files/de1p600_jornais.webp']),
-  ('Caixas pequenas de papelão', 'Várias caixas de papelão (tamanho pequeno) desmontadas, perfeitas para reciclagem.', 1, 1, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Z7T1M', ARRAY['http://localhost:8081/api/v1/files/e5r96fs_caixa-de-papelao.jpg']),
+  ('Caixas pequenas de papelão', 'Várias caixas de papelão (tamanho pequeno) desmontadas, perfeitas para reciclagem.', 1, 1, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'A9K3Q', ARRAY['http://localhost:8081/api/v1/files/e5r96fs_caixa-de-papelao.jpg']),
   ('Tampas e lacres plásticos', 'Tampas plásticas soltas de garrafa, sacos fechados para separar.', 1, 1, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'A9K3Q', ARRAY['http://localhost:8081/api/v1/files/ed5s6df_tampinhas.webp']),
   ('Eletrônicos domésticos pequenos', 'Pequenos aparelhos funcionando parcialmente (rádio, liquidificador). Podem ser reaproveitados ou consertados.', 6, 6, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Q3W9B', ARRAY['http://localhost:8081/api/v1/files/134fe20_liquidificador.jpeg', 'http://localhost:8081/api/v1/files/c23456d_radio.jpg']),
-  ('Pilhas e baterias usadas', 'Pacote com pilhas alcalinas e algumas baterias recarregáveis usadas — armazenadas com segurança.', 6, 6, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'A9K3Q', ARRAY['http://localhost:8081/api/v1/files/as8ds65_pilhas-e-baterias.jpg']),
+  ('Pilhas e baterias usadas', 'Pacote com pilhas alcalinas e algumas baterias recarregáveis usadas — armazenadas com segurança.', 6, 6, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'B6L2R', ARRAY['http://localhost:8081/api/v1/files/as8ds65_pilhas-e-baterias.jpg']),
   ('Garrafas PET grandes', 'Garrafas PET (2L) lavadas e secas — lote para reciclagem.', 11, 12, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/e43367e_garrafas-pet.jpg']),
   ('Latas amassadas', 'Latas de alumínio limpas e amassadas, prontas para coleta.', 11, 12, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/54r30t0_latas.webp']),
-  ('Sucata eletrônica leve', 'Cabos, adaptadores e pequenos componentes eletrônicos — ideal para reciclagem de eletrônicos.', 11, 12, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/2148r5t_componentes-eletronicos.jpg']);
+  ('Sucata eletrônica leve', 'Cabos, adaptadores e pequenos componentes eletrônicos — ideal para reciclagem de eletrônicos.', 11, 12, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/2148r5t_componentes-eletronicos.jpg']),
+  -- Anúncio extra da branch main
+  ('Garrafas de vinho', 'Lote de garrafas de vinho limpas para reciclagem.', 15, 15, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'A9K3Q', ARRAY['http://localhost:8081/api/v1/files/71xgns2pEHL.jpg']);
 
 -- Categorias dos anúncios
 INSERT INTO ad_categories (ad_id, category) VALUES
@@ -106,4 +114,5 @@ INSERT INTO ad_categories (ad_id, category) VALUES
   (5, 'BATTERIES'),
   (6, 'PLASTIC'),
   (7, 'METAL'),
-  (8, 'ELECTRONICS');
+  (8, 'ELECTRONICS'),
+  (9, 'GLASS');
