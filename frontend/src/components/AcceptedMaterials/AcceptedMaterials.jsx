@@ -1,11 +1,11 @@
-export default function MateriaisAceitos() {
+export default function AcceptedMaterials() {
   const items = [
     { label: "Plástico" },
     { label: "Papel" },
     { label: "Metal" },
     { label: "Vidro" },
     { label: "Eletrônicos" },
-    { label: "Pilhas" },
+    { label: "Baterias" },
   ];
 
   return (

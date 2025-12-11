@@ -1,9 +1,3 @@
-.profileContainer {
-  background: var(--bg-color);
-  min-height: 100vh;
-  padding: 20px;
-}
-
 .profileBackButton {
   background: white;
   border: 1px solid var(--border);
@@ -17,8 +11,6 @@
 .profileBackButton:hover {
   background: var(--bg-color);
 }
-
-
 
 .profileLayout {
   display: grid;
@@ -127,6 +119,7 @@
     flex-direction: column;
     gap: 8px;
     align-items: stretch;
+    transform: scale(0.9);
   }
 
   .btnCreateAd {

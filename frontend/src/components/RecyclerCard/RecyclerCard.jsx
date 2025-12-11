@@ -4,6 +4,7 @@ import styles from './RecyclerCard.module.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function RecyclerCard(props) {
+  const IMAGE_PATH = 'src/assets/profiles/recyclers';
   const { userId, firstName, lastName, city, state, acceptedMaterials } = props;
 
   let navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function RecyclerCard(props) {
     <div className={styles['recycler-card']}>
       <div className={`d-flex align-items-start gap-3 ${styles['card-info']}`}>
         <div className={styles['img-profile']}>
-          <img src={`src/assets/profile-${props.id}.jpg`} alt='' />
+          <img src={`${IMAGE_PATH}/profile-${props.id}.jpg`} alt='' />
         </div>
         <div className='flex-fill'>
           <h5>
@@ -28,7 +29,7 @@ export default function RecyclerCard(props) {
               {city}, {state}
             </small>
           </p>
-          <div className='mb-3 d-flex gap-2'>
+          <div className='mb-3 d-flex gap-2 flex-wrap'>
             {acceptedMaterials.map((material, idx) => (
               <Badge key={idx} value={material} />
             ))}

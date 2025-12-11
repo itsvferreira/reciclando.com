@@ -40,7 +40,6 @@ const Recyclers = () => {
 
   if (!loading && citiesOptions.length == 0) {
     const options = getCitiesOptions(recyclers);
-    console.log(options);
     setCitiesOptions(options);
   }
 

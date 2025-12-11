@@ -1,8 +1,8 @@
-import React from "react";
-import { MapPin, Package, CalendarDays, SquarePen, Trash2 } from "lucide-react";
-import styles from "./UserAdCard.module.css";
-
+import React from 'react';
+import { MapPin, Package, CalendarDays, SquarePen, Trash2 } from 'lucide-react';
+import styles from './UserAdCard.module.css';
 import { useNavigate } from 'react-router-dom';
+import Badge from '../ui/Badge/Badge';
 
 export default function UserAdCard({ ad, onEdit, onDelete, onConclude }) {
   const navigate = useNavigate();
@@ -19,41 +19,64 @@ export default function UserAdCard({ ad, onEdit, onDelete, onConclude }) {
             {ad.status === 'active' ? 'Ativo' : 'Concluído'}
           </span>
         </div>
-        
+
         <div className={styles.userAdMeta}>
           <span>
-            <MapPin size={14} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'text-bottom' }} />
+            <MapPin
+              size={14}
+              style={{
+                display: 'inline',
+                marginRight: '4px',
+                verticalAlign: 'text-bottom',
+              }}
+            />
             {ad.location}
           </span>
         </div>
 
         <p className={styles.userAdDescription}>{ad.description}</p>
 
-        <div className={styles.userAdMaterialTag}>{ad.material}</div>
+        <div>
+          <Badge value={ad.material} />
+        </div>
 
         <span className={styles.userAdDate}>
-          <CalendarDays size={14} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'text-bottom' }} />
+          <CalendarDays
+            size={14}
+            style={{
+              display: 'inline',
+              marginRight: '4px',
+              verticalAlign: 'text-bottom',
+            }}
+          />
           {ad.date}
         </span>
-        <div className={styles.userAdFooter}>
-          <div className={styles.userAdActions}>
-            {ad.status === 'active' && (
-              <>
-                <button className={styles.btnConclude} onClick={() => onConclude(ad.id)}>
-                  Finalizar
-                </button>
-                <button className={styles.btnEdit} onClick={() => navigate(`/anuncios/edicao/${ad.id}`)}>
-                  <SquarePen size={16} />
-                  Editar
-                </button>
-                <button className={styles.btnDelete} onClick={() => onDelete(ad.id)}>
-                  <Trash2 size={16} />
-                  Excluir
-                </button>
-              </>
-            )}
+        {ad.status === 'active' && (
+          <div className={styles.userAdFooter}>
+            <div className={styles.userAdActions}>
+              <button
+                className={styles.btnConclude}
+                onClick={() => onConclude(ad.id)}
+              >
+                Finalizar
+              </button>
+              <button
+                className={styles.btnEdit}
+                onClick={() => navigate(`/anuncios/edicao/${ad.id}`)}
+              >
+                <SquarePen size={16} />
+                Editar
+              </button>
+              <button
+                className={styles.btnDelete}
+                onClick={() => onDelete(ad.id)}
+              >
+                <Trash2 size={16} />
+                Excluir
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

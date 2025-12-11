@@ -1,6 +1,6 @@
 import { Wine, FileText, Laptop, BottleWine, Wrench, Leaf } from 'lucide-react';
-import { CardMaterials } from '../../components/cardMaterials/CardMaterials';
-import { CardTips } from '../../components/cardTips/CardTips';
+import { CardMaterials } from '../../components/CardMaterials/CardMaterials';
+import { CardTips } from '../../components/CardTips/CardTips';
 import styles from './HowToRecycle.module.css';
 
 export default function HowToRecycle() {
@@ -122,67 +122,69 @@ export default function HowToRecycle() {
   };
 
   return (
-    <>
-    <div className={styles.comoContainer}>
-      <h1 className={styles.comoTitulo}>Como funciona a Reciclagem</h1>
+    <main>
+      <div className='container'>
+        <div className='text-center'>
+          <h1 className={styles.comoTitulo}>Como funciona a Reciclagem</h1>
 
-      <p className={styles.comoSubtitulo}>
-        Aprenda a separar corretamente cada tipo de material reciclável e
-        contribua para um planeta mais sustentável
-      </p>
+          <p className={styles.comoSubtitulo}>
+            Aprenda a separar corretamente cada tipo de material reciclável e
+            contribua para um planeta mais sustentável
+          </p>
 
-      <div className={styles.gridMateriais}>
-        <CardMaterials
-          icon={Wine}
-          color='#00c951'
-          title='Vidros'
-          description='Garrafas, frascos, potes e cacos.'
-          materialData={materialsData.vidros}
-        />
+          <div className={styles.gridMateriais}>
+            <CardMaterials
+              icon={Wine}
+              color='#00c951'
+              title='Vidros'
+              description='Garrafas, frascos, potes e cacos.'
+              materialData={materialsData.vidros}
+            />
 
-        <CardMaterials
-          icon={FileText}
-          color='#2b7fff'
-          title='Papéis'
-          description='Jornais, revistas, papelão e cadernos'
-          materialData={materialsData.papeis}
-        />
+            <CardMaterials
+              icon={FileText}
+              color='#2b7fff'
+              title='Papéis'
+              description='Jornais, revistas, papelão e cadernos'
+              materialData={materialsData.papeis}
+            />
 
-        <CardMaterials
-          icon={BottleWine}
-          color='#fb2c36'
-          title='Plásticos'
-          description='Garrafas PET, embalagens, sacolas, potes e tampas plásticas.'
-          materialData={materialsData.plasticos}
-        />
+            <CardMaterials
+              icon={BottleWine}
+              color='#fb2c36'
+              title='Plásticos'
+              description='Garrafas PET, embalagens, sacolas, potes e tampas plásticas.'
+              materialData={materialsData.plasticos}
+            />
 
-        <CardMaterials
-          icon={Wrench}
-          color='#FFDE21'
-          title='Metais'
-          description='Latas de alumínio, panelas, ferragens e arames'
-          materialData={materialsData.metais}
-        />
+            <CardMaterials
+              icon={Wrench}
+              color='#FFDE21'
+              title='Metais'
+              description='Latas de alumínio, panelas, ferragens e arames'
+              materialData={materialsData.metais}
+            />
 
-        <CardMaterials
-          icon={Leaf}
-          color='#6E5415'
-          title='Orgânico'
-          description='Restos de alimentos, cascas e borra de café'
-          materialData={materialsData.organico}
-        />
+            <CardMaterials
+              icon={Leaf}
+              color='#6E5415'
+              title='Orgânico'
+              description='Restos de alimentos, cascas e borra de café'
+              materialData={materialsData.organico}
+            />
 
-        <CardMaterials
-          icon={Laptop}
-          color='#1591EA'
-          title='Eletrônicos'
-          description='Computadores, celulares, tablets e outros dispositivos eletrônicos.'
-          materialData={materialsData.eletronicos}
-        />
+            <CardMaterials
+              icon={Laptop}
+              color='#1591EA'
+              title='Eletrônicos'
+              description='Computadores, celulares, tablets e outros dispositivos eletrônicos.'
+              materialData={materialsData.eletronicos}
+            />
+          </div>
+
+          <CardTips />
+        </div>
       </div>
-
-      <CardTips />
-    </div>
-    </>
+    </main>
   );
 }

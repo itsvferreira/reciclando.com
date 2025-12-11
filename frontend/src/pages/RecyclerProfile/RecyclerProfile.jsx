@@ -1,89 +1,64 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { adsService } from "../../services/api";
-import UserCard from "../../components/UserCard/UserCard";
-import UserAdCard from "../../components/UserAdCard/UserAdCard";
-import "../../index.css";
-import styles from "./RecyclerProfile.module.css";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import UserCard from '../../components/UserCard/UserCard';
+import UserAdCard from '../../components/UserAdCard/UserAdCard';
+import '../../index.css';
+import styles from './RecyclerProfile.module.css';
+import { useFetchCollects } from '../../hooks/useFetchCollects';
+import { user as userData } from '../../utils/loggedUsers';
 
 export default function RecyclerProfile() {
   const navigate = useNavigate();
   const [user] = useState(() => {
-    const userData = localStorage.getItem("user");
-    return userData ? JSON.parse(userData) : null;
+    return userData ? userData : null;
   });
 
   const [collects, setCollects] = useState([]);
 
-  useEffect(() => {
-    const fetchCollects = async () => {
-      if (user && user.code) {
-        try {
-          // Buscar histórico de coletas do reciclador logado
-          const response = await adsService.getHistoryByRecyclerCode(user.code);
-          const mappedCollects = response.data.map(ad => ({
-            id: ad.id,
-            title: ad.title,
-            description: ad.description,
-            material: ad.category?.[0] || "N\u00e3o especificado",
-            location: [ad.city, ad.state].filter(Boolean).join(', ') || "N\u00e3o especificado",
-            date: new Date(ad.createdAt).toLocaleDateString('pt-BR'),
-            status: ad.status,
-            image: ad.imagesPath && ad.imagesPath.length > 0 ? ad.imagesPath[0] : "https://via.placeholder.com/150"
-          }));
-          setCollects(mappedCollects);
-        } catch (error) {
-          console.error("Erro ao buscar coletas:", error);
-          setCollects([]);
-        }
-      }
-    };
-    fetchCollects();
-  }, [user]);
+  useFetchCollects(user, setCollects);
 
   if (!user) {
     return null;
   }
 
   return (
-    <>
-    <div className={styles.profileContainer}>
-      <div className={styles.profileLayout}>
-        <aside className={styles.profileSidebar}>
-          <UserCard user={user} />
-        </aside>
+    <main>
+      <div className='container'>
+        <div className={styles.profileLayout}>
+          <aside className={styles.profileSidebar}>
+            <UserCard user={user} />
+          </aside>
 
-        <main className={styles.profileMain}>
-          <div className={styles.profileHeader}>
-            <div>
-              <h2>Histórico de Coletas</h2>
-              <p className={styles.collectsCount}>{collects.length} coletas concluídas</p>
-            </div>
-            <button 
-              className={styles.profileAdsButton}
-              onClick={() => navigate('/anuncios')}
-            >
-              Ver Anúncios
-            </button>
-          </div>
-
-          <div className={styles.collectsList}>
-            {collects.length === 0 ? (
-              <div className={styles.noCollects}>
-                <p>Nenhuma coleta encontrada</p>
+          <main className={styles.profileMain}>
+            <div className={styles.profileHeader}>
+              <div>
+                <h2>Histórico de Coletas</h2>
+                <p className={styles.collectsCount}>
+                  {collects.length} coletas concluídas
+                </p>
               </div>
-            ) : (
-              collects.map(collect => (
-                <UserAdCard
-                  key={collect.id}
-                  ad={collect}
-                />
-              ))
-            )}
-          </div>
-        </main>
+              <button
+                className={styles.profileAdsButton}
+                onClick={() => navigate('/anuncios')}
+              >
+                Ver Anúncios
+              </button>
+            </div>
+
+            <div className={styles.collectsList}>
+              {collects.length === 0 ? (
+                <div className={styles.noCollects}>
+                  <p>Nenhuma coleta encontrada</p>
+                </div>
+              ) : (
+                collects.map((collect) => (
+                  <UserAdCard key={collect.id} ad={collect} />
+                ))
+              )}
+            </div>
+          </main>
+        </div>
       </div>
-    </div>
-    </>
+    </main>
   );
 }
