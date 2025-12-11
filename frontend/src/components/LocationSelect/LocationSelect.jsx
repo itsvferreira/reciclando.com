@@ -61,7 +61,12 @@ const DropdownIndicator = (props) => {
   );
 };
 
-export default function LocationSelect({ onCityChange, options }) {
+export default function LocationSelect({
+  onCityChange,
+  options,
+  initialValue,
+  placeholder,
+}) {
   function handleStateChange(state) {
     onCityChange(state.value);
   }
@@ -69,12 +74,13 @@ export default function LocationSelect({ onCityChange, options }) {
   return (
     <Select
       options={options}
-      defaultValue={options[0]}
+      defaultValue={initialValue}
       styles={customStyles}
       components={{ Control, DropdownIndicator }}
       isSearchable={false}
       className={`${styles['custom-select']} mb-4`}
       onChange={handleStateChange}
+      placeholder={placeholder}
     />
   );
 }

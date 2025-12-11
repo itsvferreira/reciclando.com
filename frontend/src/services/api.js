@@ -27,4 +27,10 @@ export const recyclersService = {
   search: (params) => api.get(`/recyclers?${params}`),
 };
 
+export const addressService = {
+  getCities: () => api.get('/address/cities'),
+  getNeighborhoodsByCity: (city) =>
+    api.get(`/address/neighborhoods?city=${city}`),
+};
+
 export default api;

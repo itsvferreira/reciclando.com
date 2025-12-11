@@ -3,23 +3,32 @@ import AdCard from '../../components/AdCard/AdCard';
 import LocationSelect from '../../components/LocationSelect/LocationSelect';
 import Categories from '../../components/Categories/Categories';
 import { useFetchAds } from '../../hooks/useFetchAds';
-import { getCitiesOptions } from '../../utils/getCitiesOptions';
+import { useFetchAvaliableCities } from '../../hooks/useFetchAvaliableCities';
+import { useFetchAvaliableNeighbors } from '../../hooks/useFetchAvaliableNeighbors';
+import { user } from '../../utils/loggedUsers';
 
 const Ads = () => {
+  const userCity = user ? user.city : '';
+  const userNeighboorhood = user ? user.neighboorhood : '';
+
   const [ads, setAds] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [city, setCity] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [city, setCity] = useState(userCity);
   const [citiesOptions, setCitiesOptions] = useState([]);
+  const [neighboorhood, setNeighboorhood] = useState(userNeighboorhood);
+  const [neigboorOptions, setNeigboorOptions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  useFetchAds(categories, city, setAds, setLoading);
-
-  if (!loading && citiesOptions.length == 0) {
-    const options = getCitiesOptions(ads);
-    setCitiesOptions(options);
-  }
+  useFetchAds(categories, city, neighboorhood, setAds);
+  useFetchAvaliableCities(setCitiesOptions, setLoading);
 
   const activeAds = ads.filter((ad) => ad.status === 'active');
+  const cityIdx = citiesOptions.findIndex((c) => c.value === city);
+
+  useFetchAvaliableNeighbors(city, setNeigboorOptions, setLoading);
+  const neighboorIdx = neigboorOptions.findIndex(
+    (n) => n.value === neighboorhood
+  );
 
   return (
     <main>
@@ -32,7 +41,22 @@ const Ads = () => {
             Encontre materiais recicláveis disponíveis para coleta na sua região
           </p>
           <div style={{ margin: '2rem 0' }}>
-            <LocationSelect onCityChange={setCity} options={citiesOptions} />
+            <div className='d-flex gap-4'>
+              <LocationSelect
+                onCityChange={setCity}
+                options={citiesOptions}
+                initialValue={citiesOptions[cityIdx]}
+                placeholder='Selecione uma cidade'
+              />
+              {city && (
+                <LocationSelect
+                  onCityChange={setNeighboorhood}
+                  options={neigboorOptions}
+                  initialValue={neigboorOptions[neighboorIdx]}
+                  placeholder='Selecione um bairro'
+                />
+              )}
+            </div>
             <Categories
               categories={categories}
               onCategoriesChange={setCategories}
