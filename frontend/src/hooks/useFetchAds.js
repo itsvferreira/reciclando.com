@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import { buildQuery } from '../utils/buildQuery';
 import { adsService } from '../services/api';
 
-export function useFetchAds(categories, city, setAds, setLoading) {
+export function useFetchAds(categories, city, neighboorhood, setAds) {
   useEffect(() => {
     const fetchAds = async () => {
       let response;
 
       try {
-        const query = buildQuery(city, categories);
+        const query = buildQuery(city, categories, neighboorhood);
 
         if (query.length > 0) {
           response = await adsService.search(query);
@@ -17,11 +17,10 @@ export function useFetchAds(categories, city, setAds, setLoading) {
         }
 
         setAds(response.data);
-        setLoading(false);
       } catch (err) {
         console.error(err);
       }
     };
     fetchAds();
-  }, [categories, city, setAds, setLoading]);
+  }, [categories, city, neighboorhood, setAds]);
 }
