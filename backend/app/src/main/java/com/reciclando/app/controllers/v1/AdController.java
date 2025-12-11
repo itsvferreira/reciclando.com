@@ -37,8 +37,9 @@ public class AdController {
     @GetMapping
     public ResponseEntity<List<AdResponseDTO>> listAds(
             @RequestParam(required = false) String category,
-            @RequestParam(required = false) String city) {
-        List<AdResponseDTO> posts = adService.getAdsOrderByCreatedAt(category, city);
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) String neighboorhood) {
+        List<AdResponseDTO> posts = adService.getAdsOrderByCreatedAt(category, city, neighboorhood);
         return ResponseEntity.status(HttpStatus.OK).body(posts);
     }
 

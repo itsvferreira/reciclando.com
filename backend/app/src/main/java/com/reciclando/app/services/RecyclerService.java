@@ -25,7 +25,7 @@ public class RecyclerService {
     @Transactional
     public Recycler createRecycler(Long userId, List<Material> acceptedMaterials) {
         User user = userRepository.findById(userId)
-            .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
+                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
 
         if (recyclerRepository.existsById(userId)) {
             throw new IllegalArgumentException("Recycler already exists for user id: " + userId);
@@ -36,24 +36,24 @@ public class RecyclerService {
     }
 
     @Transactional
-    public Recycler updateMaterials(Long userID, List<Material> newMaterials){
+    public Recycler updateMaterials(Long userID, List<Material> newMaterials) {
         Recycler recycler = recyclerRepository.findById(userID)
-            .orElseThrow(() -> new IllegalArgumentException("Recycler not found with user id: " + userID));
+                .orElseThrow(() -> new IllegalArgumentException("Recycler not found with user id: " + userID));
         recycler.setAcceptedMaterials(newMaterials);
         return recyclerRepository.save(recycler);
     }
 
     public Recycler getByUserID(Long userId) {
         return recyclerRepository.findById(userId)
-            .orElseThrow(() -> new IllegalArgumentException("Recycler not found with user id: " + userId));
+                .orElseThrow(() -> new IllegalArgumentException("Recycler not found with user id: " + userId));
     }
 
-    public List<Recycler> getAll(){
+    public List<Recycler> getAll() {
         return recyclerRepository.findAll();
     }
 
     @Transactional
-    public void deleteRecycler(Long userID){
+    public void deleteRecycler(Long userID) {
         if (!recyclerRepository.existsById(userID)) {
             throw new IllegalArgumentException("Recycler not found with user id: " + userID);
         }
@@ -72,12 +72,21 @@ public class RecyclerService {
         return recyclerRepository.findByCityAndMaterial(city, material);
     }
 
-    public List<Recycler> search(String city, Material material) {
+    public List<Recycler> findByCityAndNeighboorhood(String city, String neighboorhood) {
+        return recyclerRepository.findByCityAndNeighboorhood(city, neighboorhood);
+    }
+
+    public List<Recycler> search(String city, Material material, String neighboorhood) {
         if (city != null && material != null) {
             return findByCityAndMaterial(city, material);
         }
-        if (city != null) return findByCity(city);
-        if (material != null) return findByAcceptedMaterial(material);
+        if (city != null && neighboorhood != null) {
+            return findByCityAndNeighboorhood(city, neighboorhood);
+        }
+        if (city != null)
+            return findByCity(city);
+        if (material != null)
+            return findByAcceptedMaterial(material);
         return getAll();
     }
 }

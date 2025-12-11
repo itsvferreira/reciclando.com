@@ -39,14 +39,9 @@ public class AdService {
     }
 
     @Transactional(readOnly = true)
-    public List<AdResponseDTO> getAdsOrderByCreatedAt(String category, String city) {
+    public List<AdResponseDTO> getAdsOrderByCreatedAt(String category, String city, String neighboorhood) {
         List<Ad> ads = adRepository.findAllByOrderByCreatedAtDesc();
-
-        if (category != null || city != null) {
-            String[] categories = category != null ? category.split("--") : null;
-            ads = getFilteredAds(categories, city, ads);
-        }
-
+        ads = getFilteredAds(category, city, neighboorhood, ads);
         return ads.stream()
                 .map(ad -> createResponseDTO(ad)).toList();
     }
@@ -141,7 +136,19 @@ public class AdService {
         return ads.stream().map(this::createResponseDTO).toList();
     }
 
-    private List<Ad> getFilteredAds(String[] categories, String city, List<Ad> ads) {
+    private List<Ad> getFilteredAds(String category, String city, String neighboorhood, List<Ad> ads) {
+        if (city != null && neighboorhood != null) {
+            return findByCityAndNeighboorhood(city, neighboorhood);
+        }
+        if (city != null)
+            return findByCity(city);
+        if (category != null)
+            return findByCategory(category, ads);
+        return ads;
+    }
+
+    public List<Ad> findByCategory(String category, List<Ad> ads) {
+        String[] categories = category != null ? category.split("--") : null;
         return ads.stream()
                 .filter(ad -> {
                     if (categories == null || categories.length == 0) {
@@ -155,13 +162,16 @@ public class AdService {
                         }
                     }
                     return false;
-                }).filter(ad -> {
-                    if (city != null) {
-                        return ad.getCity().equals(city);
-                    }
-                    return true;
                 })
                 .toList();
+    }
+
+    public List<Ad> findByCity(String city) {
+        return adRepository.findByCity(city);
+    }
+
+    public List<Ad> findByCityAndNeighboorhood(String city, String neighboorhood) {
+        return adRepository.findByCityAndNeighboorhood(city, neighboorhood);
     }
 
     private Address getAddress(AdRequestDTO ad) {

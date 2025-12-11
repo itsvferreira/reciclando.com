@@ -23,4 +23,7 @@ public interface RecyclerRepository extends JpaRepository<Recycler, Long> {
     List<Recycler> findByCityAndMaterial(@Param("city") String city, @Param("material") Material material);
 
     Recycler findByCode(String code);
+
+    @Query("SELECT r FROM Recycler r WHERE r.user.address.city = :city AND r.user.address.neighborhood = :neighboorhood")
+    List<Recycler> findByCityAndNeighboorhood(String city, String neighboorhood);
 }
