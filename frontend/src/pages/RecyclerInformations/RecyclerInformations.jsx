@@ -1,53 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import recyclerPhoto from '../../assets/reciclador.jpg';
+import Badge from '../../components/ui/Badge/Badge';
 import { 
   Phone, 
   Mail, 
   Clock, 
   Star, 
   MapPin, 
-  CheckCircle,
-  TrendingUp,
-  Calendar,
-  MessageCircle,
-  Award
+  CheckCircle
 } from 'lucide-react';
-
-import recyclerPhoto from '../../assets/reciclador.jpg'; 
-
-
+import { useParams } from 'react-router-dom';
 import './RecyclerInformations.css';
 
 const RecyclerInformations = () => {
   const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState(null);
   const [error, setError] = useState(null);
-
-  // Dados MOCKADOS - ATUALIZADO
-  const mockData = {
-    name: "João Silva",
-    location: "Vila Mariana, SP",
-    distance: "2.5 km",
-    rating: 4.8,
-    ratingCount: 127,
-    about: "Reciclador com mais de 10 anos de experiência. Especializado em coleta de papel, papelão e plástico. Atuo na região da Vila Mariana e arredores.",
-    materials: ["Papel", "Papelão", "Plástico"],
-    stats: [
-      { number: "1247", label: "Coletas", icon: <TrendingUp size={24} /> },
-      { number: "10 anos", label: "Ativo", icon: <Calendar size={24} /> }
-    ],
-    contact: {
-      phone: "(11) 98765-4321",
-      email: "joao.silva@email.com",
-      hours: "Segunda a Sábado, 8h às 18h"
-    },
-    reviews: []
-  };
-
+  const { id } = useParams();
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         console.log("🔄 Buscando dados da API...");
-        const response = await fetch('http://localhost:8081/api/v1/recyclers/1');
+        const response = await fetch(`http://localhost:8081/api/v1/recyclers/${id}`);
         
         if (response.ok) {
           const data = await response.json();
@@ -64,23 +39,26 @@ const RecyclerInformations = () => {
         setLoading(false);
       }
     };
-
-    setTimeout(fetchData, 500);
-  }, []);
+    fetchData();
+  }, [id]);
 
   // COMBINA dados da API com mock
   const profileData = apiData ? {
-    name: `${apiData.firstName || ''} ${apiData.lastName || ''}`.trim() || mockData.name,
-    location: `${apiData.city || ''}, ${apiData.state || ''}`.trim() || mockData.location,
-    materials: apiData.acceptedMaterials || mockData.materials,
-    distance: mockData.distance,
-    rating: mockData.rating,
-    ratingCount: mockData.ratingCount,
-    about: mockData.about,
-    stats: mockData.stats,
-    contact: mockData.contact,
-    reviews: mockData.reviews
-  } : mockData;
+    name: `${apiData.firstName || ''} ${apiData.lastName || ''}`.trim(),
+    location: `${apiData.city || ''}, ${apiData.state || ''}`.trim(),
+    materials: apiData.acceptedMaterials || [], 
+    distance: apiData.distance || '', 
+    rating: apiData.rating || '', 
+    ratingCount: apiData.ratingCount || '', 
+    about: apiData.aboutMe || apiData.about || '', 
+    stats: apiData.stats || [],     
+    contact: {
+      phone: apiData.phone || '',
+      email: apiData.email || '',
+      hours: apiData.hours || ''
+    },
+    reviews: apiData.reviews || [],
+  } : null;
 
   if (loading) {
     return (
@@ -92,22 +70,26 @@ const RecyclerInformations = () => {
     );
   }
 
+  if (!profileData) {
+    return <p>Reciclador não encontrado.</p>;
+  }
+
   return (
     <div className="recycler-profile-container">
-      <div className="profile-wrapper">     
-        <div className="profile-main">        
+      <div className="profile-wrapper">
+        <div className="profile-main">
           <div className="profile-card header-card">
-            <div className="profile-header-content">             
-              <div className="profile-header-top">                
+            <div className="profile-header-content">
+              <div className="profile-header-top">
                 <div className="recycler-photo no-border">
                   <img 
                     src={recyclerPhoto} 
-                    alt="Foto de João Silva"
+                    alt={`Foto de ${profileData.name}`}
                     className="photo-img"
                   />
                 </div>
 
-                <div className="profile-info-right">                  
+                <div className="profile-info-right">
                   <div className="name-and-badge">
                     <div className="name-and-verification">
                       <h1 className="profile-name">{profileData.name}</h1>
@@ -119,13 +101,15 @@ const RecyclerInformations = () => {
                   <div className="location-and-rating">
                     <div className="profile-location">
                       <MapPin size={16} className="location-icon" />
-                      <span>{profileData.location} • {profileData.distance}</span>
+                      <span>{profileData.location} {profileData.distance && `• ${profileData.distance}`}</span>
                     </div>
-                    <div className="profile-rating">
-                      <Star size={16} className="star-icon" />
-                      <span className="rating-value">{profileData.rating}</span>
-                      <span className="rating-label">({profileData.ratingCount} avaliações)</span>
-                    </div>
+                    {profileData.rating && (
+                      <div className="profile-rating">
+                        <Star size={16} className="star-icon" />
+                        <span className="rating-value">{profileData.rating}</span>
+                        <span className="rating-label">({profileData.ratingCount} avaliações)</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -133,19 +117,20 @@ const RecyclerInformations = () => {
               {/* Divider */}
               <hr className="profile-divider" />
 
-              {/*  SOBRE */}
-              <div className="about-section">
-                <h2 className="section-title">Sobre</h2>
-                <p className="about-content">{profileData.about}</p>
-              </div>
+              {profileData.about && (
+                <div className="about-section">
+                  <h2 className="section-title">Sobre</h2>
+                  <p className="about-content">{profileData.about}</p>
+                </div>
+              )}
 
-              {/*  MATERIAIS COLETADOS */}
+              {/* MATERIAIS COLETADOS */}
               <div className="materials-section">
                 <h2 className="section-title">Materiais coletados</h2>
                 <div className="materials-grid">
                   {profileData.materials.map((material, index) => (
                     <div key={index} className="material-item">
-                      <span className="material-name">{material}</span>
+                      <Badge value={material} />
                     </div>
                   ))}
                 </div>
@@ -153,30 +138,31 @@ const RecyclerInformations = () => {
             </div>
           </div>
 
-          {/* Estatísticas - ATUALIZADO: apenas 2 cards */}
-          <div className="profile-card stats-card">
-            <h2 className="section-title">Estatísticas</h2>
-            <div className="stats-grid">
-              {profileData.stats.map((stat, index) => (
-                <div key={index} className="stat-item">
-                  <div className="stat-icon-wrapper">
-                    {stat.icon}
+          {profileData.stats && profileData.stats.length > 0 && (
+            <div className="profile-card stats-card">
+              <h2 className="section-title">Estatísticas</h2>
+              <div className="stats-grid">
+                {profileData.stats.map((stat, index) => (
+                  <div key={index} className="stat-item">
+                    <div className="stat-icon-wrapper">
+                      {stat.icon}
+                    </div>
+                    <span className="stat-number">{stat.number}</span>
+                    <span className="stat-label">{stat.label}</span>
                   </div>
-                  <span className="stat-number">{stat.number}</span>
-                  <span className="stat-label">{stat.label}</span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Informações de contato */}
-        <div className="profile-sidebar">          
+        <div className="profile-sidebar">
           <div className="profile-card contact-card">
             <h2 className="section-title">Informações de contato</h2>
             
             <div className="contact-list">
-              {/* Telefone */}
+              
               <div className="contact-item">
                 <div className="contact-item-inner">
                   <div className="contact-icon">

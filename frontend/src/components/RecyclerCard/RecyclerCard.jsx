@@ -17,8 +17,7 @@ export default function RecyclerCard(props) {
   let navigate = useNavigate();
 
   const goToProfile = () => {
-    navigate(`/recicladores/${userId}`);
-  };
+    navigate("/reciclador-informacoes/${userId}");}
 
   return (
     <div className='col'>
