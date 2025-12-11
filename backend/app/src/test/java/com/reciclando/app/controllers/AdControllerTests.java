@@ -67,7 +67,7 @@ public class AdControllerTests {
 
     @Test
     public void testGetAds() throws Exception {
-        when(adService.getAdsOrderByCreatedAt(null, null)).thenReturn(ads);
+        when(adService.getAdsOrderByCreatedAt(null, null, null)).thenReturn(ads);
         mockMvc.perform(get("/api/v1/ads"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(3))
@@ -96,7 +96,7 @@ public class AdControllerTests {
     @Test
     public void testGetAdByCategory_Success() throws Exception {
         String category = "plastic";
-        when(adService.getAdsOrderByCreatedAt(category, null)).thenReturn(List.of(ads.get(0)));
+        when(adService.getAdsOrderByCreatedAt(category, null, null)).thenReturn(List.of(ads.get(0)));
         mockMvc.perform(get("/api/v1/ads?category={category}", "plastic"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
@@ -139,7 +139,7 @@ public class AdControllerTests {
     @Test
     public void testGetAdByCity_Success() throws Exception {
         String city = "City1";
-        when(adService.getAdsOrderByCreatedAt(null, city)).thenReturn(List.of(ads.get(0), ads.get(2)));
+        when(adService.getAdsOrderByCreatedAt(null, city, null)).thenReturn(List.of(ads.get(0), ads.get(2)));
         mockMvc.perform(get("/api/v1/ads?city={city}", "City1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
@@ -151,7 +151,7 @@ public class AdControllerTests {
     public void testGetAdByCategoryAndCity_Success() throws Exception {
         String category = "paper";
         String city = "City1";
-        when(adService.getAdsOrderByCreatedAt(category, city)).thenReturn(List.of(ads.get(2)));
+        when(adService.getAdsOrderByCreatedAt(category, city, null)).thenReturn(List.of(ads.get(2)));
         mockMvc.perform(get("/api/v1/ads?category={category}&city={city}", category, city))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
@@ -162,7 +162,7 @@ public class AdControllerTests {
     public void testGetAdByCategoryAndCity_Fail() throws Exception {
         String category = "metal";
         String city = "City1";
-        when(adService.getAdsOrderByCreatedAt(category, city)).thenReturn(List.of());
+        when(adService.getAdsOrderByCreatedAt(category, city, null)).thenReturn(List.of());
         mockMvc.perform(get("/api/v1/ads?category={category}&city={city}", category, city))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(0));
@@ -262,6 +262,28 @@ public class AdControllerTests {
                 .content(requestBody))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Updated Title"));
+    }
+
+    @Test
+    public void testGetAdByCityAndNeighboorhood_Success() throws Exception {
+        String city = "City1";
+        String neighboorhood = "Neighborhood1";
+        when(adService.getAdsOrderByCreatedAt(null, city, neighboorhood))
+                .thenReturn(List.of(ads.get(0)));
+        mockMvc.perform(get("/api/v1/ads?city={city}&neighboorhood={neighboorhood}", city, neighboorhood))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].title").value("Title1"));
+    }
+
+    @Test
+    public void testGetAdByCityAndNeighboorhood_Fail() throws Exception {
+        String city = "City1";
+        String neighboorhood = "Neighborhood2";
+        when(adService.getAdsOrderByCreatedAt(null, city, neighboorhood)).thenReturn(List.of());
+        mockMvc.perform(get("/api/v1/ads?city={city}&neighboorhood={neighboorhood}", city, neighboorhood))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(0));
     }
 
 }
