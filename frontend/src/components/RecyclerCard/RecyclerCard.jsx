@@ -8,9 +8,10 @@ export default function RecyclerCard(props) {
 
   let navigate = useNavigate();
 
-  const goToProfile = () => {
-    navigate("/reciclador-informacoes/${userId}");}
-
+   const goToProfile = () => {
+    navigate(`/reciclador-informacoes/${userId}`);
+  }
+  
   return (
     <div className={styles['recycler-card']}>
       <div className={`d-flex align-items-start gap-3 ${styles['card-info']}`}>

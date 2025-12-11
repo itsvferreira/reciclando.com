@@ -1,15 +1,24 @@
 import React from "react";
 import { MapPin } from "lucide-react";
 import styles from "./UserCard.module.css";
+import userImg from '../../assets/uifaces-human-avatar.jpg';
+import recyclerImg from '../../assets/profile-1.jpg';
 
 export default function UserCard({ user, adsStats }) {
   if (!user) return null;
 
+  // Se for reciclador, mostra imagem mokada
+  const isRecycler = user && user.tipo === 'reciclador';
+  const isComum = user && user.tipo === 'comum';
+  let avatarSrc = "https://via.placeholder.com/150";
+  if (isRecycler) avatarSrc = recyclerImg;
+  if (isComum) avatarSrc = userImg;
+  
   return (
     <div className={styles.userCard}>
       <div className={styles.userAvatar}>
         <img 
-          src="https://via.placeholder.com/150" 
+          src={avatarSrc}
           alt={user.firstName || "Usuário"}
         />
       </div>
