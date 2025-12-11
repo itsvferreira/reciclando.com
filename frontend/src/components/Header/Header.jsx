@@ -63,7 +63,7 @@ export default function Header() {
               <>
                 <button
                   className='btn-profile'
-                  onClick={() => navigate('/user-profile')}
+                  onClick={() => navigate('/@me')}
                 >
                   <span style={{ marginRight: '6px' }}>
                     <svg

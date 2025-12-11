@@ -25,7 +25,9 @@ export function LoginForm() {
       comum: {
         id: 1,
         email: 'luiza.sanchez@email.com',
-        city: 'Rio de Janeiro',
+        phone: '11987654321',
+        postalCode: '20511170',
+        city: 'São Paulo',
         password: '123456',
         tipo: 'comum',
         firstName: 'Luiza',
@@ -34,6 +36,8 @@ export function LoginForm() {
       reciclador: {
         id: 2,
         email: 'joao.silva@email.com',
+        phone: '11987654321',
+        postalCode: '06026000',
         city: 'São Paulo',
         password: '123456',
         tipo: 'reciclador',
@@ -52,7 +56,7 @@ export function LoginForm() {
       formData.password === userComum.password
     ) {
       localStorage.setItem('user', JSON.stringify(userComum));
-      navigate('/user-profile');
+      navigate('/@me');
     } else if (
       formData.email === userReciclador.email &&
       formData.password === userReciclador.password

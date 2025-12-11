@@ -1,5 +1,3 @@
-
-
 export default function AdCreation() {
   return (
     <main className='container d-flex align-items-center justify-content-center'>
@@ -8,7 +6,7 @@ export default function AdCreation() {
         <p className='mb-4'>
           Publique seu anúncio e encontre um reciclador próximo a você
         </p>
-        <AdForm donorId={1} />
+        <AdForm />
       </div>
     </main>
   );

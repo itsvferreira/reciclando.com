@@ -5,9 +5,7 @@ import { isComumLoggedIn } from '../../utils/loggedUsers';
 
 export default function UserCard({ user, adsStats }) {
   const IMAGE_PATH = 'src/assets/profiles';
-  const imageSrc = isComumLoggedIn
-    ? `${IMAGE_PATH}/donors/profile-1.jpg`
-    : `${IMAGE_PATH}/recyclers/profile-1.jpg`;
+  const imageSrc = `${IMAGE_PATH}/donors/profile-1.jpg`;
 
   if (!user) return null;
 

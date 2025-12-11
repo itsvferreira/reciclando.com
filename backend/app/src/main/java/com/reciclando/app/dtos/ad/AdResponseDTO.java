@@ -8,7 +8,6 @@ public class AdResponseDTO {
     private String title;
     private String description;
     private String donorName;
-    private String donorContact;
     private List<Material> category;
     private String postalCode;
     private String city;
@@ -17,19 +16,17 @@ public class AdResponseDTO {
     private String createdAt;
     private List<String> imagesPath;
     private String status;
-    private String contact;
+    private String phone;
     private String email;
     private String conclusionCode;
 
-    public AdResponseDTO(long id, String title, String description, String donorName, String donorContact,
-            List<Material> category, String postalCode, String city, String state, String neighborhood,
-            String createdAt, List<String> imagesPath, String status, String contact, String email,
-            String conclusionCode) {
+    public AdResponseDTO(long id, String title, String description, String donorName, List<Material> category,
+            String postalCode, String city, String state, String neighborhood, String createdAt,
+            List<String> imagesPath, String status, String phone, String email, String conclusionCode) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.donorName = donorName;
-        this.donorContact = donorContact;
         this.category = category;
         this.postalCode = postalCode;
         this.city = city;
@@ -38,7 +35,7 @@ public class AdResponseDTO {
         this.createdAt = createdAt;
         this.imagesPath = imagesPath;
         this.status = status;
-        this.contact = contact;
+        this.phone = phone;
         this.email = email;
         this.conclusionCode = conclusionCode;
     }
@@ -57,10 +54,6 @@ public class AdResponseDTO {
 
     public String getDonorName() {
         return donorName;
-    }
-
-    public String getDonorContact() {
-        return donorContact;
     }
 
     public List<Material> getCategory() {
@@ -95,15 +88,16 @@ public class AdResponseDTO {
         return status;
     }
 
-    public String getConclusionCode() {
-        return conclusionCode;
-    }
-
-    public String getContact() {
-        return contact;
+    public String getPhone() {
+        return phone;
     }
 
     public String getEmail() {
         return email;
     }
+
+    public String getConclusionCode() {
+        return conclusionCode;
+    }
+
 }

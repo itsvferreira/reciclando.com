@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { adsService } from '../services/api';
 
-
 export function useFetchAdByDonor(user, setAds, setIsLoading) {
   useEffect(() => {
     const fetchAdByDonor = async () => {

@@ -1,17 +1,18 @@
 import Categories from '../Categories/Categories';
 import styles from './AdForm.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import adFormValidation from '../../utils/adFormValidation';
 import { useNavigate } from 'react-router-dom';
 import { scrollToView } from '../../utils/scrollToView';
 import { adsService } from '../../services/api';
 import { useFetchAd } from '../../hooks/useFetchAdData';
 import { useViaCep } from '../../hooks/useViaCep';
+import { user } from '../../utils/loggedUsers';
 
-export default function Form({ id, donorId }) {
+export default function Form({ id }) {
   const navigate = useNavigate();
   const goToProfile = () => {
-    navigate(`/user-profile`);
+    navigate(`/@me`);
   };
 
   const [categories, setCategories] = useState([]);
@@ -24,12 +25,12 @@ export default function Form({ id, donorId }) {
     title: '',
     description: '',
     category: [],
-    donorId: donorId,
+    donorId: user.id,
     city: '',
     state: '',
-    postalCode: '',
-    donorContact: '',
-    donorEmail: '',
+    postalCode: user.postalCode,
+    phone: user.phone,
+    email: user.email,
   });
 
   useFetchAd(id, setFormData, setCategories);
@@ -44,7 +45,7 @@ export default function Form({ id, donorId }) {
 
     const body = setBody();
 
-    const errorFields = adFormValidation(body, image, id, isValidPostalCode);
+    const errorFields = adFormValidation(body, image);
     setErrors(errorFields);
     scrollToView(Object.keys(errorFields)[0]);
 
@@ -265,19 +266,19 @@ export default function Form({ id, donorId }) {
           <h3>Informações de Contato</h3>
           <div className='row gap-2 mb-0'>
             <div className='col-md-5'>
-              <label htmlFor='donorContact' className='form-label'>
+              <label htmlFor='phone' className='form-label'>
                 Telefone
               </label>
               <input
                 type='text'
                 className='form-control'
-                id='donorContact'
+                id='phone'
                 placeholder='(00) 00000-0000'
-                name='donorContact'
-                value={formData.donorContact}
+                name='phone'
+                value={formData.phone}
                 onChange={handleChange}
                 style={
-                  errors.donorContact
+                  errors.phone
                     ? {
                         borderColor: 'red',
                         boxShadow: 'none',
@@ -285,24 +286,24 @@ export default function Form({ id, donorId }) {
                     : {}
                 }
               />
-              {errors.donorContact && (
-                <small className='text-danger'>{errors.donorContact}</small>
+              {errors.phone && (
+                <small className='text-danger'>{errors.phone}</small>
               )}
             </div>
             <div className='col-md'>
-              <label htmlFor='donorEmail' className='form-label'>
+              <label htmlFor='email' className='form-label'>
                 E-mail
               </label>
               <input
                 type='text'
                 className='form-control'
-                id='donorEmail'
+                id='email'
                 placeholder='seu@email.com'
-                name='donorEmail'
-                value={formData.donorEmail}
+                name='email'
+                value={formData.email}
                 onChange={handleChange}
                 style={
-                  errors.donorEmail
+                  errors.email
                     ? {
                         borderColor: 'red',
                         boxShadow: 'none',
@@ -310,8 +311,8 @@ export default function Form({ id, donorId }) {
                     : {}
                 }
               />
-              {errors.donorEmail && (
-                <small className='text-danger'>{errors.donorEmail}</small>
+              {errors.email && (
+                <small className='text-danger'>{errors.email}</small>
               )}
             </div>
           </div>

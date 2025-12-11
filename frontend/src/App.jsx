@@ -10,6 +10,7 @@ import AdUpdate from './pages/AdUpdate/AdUpdate';
 import Home from './pages/Home/Home';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import { isComumLoggedIn } from './utils/loggedUsers';
 
 function App() {
   return (
@@ -22,8 +23,10 @@ function App() {
         <Route path='/anuncios' element={<Ads />} />
         <Route path='/anuncios/novo' element={<AdCreation />} />
         <Route path='/anuncios/edicao/:id' element={<AdUpdate />} />
-        <Route path='/user-profile' element={<UserProfile />} />
-        <Route path='/recycler-profile' element={<RecyclerProfile />} />
+        <Route
+          path='/@me'
+          element={isComumLoggedIn ? <UserProfile /> : <RecyclerProfile />}
+        />
         <Route path='/recicladores' element={<Recyclers />} />
       </Routes>
       <Footer />

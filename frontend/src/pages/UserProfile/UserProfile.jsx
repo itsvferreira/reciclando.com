@@ -126,6 +126,10 @@ export default function UserProfile() {
     return true;
   });
 
+  const sortedAds = filteredAds.sort((a, b) =>
+    a.status.localeCompare(b.status)
+  );
+
   const adsStats = {
     total: ads.length,
     active: ads.filter((ad) => ad.status === 'active').length,
@@ -148,7 +152,7 @@ export default function UserProfile() {
                 <div>
                   <h2>Meus Anúncios</h2>
                   <p className={styles.adsCount}>
-                    {filteredAds.length} anúncios encontrados
+                    {sortedAds.length} anúncios encontrados
                   </p>
                 </div>
                 <div className={styles.headerActions}>
@@ -170,12 +174,12 @@ export default function UserProfile() {
               <AdsFilter filter={filter} onFilterChange={setFilter} />
 
               <div className={styles.adsList}>
-                {filteredAds.length === 0 ? (
+                {sortedAds.length === 0 ? (
                   <div className={styles.noAds}>
                     <p>Nenhum anúncio encontrado</p>
                   </div>
                 ) : (
-                  filteredAds.map((ad) => (
+                  sortedAds.map((ad) => (
                     <UserAdCard
                       key={ad.id}
                       ad={ad}

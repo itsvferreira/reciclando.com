@@ -1,4 +1,4 @@
-export default function adFormValidation(values, image, isUpdate) {
+export default function adFormValidation(values, image) {
   const errors = {};
 
   const emailRegex = /^\S+@\S+\.\S+$/;
@@ -12,7 +12,7 @@ export default function adFormValidation(values, image, isUpdate) {
   if (isEmpty(values.description))
     errors.description = 'Descrição é obrigatória';
 
-  if (!isUpdate && !image) errors.image = 'Imagem é obrigatória';
+  if (!image) errors.image = 'Imagem é obrigatória';
 
   if (values.category.length == 0)
     errors.category = 'Categoria do material é obrigatória';
@@ -21,14 +21,13 @@ export default function adFormValidation(values, image, isUpdate) {
   else if (!values.postalCode.match(postalCodeRegex))
     errors.postalCode = 'CEP deve conter 8 digitos';
 
-  if (isEmpty(values.donorContact))
-    errors.donorContact = 'Telefone é obrigatório';
-  else if (!values.donorContact.match(phoneRegex))
-    errors.donorContact = 'Telefone possui formato inválido';
+  if (isEmpty(values.phone)) errors.phone = 'Telefone é obrigatório';
+  else if (!values.phone.match(phoneRegex))
+    errors.phone = 'Telefone possui formato inválido';
 
-  if (isEmpty(values.donorEmail)) errors.donorEmail = 'E-mail é obrigatório';
-  else if (!values.donorEmail.match(emailRegex))
-    errors.donorEmail = 'Formato de e-mail inválido';
+  if (isEmpty(values.email)) errors.email = 'E-mail é obrigatório';
+  else if (!values.email.match(emailRegex))
+    errors.email = 'Formato de e-mail inválido';
 
   return errors;
 }

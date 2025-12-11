@@ -1,6 +1,7 @@
 import { MapPin, Clock4, UserRound, PhoneCall } from 'lucide-react';
 import Badge from '../ui/Badge/Badge';
 import styles from './AdCard.module.css';
+import { formatDate } from '../../utils/formatDate';
 
 export default function Ad(props) {
   const {
@@ -8,7 +9,7 @@ export default function Ad(props) {
     title,
     description,
     donorName,
-    donorContact,
+    phone,
     city,
     state,
     category,
@@ -16,7 +17,7 @@ export default function Ad(props) {
   } = props;
 
   const goToWppApi = () => {
-    const url = `https://web.whatsapp.com/send?phone=+55${donorContact}`;
+    const url = `https://web.whatsapp.com/send?phone=+55${phone}`;
     window.open(url, 'rel=noopener noreferrer');
   };
 
@@ -24,7 +25,7 @@ export default function Ad(props) {
     <div className={`card mb-4 ${styles.card}`}>
       <div className='row g-0'>
         <div className={`${styles['image-container']} col-md`}>
-          <img src={imagesPath[0]} alt="" />
+          <img src={imagesPath[0]} alt='' />
         </div>
         <div className={`col-md ${styles['margin-left']}`}>
           <div className='card-body'>
@@ -48,7 +49,9 @@ export default function Ad(props) {
               </p>
               <p className='card-text d-flex align-items-center gap-1'>
                 <Clock4 size={20} />
-                <small className='text-body-secondary'>{createdAt}</small>
+                <small className='text-body-secondary'>
+                  {formatDate(createdAt)}
+                </small>
               </p>
             </div>
 
@@ -60,9 +63,8 @@ export default function Ad(props) {
               </p>
               <p className='card-text d-flex align-items-center gap-2'>
                 <PhoneCall size={20} />
-                <a href={`tel:${donorContact}`}>
-                  ({donorContact.slice(0, 2)}) {donorContact.slice(2, 6)}-
-                  {donorContact.slice(6)}
+                <a href={`tel:${phone}`}>
+                  ({phone.slice(0, 2)}) {phone.slice(2, 6)}-{phone.slice(6)}
                 </a>
               </p>
               <button

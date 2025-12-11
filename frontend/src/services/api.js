@@ -18,7 +18,8 @@ export const adsService = {
   conclude: (id, recyclerCode) =>
     api.patch(`/ads/${id}/conclude?recyclerCode=${recyclerCode}`),
   search: (params) => api.get(`/ads?${params}`),
-  getHistoryByRecyclerCode: (recyclerCode) => api.get(`/ads/recycler/${recyclerCode}/history`),
+  getHistoryByRecyclerCode: (recyclerCode) =>
+    api.get(`/ads/recycler/${recyclerCode}/history`),
 };
 
 export const recyclersService = {

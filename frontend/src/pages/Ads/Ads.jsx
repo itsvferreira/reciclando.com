@@ -19,6 +19,8 @@ const Ads = () => {
     setCitiesOptions(options);
   }
 
+  const activeAds = ads.filter((ad) => ad.status === 'active');
+
   return (
     <main>
       {loading ? (
@@ -36,10 +38,14 @@ const Ads = () => {
               onCategoriesChange={setCategories}
             />
           </div>
-          <p style={{ marginBottom: '1.65rem' }}>
-            {ads.length} resultados encontrados
-          </p>
-          {ads.map((ad) => (
+          {activeAds.length === 0 ? (
+            <p>Nenhum resultado encontrado</p>
+          ) : (
+            <p style={{ marginBottom: '1.65rem' }}>
+              {activeAds.length} resultados encontrados
+            </p>
+          )}
+          {activeAds.map((ad) => (
             <AdCard key={ad.id} {...ad} />
           ))}
         </div>
