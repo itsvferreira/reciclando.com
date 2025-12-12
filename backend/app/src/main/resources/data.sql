@@ -91,6 +91,8 @@ INSERT INTO recycler_materials (user_id, material) VALUES
 -- Anúncios
 INSERT INTO ads (title, description, donor_id, phone, email, address_id, status, created_at, updated_at, conclusion_code, images_path) VALUES
   ('Jornais e revistas avulsas', 'Pacote de jornais e revistas em bom estado para reciclagem — aprox. 10kg.', 1, '11987654321', 'luiza.sanchez@email.com', 1, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/a8d16fl_revistas.jpeg', 'http://localhost:8081/api/v1/files/de1p600_jornais.webp']),
+  ('Pilhas e baterias usadas', 'Pacote com pilhas alcalinas e algumas baterias recarregáveis usadas — armazenadas com segurança.', 1, '11987654321', 'luiza.sanchez@email.com', 1, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/as8ds65_pilhas-e-baterias.jpg']),
+  ('Garrafas PET pequenas', 'Garrafas PET de 500ml limpas e separadas.', 1, '11987654321', 'luiza.sanchez@email.com', 1, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/e43367e_garrafas-pet.jpg']),
   ('Caixas pequenas de papelão', 'Várias caixas de papelão (tamanho pequeno) desmontadas, perfeitas para reciclagem.', 1, '11987654321', 'luiza.sanchez@email.com', 1, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'A9K3Q', ARRAY['http://localhost:8081/api/v1/files/e5r96fs_caixa-de-papelao.jpg']),
   ('Tampas e lacres plásticos', 'Tampas plásticas soltas de garrafa, sacos fechados para separar.', 1, '11987654321', 'luiza.sanchez@email.com', 1, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'A9K3Q', ARRAY['http://localhost:8081/api/v1/files/ed5s6df_tampinhas.webp']),
   ('Eletrônicos domésticos pequenos', 'Pequenos aparelhos funcionando parcialmente (rádio, liquidificador). Podem ser reaproveitados ou consertados.', 6, '21987654321', 'claudia.maria@email.com', 6, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Q3W9B', ARRAY['http://localhost:8081/api/v1/files/134fe20_liquidificador.jpeg', 'http://localhost:8081/api/v1/files/c23456d_radio.jpg']),
@@ -103,7 +105,7 @@ INSERT INTO ads (title, description, donor_id, phone, email, address_id, status,
 -- Categorias dos anúncios
 INSERT INTO ad_categories (ad_id, category) VALUES
   (1, 'PAPER'),
-  (2, 'PAPER'),
+  (2, 'ELECTRONICS'),
   (3, 'PLASTIC'),
   (4, 'ELECTRONICS'),
   (5, 'BATTERIES'),

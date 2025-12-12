@@ -15,6 +15,15 @@ export default function Form({ id }) {
     navigate(`/user-profile`);
   };
 
+  // Buscar usuário do localStorage de forma segura
+  const storedUser = (() => {
+    try {
+      return JSON.parse(localStorage.getItem('user')) || {};
+    } catch {
+      return {};
+    }
+  })();
+
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState(null);
   const [address, setAddress] = useState({});
@@ -25,12 +34,12 @@ export default function Form({ id }) {
     title: '',
     description: '',
     category: [],
-    donorId: user.id,
+    donorId: storedUser.id || '',
     city: '',
     state: '',
-    postalCode: user.postalCode,
-    phone: user.phone,
-    email: user.email,
+    postalCode: storedUser.postalCode || '',
+    phone: storedUser.phone || '',
+    email: storedUser.email || '',
   });
 
   useFetchAd(id, setFormData, setCategories);
