@@ -52,17 +52,13 @@ export function LoginForm() {
     const userReciclador = mockUsers.reciclador;
 
     if (
-      formData.email === userComum.email &&
-      formData.password === userComum.password
+      (formData.email === userComum.email &&
+        formData.password === userComum.password) ||
+      (formData.email === userReciclador.email &&
+        formData.password === userReciclador.password)
     ) {
       localStorage.setItem('user', JSON.stringify(userComum));
       navigate('/@me');
-    } else if (
-      formData.email === userReciclador.email &&
-      formData.password === userReciclador.password
-    ) {
-      localStorage.setItem('user', JSON.stringify(userReciclador));
-      navigate('/recycler-profile');
     } else {
       alert('Email ou senha incorretos!');
     }

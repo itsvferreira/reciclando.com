@@ -10,7 +10,7 @@ import { user as userData } from '../../utils/loggedUsers';
 export default function RecyclerProfile() {
   const navigate = useNavigate();
   const [user] = useState(() => {
-    return userData ? userData : null;
+    return userData ?? null;
   });
 
   const [collects, setCollects] = useState([]);

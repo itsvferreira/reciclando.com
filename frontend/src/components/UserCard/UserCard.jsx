@@ -1,7 +1,5 @@
-import React from 'react';
 import { MapPin } from 'lucide-react';
 import styles from './UserCard.module.css';
-import { isComumLoggedIn } from '../../utils/loggedUsers';
 
 export default function UserCard({ user, adsStats }) {
   const IMAGE_PATH = 'src/assets/profiles';

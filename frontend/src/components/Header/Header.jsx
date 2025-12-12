@@ -59,7 +59,7 @@ export default function Header() {
             )}
           </nav>
           <div className='d-flex align-items-center'>
-            {isComumLoggedIn && !currentUrlPath.includes('profile') && (
+            {isComumLoggedIn && !currentUrlPath.includes('@me') && (
               <>
                 <button
                   className='btn-profile'
@@ -87,10 +87,10 @@ export default function Header() {
                 </button>
               </>
             )}
-            {isRecicladorLoggedIn && !currentUrlPath.includes('profile') && (
+            {isRecicladorLoggedIn && !currentUrlPath.includes('@me') && (
               <button
                 className='btn-profile'
-                onClick={() => navigate('/recycler-profile')}
+                onClick={() => navigate('/@me')}
               >
                 <span style={{ marginRight: '6px' }}>
                   <svg
@@ -180,7 +180,7 @@ export default function Header() {
             <button
               className='btn-profile mobile-btn'
               onClick={() => {
-                navigate('/recycler-profile');
+                navigate('/@me');
                 closeMenu();
               }}
             >

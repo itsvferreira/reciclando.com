@@ -10,12 +10,12 @@ import FeedbackModal from '../../components/FeedbackModal/FeedbackModal';
 import '../../index.css';
 import styles from './UserProfile.module.css';
 import { useFetchAdByDonor } from '../../hooks/useFetchAdByDonor';
+import { user as userData } from '../../utils/loggedUsers';
 
 export default function UserProfile() {
   const navigate = useNavigate();
   const [user] = useState(() => {
-    const userData = localStorage.getItem('user');
-    return userData ? JSON.parse(userData) : null;
+    return userData ?? null;
   });
 
   const [ads, setAds] = useState([]);
