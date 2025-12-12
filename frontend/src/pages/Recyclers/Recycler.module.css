@@ -13,6 +13,7 @@
 
 @media (max-width: 426px) {
   .recycler-grid {
+    justify-content: center;
     grid-template-columns: 380px;
   }
 }

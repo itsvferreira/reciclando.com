@@ -15,6 +15,11 @@ export default function Form({ id }) {
     navigate(`/user-profile`);
   };
 
+  const [user] = useState(() => {
+    const userData = localStorage.getItem('user');
+    return userData ? JSON.parse(userData) : null;
+  });
+
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState(null);
   const [address, setAddress] = useState({});
@@ -25,12 +30,12 @@ export default function Form({ id }) {
     title: '',
     description: '',
     category: [],
-    donorId: id ? user.id : 1,
+    donorId: user?.id ?? 1,
     city: '',
     state: '',
-    postalCode: user.postalCode,
-    phone: user.phone,
-    email: user.email,
+    postalCode: user?.postalCode ?? '',
+    donorContact: user?.phone ?? '',
+    email: user?.email ?? '',
   });
 
   useFetchAd(id, setFormData, setCategories);
@@ -45,13 +50,13 @@ export default function Form({ id }) {
 
     const body = setBody();
 
-    const errorFields = adFormValidation(body, image);
-    setErrors(errorFields);
-    scrollToView(Object.keys(errorFields)[0]);
+    // const errorFields = adFormValidation(body, image, id, isValidPostalCode);
+    // setErrors(errorFields);
+    // scrollToView(Object.keys(errorFields)[0]);
 
-    if (Object.keys(errorFields).length > 0) {
-      return;
-    }
+    // if (Object.keys(errorFields).length > 0) {
+    //   return;
+    // }
 
     try {
       if (!id) {

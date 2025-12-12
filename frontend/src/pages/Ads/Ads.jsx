@@ -14,12 +14,12 @@ const Ads = () => {
 
   useFetchAds(categories, city, setAds, setLoading);
 
+  const activeAds = ads.filter((ad) => ad.status === 'active');
+
   if (!loading && citiesOptions.length == 0) {
-    const options = getCitiesOptions(ads);
+    const options = getCitiesOptions(activeAds);
     setCitiesOptions(options);
   }
-
-  const activeAds = ads.filter((ad) => ad.status === 'active');
 
   return (
     <main>

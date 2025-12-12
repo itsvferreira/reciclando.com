@@ -4,12 +4,18 @@ import Badge from '../../components/ui/Badge/Badge';
 import { Phone, Mail, Clock, Star, MapPin, CheckCircle } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 import './RecyclerInformations.css';
+import { useNavigate } from 'react-router-dom';
 
 const RecyclerInformations = () => {
   const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState(null);
   const [error, setError] = useState(null);
   const { id } = useParams();
+
+  const navigate = useNavigate();
+  const goToRecyclers = () => {
+    navigate(`/recicladores`);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,6 +84,10 @@ const RecyclerInformations = () => {
     return <p>Reciclador não encontrado.</p>;
   }
 
+  const goToWppApi = () => {
+    const url = `https://web.whatsapp.com/send?phone=+55${profileData.contact.phone}`;
+    window.open(url, 'rel=noopener noreferrer');
+  };
   return (
     <div className='recycler-profile-container'>
       <div className='profile-wrapper'>
@@ -220,11 +230,13 @@ const RecyclerInformations = () => {
 
             {/* BOTÕES */}
             <div className='buttons-container'>
-              <button className='btnPrimary'>
+              <button className='btnPrimary' onClick={goToWppApi}>
                 <Phone size={16} className='btn-icon' />
                 Contatar
               </button>
-              <button className='btn-secondary'>Voltar para listagem</button>
+              <button className='btn-secondary' onClick={goToRecyclers}>
+                Voltar para listagem
+              </button>
             </div>
           </div>
         </div>

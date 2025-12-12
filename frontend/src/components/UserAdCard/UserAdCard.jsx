@@ -3,7 +3,7 @@ import { MapPin, Package, CalendarDays, SquarePen, Trash2 } from 'lucide-react';
 import styles from './UserAdCard.module.css';
 
 import { useNavigate } from 'react-router-dom';
-import Badge from '../ui/Badge/Badge';
+import Badge from "../ui/Badge/Badge";
 
 export default function UserAdCard({ ad, onEdit, onDelete, onConclude }) {
   const navigate = useNavigate();
