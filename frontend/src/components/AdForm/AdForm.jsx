@@ -25,7 +25,7 @@ export default function Form({ id }) {
     title: '',
     description: '',
     category: [],
-    donorId: user.id,
+    donorId: id ? user.id : 1,
     city: '',
     state: '',
     postalCode: user.postalCode,
