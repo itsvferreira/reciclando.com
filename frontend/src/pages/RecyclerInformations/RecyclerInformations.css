@@ -10,30 +10,15 @@
   --green-light: #d1fae5;
   --green-dark: #065f46;
   --badge-green: #059669;
-  --accent-bg: #DCFCE7;
+  --accent-bg: #dcfce7;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.1);
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
   --radius-2xl: 16px;
-  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-/*  ESTILOS GERAIS */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: var(--font-sans);
-  background-color: var(--background-light);
-  color: var(--text-foreground);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, sans-serif;
 }
 
 /* CONTAINER PRINCIPAL */
@@ -118,8 +103,8 @@ body {
 
 /* FOTO DO RECICLADOR  */
 .recycler-photo {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -158,7 +143,7 @@ body {
 }
 
 .profile-name {
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 700;
   color: var(--text-foreground);
   margin: 0;
@@ -249,17 +234,17 @@ body {
   margin-top: 16px !important;
 }
 
-.material-item {
-  all: unset; 
+.materialItem {
+  all: unset;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   padding: 6px 16px !important;
-  background-color: #DCFCE7 !important; 
-  border: 1px solid #e5e7eb !important; 
+  background-color: #dcfce7 !important;
+  border: 1px solid #e5e7eb !important;
   border-radius: 9999px !important;
   font-weight: 500 !important;
-  color: #1a1a1a !important; 
+  color: #1a1a1a !important;
   font-size: 14px !important;
   line-height: 1 !important;
   white-space: nowrap !important;
@@ -386,8 +371,8 @@ body {
   gap: 12px;
 }
 
-.btn-primary {
-  background-color: #166534;
+.btnPrimary {
+  background-color: var(--green);
   color: var(--white);
   border: none;
   border-radius: var(--radius-md);
@@ -403,8 +388,8 @@ body {
   justify-content: center;
 }
 
-.btn-primary:hover {
-  background-color: var(--badge-green);
+.btnPrimary:hover {
+  background-color: var(--btn-hover);
 }
 
 .btn-icon {
@@ -450,7 +435,9 @@ body {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* RESPONSIVIDADE */
@@ -458,11 +445,11 @@ body {
   .recycler-profile-container {
     padding: 16px;
   }
-  
+
   .profile-wrapper {
     gap: 20px;
   }
-  
+
   .contact-card {
     position: static;
   }
@@ -472,45 +459,45 @@ body {
   .profile-card {
     padding: 20px;
   }
-  
+
   .profile-header-top {
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .recycler-photo {
     align-self: center;
   }
-  
+
   .name-and-badge {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   /* REMOVIDO: estilos do availability-badge na responsividade */
-  
+
   .materials-grid {
     justify-content: center;
   }
-  
-  .material-item {
+
+  .materialItem {
     min-width: 90px;
     padding: 16px 12px;
   }
-  
+
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
-  
+
   .section-title {
     font-size: 16px;
   }
-  
+
   .profile-name {
     font-size: 20px;
   }
-  
+
   /* REMOVIDO: estilos das avaliações na responsividade */
 }
 
@@ -518,17 +505,17 @@ body {
   .stats-grid {
     grid-template-columns: 1fr;
   }
-  
-  .material-item {
+
+  .materialItem {
     min-width: 80px;
     padding: 14px 10px;
   }
-  
+
   .contact-item-inner {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .contact-icon {
     margin-bottom: 8px;
   }

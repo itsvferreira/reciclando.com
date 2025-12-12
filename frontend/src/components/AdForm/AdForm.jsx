@@ -8,11 +8,16 @@ import { adsService } from '../../services/api';
 import { useFetchAd } from '../../hooks/useFetchAdData';
 import { useViaCep } from '../../hooks/useViaCep';
 
-export default function Form({ id, donorId }) {
+export default function Form({ id }) {
   const navigate = useNavigate();
   const goToProfile = () => {
     navigate(`/user-profile`);
   };
+
+  const [user] = useState(() => {
+    const userData = localStorage.getItem('user');
+    return userData ? JSON.parse(userData) : null;
+  });
 
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState(null);
@@ -24,12 +29,12 @@ export default function Form({ id, donorId }) {
     title: '',
     description: '',
     category: [],
-    donorId: donorId,
+    donorId: user?.id ?? 1,
     city: '',
     state: '',
-    postalCode: '',
-    donorContact: '',
-    donorEmail: '',
+    postalCode: user?.postalCode ?? '',
+    donorContact: user?.phone ?? '',
+    email: user?.email ?? '',
   });
 
   useFetchAd(id, setFormData, setCategories);
@@ -290,19 +295,19 @@ export default function Form({ id, donorId }) {
               )}
             </div>
             <div className='col-md'>
-              <label htmlFor='donorEmail' className='form-label'>
+              <label htmlFor='email' className='form-label'>
                 E-mail
               </label>
               <input
                 type='text'
                 className='form-control'
-                id='donorEmail'
+                id='email'
                 placeholder='seu@email.com'
-                name='donorEmail'
-                value={formData.donorEmail}
+                name='email'
+                value={formData.email}
                 onChange={handleChange}
                 style={
-                  errors.donorEmail
+                  errors.email
                     ? {
                         borderColor: 'red',
                         boxShadow: 'none',
@@ -310,8 +315,8 @@ export default function Form({ id, donorId }) {
                     : {}
                 }
               />
-              {errors.donorEmail && (
-                <small className='text-danger'>{errors.donorEmail}</small>
+              {errors.email && (
+                <small className='text-danger'>{errors.email}</small>
               )}
             </div>
           </div>

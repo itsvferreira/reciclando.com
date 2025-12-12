@@ -26,9 +26,9 @@ export default function adFormValidation(values, image, isUpdate) {
   else if (!values.donorContact.match(phoneRegex))
     errors.donorContact = 'Telefone possui formato inválido';
 
-  if (isEmpty(values.donorEmail)) errors.donorEmail = 'E-mail é obrigatório';
-  else if (!values.donorEmail.match(emailRegex))
-    errors.donorEmail = 'Formato de e-mail inválido';
+  if (isEmpty(values.email)) errors.email = 'E-mail é obrigatório';
+  else if (!values.email.match(emailRegex))
+    errors.email = 'Formato de e-mail inválido';
 
   return errors;
 }
