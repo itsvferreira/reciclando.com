@@ -37,13 +37,7 @@
     display: none !important;
   }
 }
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-left: auto;
-}
+
 /* Meu Perfil button */
 .btn-profile {
   background: #fff;
@@ -91,7 +85,7 @@
   background: #fff;
   color: #222;
   border: 1px solid #e5e7eb;
-  padding: 7px 18px;
+  padding: 5px 10px;
   border-radius: 12px;
   font-size: 1rem;
   font-family: var(--font-sans);
@@ -138,16 +132,14 @@
   top: 0;
   z-index: 1000;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
 }
 
 .header-content {
-  max-width: 1200px;
-  margin: 0 auto;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
 }
 
 /* LOGO */
@@ -168,14 +160,6 @@
 }
 
 /* MENU DESKTOP */
-.menu-desktop {
-  display: flex;
-  gap: 32px;
-  margin: 0 auto;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
 
 .menu-desktop a {
   color: var(--black);
@@ -212,13 +196,6 @@
   width: 100%;
 }
 
-/* LADO DIREITO DO HEADER */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
 /* BOTÃO LOGIN DESKTOP */
 .btn-login {
   all: unset;
@@ -229,8 +206,8 @@
   border-radius: 8px;
   height: 40px;
   padding: 0 20px;
-  background-color: #FAFAF9;
-  color: #1C1917;
+  background-color: #fafaf9;
+  color: #1c1917;
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 500;
@@ -391,23 +368,13 @@
 }
 
 /* RESPONSIVIDADE */
-@media (max-width: 1024px) {
-  .header-content {
-    padding: 0 20px;
-  }
-
-  .menu-desktop {
-    gap: 24px;
-  }
-}
-
 @media (max-width: 768px) {
-  .menu-desktop {
-    display: none;
-  }
-
+  .menu-desktop,
+  .btn-profile,
+  .btn-create-ad,
+  .btn-logout,
   .btn-login {
-    display: none;
+    display: none !important;
   }
 
   .menu-hamburger {
@@ -463,8 +430,18 @@
   animation: slideIn 0.3s ease forwards;
 }
 
-.menu-mobile.active .mobile-menu-link:nth-child(1) { animation-delay: 0.1s; }
-.menu-mobile.active .mobile-menu-link:nth-child(2) { animation-delay: 0.15s; }
-.menu-mobile.active .mobile-menu-link:nth-child(3) { animation-delay: 0.2s; }
-.menu-mobile.active .mobile-menu-link:nth-child(4) { animation-delay: 0.25s; }
-.menu-mobile.active .btn-login-mobile { animation-delay: 0.3s; }
+.menu-mobile.active .mobile-menu-link:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.menu-mobile.active .mobile-menu-link:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.menu-mobile.active .mobile-menu-link:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.menu-mobile.active .mobile-menu-link:nth-child(4) {
+  animation-delay: 0.25s;
+}
+.menu-mobile.active .btn-login-mobile {
+  animation-delay: 0.3s;
+}

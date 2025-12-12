@@ -48,7 +48,7 @@ public class Ad {
 
     private String status;
     private String conclusionCode;
-    private String contact;
+    private String phone;
     private String email;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -73,7 +73,7 @@ public class Ad {
         this.category = category;
         this.address = address;
         this.status = "active";
-        this.contact = donor.getContact();
+        this.phone = donor.getPhone();
         this.email = donor.getEmail();
     }
 
@@ -170,11 +170,11 @@ public class Ad {
     }
 
     public String getPhone() {
-        return contact;
+        return phone;
     }
 
-    public void setPhone(String contact) {
-        this.contact = donor.getContact();
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -182,14 +182,14 @@ public class Ad {
     }
 
     public void setEmail(String email) {
-        this.email = donor.getEmail();
+        this.email = email;
     }
 
     @Override
     public String toString() {
         return "Ad [id=" + id + ", title=" + title + ", description=" + description + ", imagesPath=" + imagesPath
                 + ", address=" + address + ", donor=" + donor + ", category=" + category + ", status=" + status
-                + ", conclusionCode=" + conclusionCode + ", contact=" + contact + ", email="
+                + ", conclusionCode=" + conclusionCode + ", phone=" + phone + ", email="
                 + email + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
     }
 }

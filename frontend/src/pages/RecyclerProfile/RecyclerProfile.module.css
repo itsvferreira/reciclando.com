@@ -1,9 +1,3 @@
-.profileContainer {
-  background: var(--bg-color);
-  min-height: 100vh;
-  padding: 20px;
-}
-
 .profileBackButton {
   background: white;
   border: 1px solid var(--border);

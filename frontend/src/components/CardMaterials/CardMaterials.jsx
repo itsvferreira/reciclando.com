@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./CardMaterials.module.css";
-import { ModalInformations } from "../modalInformations/ModalInformations";
+import { ModalInformations } from "../ModalInformations/ModalInformations";
 
 export function CardMaterials({ icon: Icon, color, title, description, materialData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);

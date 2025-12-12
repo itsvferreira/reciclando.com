@@ -24,20 +24,26 @@ export function LoginForm() {
     const mockUsers = {
       comum: {
         id: 1,
-        email: "luiza.sanchez@email.com",
-        password: "123456",
-        tipo: "comum",
-        firstName: "Luiza",
-        lastName: "Sanchez"
+        email: 'luiza.sanchez@email.com',
+        phone: '11987654321',
+        postalCode: '20511170',
+        city: 'São Paulo',
+        password: '123456',
+        tipo: 'comum',
+        firstName: 'Luiza',
+        lastName: 'Sanchez',
       },
       reciclador: {
         id: 2,
         email: 'joao.silva@email.com',
+        phone: '11987654321',
+        postalCode: '06026000',
+        city: 'São Paulo',
         password: '123456',
         tipo: 'reciclador',
-        firstName: "João",
-        lastName: "Silva",
-        code: "A9K3Q"
+        firstName: 'João',
+        lastName: 'Silva',
+        code: 'A9K3Q',
       },
     };
 
@@ -45,12 +51,18 @@ export function LoginForm() {
     const userComum = mockUsers.comum;
     const userReciclador = mockUsers.reciclador;
 
-    if (formData.email === userComum.email && formData.password === userComum.password) {
-      localStorage.setItem("user", JSON.stringify(userComum));
-      navigate("/user-profile");
-    } else if (formData.email === userReciclador.email && formData.password === userReciclador.password) {
-      localStorage.setItem("user", JSON.stringify(userReciclador));
-      navigate("/recycler-profile");
+    if (
+      formData.email === userComum.email &&
+      formData.password === userComum.password
+    ) {
+      localStorage.setItem('user', JSON.stringify(userComum));
+      navigate('/user-profile');
+    } else if (
+      formData.email === userReciclador.email &&
+      formData.password === userReciclador.password
+    ) {
+      localStorage.setItem('user', JSON.stringify(userReciclador));
+      navigate('/recycler-profile');
     } else {
       alert('Email ou senha incorretos!');
     }

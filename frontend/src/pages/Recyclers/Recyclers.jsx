@@ -40,7 +40,6 @@ const Recyclers = () => {
 
   if (!loading && citiesOptions.length == 0) {
     const options = getCitiesOptions(recyclers);
-    console.log(options);
     setCitiesOptions(options);
   }
 
@@ -66,7 +65,7 @@ const Recyclers = () => {
           <p style={{ marginBottom: '1.65rem' }}>
             {recyclers.length} recicladores encontrados
           </p>
-          <div class={styles['recycler-grid']}>
+          <div className={styles['recycler-grid']}>
             {recyclers.map((rec, id) => (
               <RecyclerCard key={rec.userId} {...rec} id={id + 1} />
             ))}
