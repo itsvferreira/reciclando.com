@@ -9,7 +9,7 @@ export default function Ad(props) {
     title,
     description,
     donorName,
-    donorContact,
+    phone,
     city,
     state,
     category,
@@ -17,7 +17,7 @@ export default function Ad(props) {
   } = props;
 
   const goToWppApi = () => {
-    const url = `https://web.whatsapp.com/send?phone=+55${donorContact}`;
+    const url = `https://web.whatsapp.com/send?phone=+55${phone}`;
     window.open(url, 'rel=noopener noreferrer');
   };
 
@@ -63,9 +63,8 @@ export default function Ad(props) {
               </p>
               <p className='card-text d-flex align-items-center gap-2'>
                 <PhoneCall size={20} />
-                <a href={`tel:${donorContact}`}>
-                  ({donorContact.slice(0, 2)}) {donorContact.slice(2, 6)}-
-                  {donorContact.slice(6)}
+                <a href={`tel:${phone}`}>
+                  ({phone.slice(0, 2)}) {phone.slice(2, 6)}-{phone.slice(6)}
                 </a>
               </p>
               <button

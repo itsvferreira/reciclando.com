@@ -22,16 +22,6 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class AdService {
-        @Transactional(readOnly = true)
-        public List<AdResponseDTO> getAdsByRecyclerCode(String recyclerCode) {
-            List<Ad> ads = new ArrayList<>();
-            for (Ad ad : adRepository.findAllByOrderByCreatedAtDesc()) {
-                if ("concluded".equals(ad.getStatus()) && recyclerCode.equals(ad.getConclusionCode())) {
-                    ads.add(ad);
-                }
-            }
-            return ads.stream().map(this::createResponseDTO).toList();
-        }
     private final AdRepository adRepository;
     private final DonorRepository donorRepository;
     private final AddressRepository addressRepository;
@@ -155,6 +145,17 @@ public class AdService {
         throw new IllegalArgumentException("Invalid confirmation code");
     }
 
+    @Transactional(readOnly = true)
+    public List<AdResponseDTO> getAdsByRecyclerCode(String recyclerCode) {
+        List<Ad> ads = new ArrayList<>();
+        for (Ad ad : adRepository.findAllByOrderByCreatedAtDesc()) {
+            if ("concluded".equals(ad.getStatus()) && recyclerCode.equals(ad.getConclusionCode())) {
+                ads.add(ad);
+            }
+        }
+        return ads.stream().map(this::createResponseDTO).toList();
+    }
+
     private Address getAddress(AdRequestDTO ad) {
         Address address = addressRepository.findByPostalCode(ad.getPostalCode());
 
@@ -180,7 +181,6 @@ public class AdService {
                 ad.getTitle(),
                 ad.getDescription(),
                 ad.getDonor().getFullName(),
-                ad.getDonor().getContact(),
                 ad.getCategory(),
                 ad.getPostalCode(),
                 ad.getCity(),

@@ -37,7 +37,7 @@ public class Donor {
         return user.getFirstName() + " " + user.getLastName();
     }
 
-    public String getContact() {
+    public String getPhone() {
         return user.getPhone();
     }
 

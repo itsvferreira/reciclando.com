@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AdCard from '../../components/AdCard/AdCard';
 import LocationSelect from '../../components/LocationSelect/LocationSelect';
 import Categories from '../../components/Categories/Categories';
@@ -20,6 +20,8 @@ const Ads = () => {
     const options = getCitiesOptions(activeAds);
     setCitiesOptions(options);
   }
+
+  const activeAds = ads.filter((ad) => ad.status === 'active');
 
   return (
     <main>
