@@ -34,7 +34,7 @@ export default function Form({ id }) {
     city: '',
     state: '',
     postalCode: user?.postalCode ?? '',
-    donorContact: user?.phone ?? '',
+    phone: user?.phone ?? '',
     email: user?.email ?? '',
   });
 
