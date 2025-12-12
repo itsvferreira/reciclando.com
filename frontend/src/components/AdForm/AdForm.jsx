@@ -49,13 +49,13 @@ export default function Form({ id }) {
 
     const body = setBody();
 
-    const errorFields = adFormValidation(body, image, id, isValidPostalCode);
-    setErrors(errorFields);
-    scrollToView(Object.keys(errorFields)[0]);
+    // const errorFields = adFormValidation(body, image, id, isValidPostalCode);
+    // setErrors(errorFields);
+    // scrollToView(Object.keys(errorFields)[0]);
 
-    if (Object.keys(errorFields).length > 0) {
-      return;
-    }
+    // if (Object.keys(errorFields).length > 0) {
+    //   return;
+    // }
 
     try {
       if (!id) {

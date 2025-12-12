@@ -1,8 +1,7 @@
 .recycler-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(420px, 420px));
   gap: 10px;
-  justify-content: center;
 }
 
 @media (max-width: 769px) {
@@ -13,6 +12,7 @@
 
 @media (max-width: 426px) {
   .recycler-grid {
+    justify-content: center;
     grid-template-columns: 380px;
   }
 }
