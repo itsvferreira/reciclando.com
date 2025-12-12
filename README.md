@@ -30,7 +30,6 @@ reciclando.com/
 ## Pré-requisitos
 - Node.js 18+
 - npm
-- Git
 
 ## Como executar
 
