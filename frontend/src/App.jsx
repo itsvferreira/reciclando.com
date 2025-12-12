@@ -12,7 +12,6 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import RecyclerInformations from './pages/RecyclerInformations/RecyclerInformations';
 
-
 function App() {
   return (
     <Router>
@@ -27,7 +26,7 @@ function App() {
         <Route path='/user-profile' element={<UserProfile />} />
         <Route path='/recycler-profile' element={<RecyclerProfile />} />
         <Route path='/recicladores' element={<Recyclers />} />
-        <Route path='/reciclador-informacoes/:id' element={<RecyclerInformations />} />
+        <Route path='/reciclador/:id' element={<RecyclerInformations />} />
       </Routes>
       <Footer />
     </Router>
