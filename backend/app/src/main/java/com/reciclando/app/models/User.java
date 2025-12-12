@@ -111,6 +111,14 @@ public class User {
         this.photoPath = photoPath;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+    public String getNeighborhood() {
+        return address.getNeighborhood();
+    }
+
     @Override
     public String toString() {
         return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone
