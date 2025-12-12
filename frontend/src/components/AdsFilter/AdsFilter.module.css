@@ -92,7 +92,7 @@
   color: var(--green-font);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
   .adsFilterHeader {
     flex-direction: column;
     align-items: flex-start;

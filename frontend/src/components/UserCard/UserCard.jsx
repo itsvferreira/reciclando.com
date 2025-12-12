@@ -4,7 +4,10 @@ import styles from './UserCard.module.css';
 
 export default function UserCard({ user, adsStats }) {
   const IMAGE_PATH = 'src/assets/profiles';
-  const imageSrc = `${IMAGE_PATH}/donors/profile-1.jpg`;
+  const imageSrc =
+    user.tipo === 'comum'
+      ? `${IMAGE_PATH}/donors/profile-1.jpg`
+      : `${IMAGE_PATH}/recyclers/profile-1.jpg`;
 
   if (!user) return null;
 
