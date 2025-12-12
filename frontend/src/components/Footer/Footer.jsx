@@ -6,7 +6,7 @@ export default function Footer() {
     
 
       <div className="footer-content">
-        <p>© 2025 Reciclando.com  Todos os direitos reservados.</p>    
+        <p>© 2025 Reciclando.com - Todos os direitos reservados.</p>    
       </div>
     </footer>
   );

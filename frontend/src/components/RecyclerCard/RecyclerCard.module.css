@@ -3,7 +3,10 @@
   border-radius: 15px;
   border: 1px solid var(--border);
   padding: 30px;
-  min-width: 415px;
+}
+
+.recycler-card:not(:last-child) {
+  margin-bottom: 10px;
 }
 
 .img-profile img {
@@ -35,10 +38,4 @@
   font-weight: 500;
   color: var(--black);
   text-decoration: none;
-}
-
-@media (min-width: 1400px) {
-  .recycler-card {
-    max-width: 415px;
-  }
 }
