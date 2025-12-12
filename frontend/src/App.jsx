@@ -11,6 +11,8 @@ import Home from './pages/Home/Home';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import { isComumLoggedIn } from './utils/loggedUsers';
+import RecyclerInformations from './pages/RecyclerInformations/RecyclerInformations';
+
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
           element={isComumLoggedIn ? <UserProfile /> : <RecyclerProfile />}
         />
         <Route path='/recicladores' element={<Recyclers />} />
+        <Route path='/reciclador-informacoes/:id' element={<RecyclerInformations />} />
       </Routes>
       <Footer />
     </Router>

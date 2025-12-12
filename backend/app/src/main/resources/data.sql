@@ -1,3 +1,4 @@
+-- Endereços
 INSERT INTO addresses (postal_code, city, state, neighborhood) VALUES
   ('06026000', 'São Paulo', 'SP', 'Osasco'),
   ('06018060', 'São Paulo', 'SP', 'Osasco'),
@@ -12,18 +13,16 @@ INSERT INTO addresses (postal_code, city, state, neighborhood) VALUES
   ('23050320', 'Rio de Janeiro', 'RJ', 'Campo Grande'),
   ('30130000', 'Belo Horizonte', 'MG', 'Centro'),
   ('30310150', 'Belo Horizonte', 'MG', 'Belvedere'),
-  ('31275020', 'Belo Horizonte', 'MG', 'Pampulha');
-
--- Endereço em São Paulo
-INSERT INTO addresses (postal_code, city, state, neighborhood) VALUES
+  ('31275020', 'Belo Horizonte', 'MG', 'Pampulha'),
   ('04001000', 'São Paulo', 'SP', 'Paraíso');
 
+-- Usuários (15 usuários)
 INSERT INTO users (first_name, last_name, phone, email, account_type, address_id) VALUES
   ('Luiza', 'Sanchez', '11987654321', 'luiza.sanchez@email.com', 'DONOR', 1),
   ('João', 'Silva', '11987654321', 'joao.silva@email.com', 'RECYCLER', 2),
   ('Fernanda', 'Souza', '11987654321', 'fernanda.souza@email.com', 'RECYCLER', 3),
   ('Maria', 'Santos', '11987654321', 'maria.santos@email.com', 'RECYCLER', 4),
-  ('Renan', 'Paiva', '11987654321', 'juliana.lima@email.com', 'RECYCLER', 5),
+  ('Renan', 'Paiva', '11987654321', 'renan.paiva@email.com', 'RECYCLER', 5),
   ('Cláudia', 'Maria', '21987654321', 'claudia.maria@email.com', 'DONOR', 6),
   ('Juliana', 'Lima', '21987654321', 'juliana.lima@email.com', 'RECYCLER', 7),
   ('Carlos', 'Oliveira', '21987654321', 'carlos.oliveira@email.com', 'RECYCLER', 8),
@@ -32,28 +31,30 @@ INSERT INTO users (first_name, last_name, phone, email, account_type, address_id
   ('Yuri', 'Barreto', '21987654321', 'yuri.barreto@email.com', 'DONOR', 11),
   ('Marcos', 'Almeida', '31987654321', 'marcos.almeida@email.com', 'RECYCLER', 12),
   ('Patrícia', 'Menezes', '31987654321', 'patricia.menezes@email.com', 'RECYCLER', 13),
-  ('Rafael', 'Gomes',  '31987654321', 'rafael.gomes@email.com', 'RECYCLER', 14),
+  ('Rafael', 'Gomes', '31987654321', 'rafael.gomes@email.com', 'RECYCLER', 14),
   ('Bruno', 'Martins', '11999999999', 'bruno.martins@email.com', 'DONOR', 15);
 
-INSERT INTO recyclers (user_id, code) VALUES
-  (2,  'A9K3Q'),
-  (3,  'Z7T1M'),
-  (4,  'Q3W9B'),
-  (5,  'M8D2S'),
-  (7,  'H4P7X'),
-  (8,  'T1F9C'),
-  (9,  'B6L2R'),
-  (10, 'P5N8V'),
-  (12, 'W2J6Y'),
-  (13, 'K9E3U'),
-  (14, 'R4C1Z');
+-- Recicladores COM about_me (10 recicladores)
+INSERT INTO recyclers (user_id, code, about_me) VALUES
+  (2, 'A9K3Q', 'Sou um reciclador dedicado a transformar resíduos em novos recursos. Trabalho coletando e separando materiais para garantir que ganhem uma nova vida.'),
+  (3, 'Z7T1M', 'Atuo na reciclagem há anos, ajudando a reduzir o impacto ambiental através da coleta e triagem de resíduos recicláveis.'),
+  (4, 'Q3W9B', 'Meu trabalho é recolher materiais descartados e encaminhá-los para reciclagem, contribuindo com um futuro mais sustentável.'),
+  (5, 'M8D2S', 'Sou responsável por coletar, classificar e encaminhar resíduos recicláveis, ajudando minha comunidade a descartar corretamente.'),
+  (7, 'H4P7X', 'Trabalho diariamente com a separação de resíduos para garantir que tudo o que pode ser reciclado volte ao ciclo de produção.'),
+  (8, 'T1F9C', 'Dedico meu tempo a recolher materiais recicláveis e orientar pessoas sobre práticas sustentáveis.'),
+  (9, 'B6L2R', 'Sou reciclador e colaboro para a preservação do meio ambiente através da coleta e triagem de resíduos.'),
+  (10, 'P5N8V', 'Ajudo minha região coletando materiais que podem ser reaproveitados, dando um destino melhor ao que seria lixo.'),
+  (13, 'W2J6Y', 'Atuo na reciclagem coletando e separando resíduos para garantir um processo eficiente e ecológico.'),
+  (14, 'K9E3U', 'Meu trabalho envolve recolher e organizar materiais recicláveis, promovendo práticas mais sustentáveis.');
 
+-- Doadores
 INSERT INTO donors (user_id) VALUES 
   (1),
   (6),
   (11),
   (15);
 
+-- Materiais aceitos pelos recicladores
 INSERT INTO recycler_materials (user_id, material) VALUES
   (2, 'PLASTIC'),
   (2, 'METAL'),
@@ -79,9 +80,6 @@ INSERT INTO recycler_materials (user_id, material) VALUES
   (9, 'METAL'),
   (10, 'ELECTRONICS'),
   (10, 'METAL'),
-  (12, 'PAPER'),
-  (12, 'PLASTIC'),
-  (12, 'BATTERIES'),
   (13, 'PAPER'),
   (13, 'GLASS'),
   (13, 'BATTERIES'),
@@ -90,6 +88,7 @@ INSERT INTO recycler_materials (user_id, material) VALUES
   (14, 'METAL'),
   (14, 'GLASS');
 
+-- Anúncios
 INSERT INTO ads (title, description, donor_id, phone, email, address_id, status, created_at, updated_at, conclusion_code, images_path) VALUES
   ('Jornais e revistas avulsas', 'Pacote de jornais e revistas em bom estado para reciclagem — aprox. 10kg.', 1, '11987654321', 'luiza.sanchez@email.com', 1, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/a8d16fl_revistas.jpeg', 'http://localhost:8081/api/v1/files/de1p600_jornais.webp']),
   ('Caixas pequenas de papelão', 'Várias caixas de papelão (tamanho pequeno) desmontadas, perfeitas para reciclagem.', 1, '11987654321', 'luiza.sanchez@email.com', 1, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'A9K3Q', ARRAY['http://localhost:8081/api/v1/files/e5r96fs_caixa-de-papelao.jpg']),
@@ -101,6 +100,7 @@ INSERT INTO ads (title, description, donor_id, phone, email, address_id, status,
   ('Sucata eletrônica leve', 'Cabos, adaptadores e pequenos componentes eletrônicos — ideal para reciclagem de eletrônicos.', 11, '21987654321', 'yuri.barreto@email.com', 12, 'active', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), NULL, ARRAY['http://localhost:8081/api/v1/files/2148r5t_componentes-eletronicos.jpg']),
   ('Garrafas de vinho', 'Lote de garrafas de vinho limpas para reciclagem.', 15, '11999999999', 'bruno.martins@email.com', 15, 'concluded', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'A9K3Q', ARRAY['http://localhost:8081/api/v1/files/71xgns2pEHL.jpg']);
 
+-- Categorias dos anúncios
 INSERT INTO ad_categories (ad_id, category) VALUES
   (1, 'PAPER'),
   (2, 'PAPER'),
