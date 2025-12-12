@@ -27,18 +27,19 @@ import jakarta.persistence.EntityNotFoundException;
 
 @WebMvcTest(AdController.class)
 public class AdControllerTests {
-        @Test
-        public void testGetAdsByRecyclerCodeHistory() throws Exception {
-                String recyclerCode = "1234";
-                List<AdResponseDTO> recyclerAds = List.of(ads.get(1)); // só o concluído com código 1234
-                when(adService.getAdsByRecyclerCode(recyclerCode)).thenReturn(recyclerAds);
+    @Test
+    public void testGetAdsByRecyclerCodeHistory() throws Exception {
+        String recyclerCode = "1234";
+        List<AdResponseDTO> recyclerAds = List.of(ads.get(1)); // só o concluído com código 1234
+        when(adService.getAdsByRecyclerCode(recyclerCode)).thenReturn(recyclerAds);
 
-                mockMvc.perform(get("/api/v1/ads/recycler/{recyclerCode}/history", recyclerCode))
-                                .andExpect(status().isOk())
-                                .andExpect(jsonPath("$.length()").value(1))
-                                .andExpect(jsonPath("$[0].title").value("Title2"))
-                                .andExpect(jsonPath("$[0].conclusionCode").value(recyclerCode));
-        }
+        mockMvc.perform(get("/api/v1/ads/recycler/{recyclerCode}/history", recyclerCode))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].title").value("Title2"))
+                .andExpect(jsonPath("$[0].conclusionCode").value(recyclerCode));
+    }
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -50,15 +51,15 @@ public class AdControllerTests {
     @BeforeEach
     public void init() {
         ads = new ArrayList<>();
-        ads.add(new AdResponseDTO(1L, "Title1", "Description1", "Donor1", "Contact1",
+        ads.add(new AdResponseDTO(1L, "Title1", "Description1", "Donor1",
                 List.of(Material.PAPER), "12345-678", "City1", "State1", "Neighborhood1",
-                "2024-06-01, 10:00",
-                new ArrayList<>(), "active", "+11234567890", "contact1@email.com", null));
-        ads.add(new AdResponseDTO(2L, "Title2", "Description2", "Donor2", "Contact2",
+                "2024-06-01, 10:00", new ArrayList<>(), "active", "+11234567890", "contact1@email.com",
+                null));
+        ads.add(new AdResponseDTO(2L, "Title2", "Description2", "Donor2",
                 List.of(Material.PLASTIC), "87654-321", "City2", "State2", "Neighborhood2",
                 "2024-06-02, 11:00",
                 new ArrayList<>(), "concluded", "+22345678901", "contact2@email.com", "1234"));
-        ads.add(new AdResponseDTO(3L, "Title3", "Description3", "Donor3", "Contact3",
+        ads.add(new AdResponseDTO(3L, "Title3", "Description3", "Donor3",
                 List.of(Material.PAPER), "12345-678", "City3", "State3", "Neighborhood3",
                 "2024-06-03, 12:00",
                 new ArrayList<>(), "active", "+33456789012", "contact3@email.com", null));
@@ -105,7 +106,7 @@ public class AdControllerTests {
     @Test
     public void testCreateAd_Success() throws Exception {
         AdResponseDTO newAdResponse = new AdResponseDTO(4L, "New Title", "New Description", "Donor3",
-                "Contact3", List.of(Material.PAPER), "12345-678", "City3", "State3", "Neighborhood3",
+                List.of(Material.PAPER), "12345-678", "City3", "State3", "Neighborhood3",
                 "2024-06-03, 12:00", new ArrayList<>(), "active", "+11234567890", "contact@email.com",
                 null);
         String requestBody = """
@@ -198,7 +199,7 @@ public class AdControllerTests {
         String recyclerCode = "5678";
 
         AdResponseDTO concludedAd = new AdResponseDTO(
-                1L, "Title1", "Description1", "Donor1", "Contact1",
+                1L, "Title1", "Description1", "Donor1",
                 List.of(Material.PAPER), "12345-678", "City3", "State3", "Neighborhood3",
                 "2024-06-03, 12:00",
                 new ArrayList<>(), "concluded", "+11234567890", "contact@email.com", "1234");
@@ -234,7 +235,7 @@ public class AdControllerTests {
     public void testUpdateAd_Success() throws Exception {
         Long adId = 1L;
         AdResponseDTO updatedAd = new AdResponseDTO(
-                1L, "Updated Title", "Updated Description", "Updated Donor", "Updated Contact",
+                1L, "Updated Title", "Updated Description", "Updated Donor",
                 List.of(Material.PAPER), "12345-678", "Updated City", "Updated State",
                 "Updated Neighborhood",
                 "2024-06-03, 12:00",

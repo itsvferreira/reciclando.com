@@ -26,7 +26,7 @@ function App() {
         <Route path='/user-profile' element={<UserProfile />} />
         <Route path='/recycler-profile' element={<RecyclerProfile />} />
         <Route path='/recicladores' element={<Recyclers />} />
-        <Route path='/recicladores/:id' element={<RecyclerInformations />} />
+        <Route path='/reciclador/:id' element={<RecyclerInformations />} />
       </Routes>
       <Footer />
     </Router>

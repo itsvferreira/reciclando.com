@@ -1,12 +1,13 @@
 import Categories from '../Categories/Categories';
 import styles from './AdForm.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import adFormValidation from '../../utils/adFormValidation';
 import { useNavigate } from 'react-router-dom';
 import { scrollToView } from '../../utils/scrollToView';
 import { adsService } from '../../services/api';
 import { useFetchAd } from '../../hooks/useFetchAdData';
 import { useViaCep } from '../../hooks/useViaCep';
+import { user } from '../../utils/loggedUser';
 
 export default function Form({ id }) {
   const navigate = useNavigate();
@@ -270,19 +271,19 @@ export default function Form({ id }) {
           <h3>Informações de Contato</h3>
           <div className='row gap-2 mb-0'>
             <div className='col-md-5'>
-              <label htmlFor='donorContact' className='form-label'>
+              <label htmlFor='phone' className='form-label'>
                 Telefone
               </label>
               <input
                 type='text'
                 className='form-control'
-                id='donorContact'
+                id='phone'
                 placeholder='(00) 00000-0000'
-                name='donorContact'
-                value={formData.donorContact}
+                name='phone'
+                value={formData.phone}
                 onChange={handleChange}
                 style={
-                  errors.donorContact
+                  errors.phone
                     ? {
                         borderColor: 'red',
                         boxShadow: 'none',
@@ -290,8 +291,8 @@ export default function Form({ id }) {
                     : {}
                 }
               />
-              {errors.donorContact && (
-                <small className='text-danger'>{errors.donorContact}</small>
+              {errors.phone && (
+                <small className='text-danger'>{errors.phone}</small>
               )}
             </div>
             <div className='col-md'>

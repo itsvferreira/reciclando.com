@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AdCard from '../../components/AdCard/AdCard';
 import LocationSelect from '../../components/LocationSelect/LocationSelect';
 import Categories from '../../components/Categories/Categories';
